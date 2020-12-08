@@ -1634,18 +1634,6 @@ rule APT_HackTool_MSIL_SHARPNFS_1
     condition:
         (uint16(0) == 0x5A4D and uint32(uint32(0x3C)) == 0x00004550) and any of them
 }
-rule Hunting_B64Engine_DotNetToJScript_Dos
-{
-    meta:
-        description = "This file may enclude a Base64 encoded .NET executable. This technique is used by the project DotNetToJScript which is used by many malware families including GadgetToJScript."
-        md5 = "7af24305a409a2b8f83ece27bb0f7900"
-        rev = 1
-        author = "FireEye"
-    strings:
-        $b64_mz = "AAC4AAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAOH7oOALQJzSG4AUzNIVRoaXMgcHJvZ3JhbSBjYW5ub3QgYmUgcnVuIGluIERPUyBtb2RlLg0NCiQAAAAAAAAAUEU"
-    condition:
-        $b64_mz
-}
 rule CredTheft_MSIL_CredSnatcher_1
 {
     meta:
@@ -2525,25 +2513,6 @@ rule HackTool_MSIL_SharpHound_3
         $typelibguid1 = "A517A8DE-5834-411D-ABDA-2D0E1766539C" ascii nocase wide
     condition:
         (uint16(0) == 0x5A4D and uint32(uint32(0x3C)) == 0x00004550) and $typelibguid1
-}
-rule Hunting_DotNetToJScript_Functions
-{
-    meta:
-        description = "This file references a selection of functions/classes that are used by the project DotNetToJScript and commonly found in other malware families including GadgetToJScript."
-        md5 = "06b6f677d64eef9c4f69ef105b76fba8"
-        rev = 1
-        author = "FireEye"
-    strings:
-        $lib1 = "System.Text.ASCIIEncoding"
-        $lib2 = "System.Security.Cryptography.FromBase64Transform"
-        $lib3 = "System.IO.MemoryStream"
-        $lib4 = "System.Runtime.Serialization.Formatters.Binary.BinaryFormatter"
-        $vba1 = "Microsoft.XMLDOM"
-        $vba2 = "Microsoft.Windows.ActCtx"
-        $vba3 = "System.IO.MemoryStream"
-        $vba4 = "System.Runtime.Serialization.Formatters.Binary.BinaryFormatter"
-    condition:
-        all of ($lib*) or all of ($vba*)
 }
 rule CredTheft_MSIL_TitoSpecial_2
 {
