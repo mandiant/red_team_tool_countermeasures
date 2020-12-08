@@ -30,5 +30,5 @@ alert tcp any $HTTP_PORTS -> any any (msg:"Backdoor.HTTP.BEACON.[CSBundle NYTIME
 alert tcp any $HTTP_PORTS -> any any (msg:"Backdoor.HTTP.BEACON.[CSBundle Original Server 3]"; content:"{\"alias\":\"apx\",\"prefix\":\"\",\"suffix\":null,\"suggestions\":[],\"responseId\":\"15QE9JX9CKE2P\",\"addon\": \""; content:"\",\"shuffled\":false}"; sid:25876; rev:1;)
 alert udp any any -> any 88 (msg:"HackTool.UDP.Rubeus.[nonce]"; content:"|05|"; depth:30; content:"|0a|"; distance:4; within:1; content:"Z"; content:"|6C 69 6C 00|"; within:25; sid:25901; rev:1;)
 alert tcp any any -> any any (msg:"Backdoor.HTTP.GORAT.[POST]"; content:"POST / HTTP/1.1"; depth:15; content:"Connection: upgrade"; content:"|0d 0a|Upgrade: tcp/1|0d 0a|"; content:!"|0d 0a|Referer:"; content:!"|0d 0a|Accept"; content:!"|0d 0a|Cookie:"; sid:25849; rev:1;)
-alert tcp any any -> any any (msg:"HackTool.TCP.Rubeus.[User32LogonProcesss]"; flow:to_server; content:"User32LogonProcesss"; sid:sid:100001; rev:1;)
+alert tcp any any -> any any (msg:"HackTool.TCP.Rubeus.[User32LogonProcesss]"; flow:to_server; content:"User32LogonProcesss"; sid:100001; rev:1;)
 alert tcp any any -> any any (msg:"Backdoor.HTTP.GORAT.[Build ID]"; content:"aqlKZ7wjzg0iKM00E1WB/jq9_RA46w91EKl9A02Dv/nbNdZiLsB1ci8Ph0fb64/9Ks1YxAE86iz9A0dUiDl"; sid:25850; rev:1;)
