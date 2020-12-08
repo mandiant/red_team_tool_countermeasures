@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="272d9603-71b1-4889-b096-565edb822bc5" last-modified="2020-12-02T12:15:09Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>SUSPICIOUS EXECUTION OF TSTHEME.EXE (METHODOLOGY)</short_description>
+    <description>This IOC detects suspicious parent and child processes relation with TStheme.exe.</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2020-12-02T09:55:35Z</authored_date>
+    <links></links>
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="fdecdd13-72b2-4bb8-8f76-37dc6c725073">
+      <Indicator operator="AND" id="8ed56ccc-e036-4c6e-b8c0-655e96dc39a2">
+        <IndicatorItem id="4d3e9a82-393a-465f-942a-25ce353b85f5" condition="matches" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/parentProcessPath" type="event" />
+          <Content type="string">:\\Windows\\(SysWOW64|system32)\\TSTheme\.exe$</Content>
+        </IndicatorItem>
+        <Indicator operator="OR" id="d4d22d69-0317-42b5-8ea7-c9282a71ccae">
+          <IndicatorItem id="dc3293ae-b888-46da-8884-fbe7f6d84813" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">cmd.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="4b2c4011-11c4-4e72-968d-10e9bfa86e4f" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">powershell.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="c7bed295-38a0-4627-a337-26aa685383c9" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">nslookup.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="6ac59e63-af5c-437e-b84f-ef9559838836" condition="contains" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/processPath" type="event" />
+            <Content type="string">:\Windows\Temp\</Content>
+          </IndicatorItem>
+          <IndicatorItem id="becc4f2d-d677-40e3-9ac4-052b755015f9" condition="contains" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/processPath" type="event" />
+            <Content type="string">:\ProgramData\</Content>
+          </IndicatorItem>
+          <IndicatorItem id="452d6006-2294-4cb5-89c8-1a5a358d6d62" condition="contains" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/processPath" type="event" />
+            <Content type="string">:\Users\Public\</Content>
+          </IndicatorItem>
+          <IndicatorItem id="d288d16b-816a-4371-9fbe-bff175f9eb84" condition="contains" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/processPath" type="event" />
+            <Content type="string">\AppData\Roaming\</Content>
+          </IndicatorItem>
+          <IndicatorItem id="da7502bc-7dc4-4d15-a882-9ff062909317" condition="contains" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/processPath" type="event" />
+            <Content type="string">\AppData\Local\Temp\</Content>
+          </IndicatorItem>
+        </Indicator>
+        <Indicator operator="OR" id="13323764-b432-4eb7-99bf-fa36ee925689">
+          <IndicatorItem id="575990af-0c64-4052-af52-c97d52f8c4e8" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/eventType" type="event" />
+            <Content type="string">start</Content>
+          </IndicatorItem>
+          <IndicatorItem id="5cd8d98c-be2e-4ee9-9215-5ea105ae390c" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/eventType" type="event" />
+            <Content type="string">running</Content>
+          </IndicatorItem>
+        </Indicator>
+      </Indicator>
+      <Indicator operator="AND" id="c5fb92f5-c748-49b7-a93b-ed5f0edd5030">
+        <IndicatorItem id="90220d2b-39a3-4dc3-a5bb-11b302f929e8" condition="is" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/parentProcess" type="event" />
+          <Content type="string">Explorer.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="fa218ec0-6f46-436c-8cbd-b21715720c6a" condition="matches" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/processPath" type="event" />
+          <Content type="string">:\\Windows\\(SysWOW64|system32)\\TSTheme\.exe$</Content>
+        </IndicatorItem>
+        <Indicator operator="OR" id="1d794e1a-5b19-4d94-a567-1c2b02d61f49">
+          <IndicatorItem id="e9193393-c700-42a5-b51c-e71dc61b730e" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/eventType" type="event" />
+            <Content type="string">start</Content>
+          </IndicatorItem>
+          <IndicatorItem id="7a0fdaf8-1e3b-4fed-9938-fb5ef0e1fce5" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/eventType" type="event" />
+            <Content type="string">running</Content>
+          </IndicatorItem>
+        </Indicator>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

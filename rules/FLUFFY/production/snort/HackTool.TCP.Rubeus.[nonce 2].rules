@@ -1,0 +1,1 @@
+alert tcp any any -> any 88 (msg:"HackTool.TCP.Rubeus.[nonce 2]"; content:"|a7 06 02 04 6C 69 6C 00|"; sid:25900; rev:1;)

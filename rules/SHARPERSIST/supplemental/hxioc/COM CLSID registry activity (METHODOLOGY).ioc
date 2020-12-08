@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="def0f24d-9faf-4449-95fc-794026dd9eb3" last-modified="2020-11-27T15:11:49Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>COM CLSID registry activity (METHODOLOGY)</short_description>
+    <description>Detects changes to Windows Component Object Model Class ID (clsid) registry persistence keys. This is associated with MITRE ATT&amp;CK (r) Tactic(s): Defense Evasion, Persistence, Privilege Escalation and Technique(s): T1112, T1546.015.</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2018-10-19T00:47:24Z</authored_date>
+    <links></links>
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="fc71b0e1-6ad0-490e-902a-7b5dac48907f">
+      <Indicator operator="AND" id="1172c9b3-c43e-4b1c-b2c2-e3e7617248b3">
+        <IndicatorItem id="c0e0ed61-70d8-4dc3-bcbf-064d0838449c" condition="contains" preserve-case="false" negate="true">
+          <Context document="regKeyEvent" search="regKeyEvent/process" type="event" />
+          <Content type="string">onedrive.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="3b059b4e-6860-49d9-bdeb-5f37505ceb89" condition="is" preserve-case="false" negate="true">
+          <Context document="regKeyEvent" search="regKeyEvent/process" type="event" />
+          <Content type="string">onedrivesetup.exe</Content>
+        </IndicatorItem>
+        <Indicator operator="OR" id="0a7e0828-ee44-4245-af7b-be69250d2654">
+          <IndicatorItem id="c7c2f412-51b7-4e1b-ad3e-b6ccda5856d3" condition="contains" preserve-case="false" negate="false">
+            <Context document="regKeyEvent" search="regKeyEvent/keyPath" type="event" />
+            <Content type="string">\inprocserver32</Content>
+          </IndicatorItem>
+          <IndicatorItem id="fd399162-1097-4777-be07-ddfa08a58ec9" condition="contains" preserve-case="false" negate="false">
+            <Context document="regKeyEvent" search="regKeyEvent/keyPath" type="event" />
+            <Content type="string">\localserver32</Content>
+          </IndicatorItem>
+          <IndicatorItem id="7cd5cbee-921b-40b1-ab03-e166a9771d83" condition="contains" preserve-case="false" negate="false">
+            <Context document="regKeyEvent" search="regKeyEvent/keyPath" type="event" />
+            <Content type="string">\TreatAs</Content>
+          </IndicatorItem>
+        </Indicator>
+        <Indicator operator="OR" id="ff44c62a-287e-48e7-b568-9184f766a70f">
+          <IndicatorItem id="2bc1ae84-17c3-4db9-af46-74fc4ad94115" condition="contains" preserve-case="false" negate="false">
+            <Context document="regKeyEvent" search="regKeyEvent/keyPath" type="event" />
+            <Content type="string">\Software\Classes\CLSID\</Content>
+          </IndicatorItem>
+          <IndicatorItem id="8cf80725-8a7c-4276-aeea-03cd80ab867c" condition="contains" preserve-case="false" negate="false">
+            <Context document="regKeyEvent" search="regKeyEvent/path" type="event" />
+            <Content type="string">_CLASSES\CLSID</Content>
+          </IndicatorItem>
+        </Indicator>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

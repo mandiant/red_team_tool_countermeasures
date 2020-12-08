@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="9fb58666-70db-4082-9e3e-ae42e055d27d" last-modified="2020-12-02T00:14:20Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>crshhndl.dll Hijack (Methodology)</short_description>
+    <description>Identifies possible DLL search order hijacking of crshhndl.dll based on image loads from unexpected locations.
+MITRE ATT&amp;CK
+Tactic: Persistence, Privilege Escalation, Defense Evasion
+Technique: T1574.001</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2020-11-25T16:21:14Z</authored_date>
+    <links></links>
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="c973bff3-6368-4d2e-b443-9b63b169a614">
+      <Indicator operator="AND" id="1f3864dd-7228-4c71-9a57-3d48cbba0966">
+        <IndicatorItem id="a99eb768-5f30-42fe-916a-cba219159126" condition="is" preserve-case="false" negate="false">
+          <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+          <Content type="string">crshhndl.dll</Content>
+        </IndicatorItem>
+        <IndicatorItem id="e106e12e-dfc9-4c64-9ca9-3bf66f6f2971" condition="contains" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">\TortoiseSVN\bin\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="3bdc99c1-26c4-4ae7-bd89-e18c9c70f842" condition="contains" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">\TortoiseGit\bin\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="0483225f-05de-47c7-966f-324fe9bd87fc" condition="ends-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/fullPath" type="event" />
+          <Content type="string">\bin\crshhndl.dll</Content>
+        </IndicatorItem>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

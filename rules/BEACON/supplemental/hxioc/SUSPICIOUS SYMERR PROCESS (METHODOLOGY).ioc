@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="a4fcb7b9-8ff3-4b8f-bff9-8e9437f02fe2" last-modified="2020-12-08T14:12:01Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>SUSPICIOUS SYMERR PROCESS (METHODOLOGY)</short_description>
+    <description>This IOC detects suspicious execution of symerr utility. This is known to be used by Cobaltstrike to sideload malicious DLLs for persistence or lateral movement. This is associated with MITRE ATT&amp;CK (r) Tactic(s): Defense Evasion, Persistence, Privilege Escalation and Technique(s): T1036.005, T1574.002.</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2020-12-02T09:24:15Z</authored_date>
+    <links></links>
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="0093ad5b-d470-42aa-90cc-7196861de3be">
+      <Indicator operator="AND" id="73d25dd9-272f-4e70-9527-ac7f0eec4c8e">
+        <IndicatorItem id="037cdc51-e569-43be-a79c-f2d7f018cc03" condition="is" preserve-case="false" negate="false">
+          <Context document="imageLoadEvent" search="imageLoadEvent/process" type="event" />
+          <Content type="string">symerr.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="8930a20d-fd5d-4b58-848c-60c4a9f46b86" condition="contains" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">\Norton</Content>
+        </IndicatorItem>
+        <IndicatorItem id="3e0d8b28-87b6-4ca9-b2b4-bf269083090c" condition="matches" preserve-case="false" negate="false">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">.</Content>
+        </IndicatorItem>
+        <IndicatorItem id="0cf560ff-84ef-41cf-b169-b9e8b055b5ca" condition="is" preserve-case="false" negate="false">
+          <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+          <Content type="string">cclib.dll</Content>
+        </IndicatorItem>
+        <IndicatorItem id="d7ff931c-214d-4f96-971f-99d5c343c209" condition="contains" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">\Symantec</Content>
+        </IndicatorItem>
+      </Indicator>
+      <Indicator operator="AND" id="9d8b6a3d-441f-472b-b52d-f18eb3cdb3bb">
+        <IndicatorItem id="4182b54b-4fb1-4023-9378-b2e12f704697" condition="contains" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/processPath" type="event" />
+          <Content type="string">\Norton</Content>
+        </IndicatorItem>
+        <IndicatorItem id="7061eeaf-d79a-49cb-940c-fa144b7415ae" condition="contains" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/processPath" type="event" />
+          <Content type="string">\Symantec</Content>
+        </IndicatorItem>
+        <IndicatorItem id="b252c40d-1768-4a92-ad6d-04d53abc53ec" condition="matches" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/processPath" type="event" />
+          <Content type="string">.</Content>
+        </IndicatorItem>
+        <IndicatorItem id="57964a4b-9779-4f52-a7f7-84c22b2d47f8" condition="contains" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/parentProcessPath" type="event" />
+          <Content type="string">\Norton</Content>
+        </IndicatorItem>
+        <IndicatorItem id="253cd5d8-44c0-4a3c-8674-e52730a7dd19" condition="contains" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/parentProcessPath" type="event" />
+          <Content type="string">\Symantec</Content>
+        </IndicatorItem>
+        <IndicatorItem id="9fe0ae6a-5faa-40a0-b1e4-224008c6d018" condition="matches" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/parentProcessPath" type="event" />
+          <Content type="string">.</Content>
+        </IndicatorItem>
+        <IndicatorItem id="b836bad1-8790-4bf3-b162-2e40b6715613" condition="is" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/eventType" type="event" />
+          <Content type="string">start</Content>
+        </IndicatorItem>
+        <Indicator operator="OR" id="075487ce-a5f1-488e-a722-185981e04151">
+          <IndicatorItem id="302f67fc-32a1-427a-bb5b-085e3f0b4fc9" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">symerr.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="bcff983e-6ec0-4477-b3d3-3d8a71aae73b" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/md5" type="event" />
+            <Content type="md5">2ac4ea37db0da7d2970e73d1a3c6648a</Content>
+          </IndicatorItem>
+          <IndicatorItem id="dfa992e5-3a5c-4045-883d-05cbefd36e79" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/parentProcess" type="event" />
+            <Content type="string">symerr.exe</Content>
+          </IndicatorItem>
+        </Indicator>
+      </Indicator>
+      <Indicator operator="AND" id="1e7f846d-c84e-44b9-85f6-07784eee1a7b">
+        <IndicatorItem id="e24d843b-059f-4d47-8a0d-bbcf22d46235" condition="contains" preserve-case="false" negate="true">
+          <Context document="fileWriteEvent" search="fileWriteEvent/filePath" type="event" />
+          <Content type="string">\Symantec</Content>
+        </IndicatorItem>
+        <IndicatorItem id="43e9f12a-cc28-4c80-8ff1-ee2b9a48f775" condition="contains" preserve-case="false" negate="true">
+          <Context document="fileWriteEvent" search="fileWriteEvent/filePath" type="event" />
+          <Content type="string">\Norton</Content>
+        </IndicatorItem>
+        <IndicatorItem id="ddcc5fb9-a08b-4b7f-bd68-56a734714218" condition="is" preserve-case="false" negate="false">
+          <Context document="fileWriteEvent" search="fileWriteEvent/fileName" type="event" />
+          <Content type="string">cclib.dll</Content>
+        </IndicatorItem>
+        <IndicatorItem id="dd2a09c8-3b28-4fb6-8049-bce93f2b75bb" condition="starts-with" preserve-case="true" negate="false">
+          <Context document="fileWriteEvent" search="fileWriteEvent/textAtLowestOffset" type="event" />
+          <Content type="string">MZ</Content>
+        </IndicatorItem>
+        <IndicatorItem id="b6651404-9edd-4f40-86bb-6342abfb1c03" condition="matches" preserve-case="false" negate="false">
+          <Context document="fileWriteEvent" search="fileWriteEvent/filePath" type="event" />
+          <Content type="string">.</Content>
+        </IndicatorItem>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

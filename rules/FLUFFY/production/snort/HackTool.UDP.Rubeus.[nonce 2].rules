@@ -1,0 +1,1 @@
+alert udp any any -> any 88 (msg:"HackTool.UDP.Rubeus.[nonce 2]"; content:"|a7 06 02 04 6C 69 6C 00|"; sid:25902; rev:1;)

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="e514c07a-3048-4975-a000-c9de422be59b" last-modified="2020-12-02T14:27:25Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>SUSPICIOUS EXECUTION OF SEARCH INDEXER (METHODOLOGY)</short_description>
+    <description>This IOC detects suspicious execution of searchindexer. This technique is known to be used by Cobaltstrike which inject malicious code into a newly spawned searchindexer process to evade detection. This is associated with MITRE ATT&amp;CK (r) Tactic(s): Defense Evasion and Technique(s): T1036.004.</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2020-12-02T14:10:59Z</authored_date>
+    <links></links>
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="fc5221d0-41b6-4b02-b54b-53291c6e72ef">
+      <Indicator operator="AND" id="aa9987d4-b35b-43fb-b334-6f66e9e6e49a">
+        <IndicatorItem id="afcafc4c-f2d2-470e-b441-fa0d74da1df5" condition="is" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/eventType" type="event" />
+          <Content type="string">start</Content>
+        </IndicatorItem>
+        <IndicatorItem id="e6ea03e7-a3d2-4599-a581-9716a58f199f" condition="is" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/processPath" type="event" />
+          <Content type="string">C:\Windows\System32\SearchIndexer.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="9ff78c30-fe75-4725-892e-1f76d793bafc" condition="is" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/username" type="event" />
+          <Content type="string">NT AUTHORITY\SYSTEM</Content>
+        </IndicatorItem>
+        <IndicatorItem id="143d70cb-6cbb-4be6-b49f-1497e51ca889" condition="is" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/parentProcess" type="event" />
+          <Content type="string">services.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="4610f2f6-4c86-4b87-b277-a33647aa1989" condition="matches" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/parentProcess" type="event" />
+          <Content type="string">.</Content>
+        </IndicatorItem>
+        <IndicatorItem id="0dab8e62-b8ea-4d37-9a75-d393a75fd33c" condition="matches" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/username" type="event" />
+          <Content type="string">.</Content>
+        </IndicatorItem>
+        <IndicatorItem id="219023ae-cea7-4152-9689-f80264492c7c" condition="is" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/parentProcess" type="event" />
+          <Content type="string">explorer.exe</Content>
+        </IndicatorItem>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

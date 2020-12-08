@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='utf-8'?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://openioc.org/schemas/OpenIOC_1.1" id="74f3e2e9-5a92-4a0d-bfa3-7483dd8628a3" last-modified="2020-11-04T01:09:55Z" published-date="0001-01-01T00:00:00">
+  <metadata>
+    <short_description>RENAMED WORKFLOW COMPILER BY FILE WRITE (METHODOLOGY)</short_description>
+    <description>Microsoft.Workflow.Compiler.exe is a native, signed Windows binary that can be used to execute arbitrary C# or VB.NET code stored in an XOML file (Extensible Object Markup Language) on disk. This XOML file is referenced by a corresponding XML file that contains a serialized CompilerInput object, and then upon execution Microsoft.Workflow.Compiler.exe creates an output file that contains the serialized compilation result. This alert looks for the creation of this compilation result file from a binary not named Microsoft.Workflow.Compiler.exe to identify attackers renaming Microsoft.Workflow.Compiler.exe before executing it to avoid detections focused on the correctly named binary. This is associated with MITRE ATT&amp;CK (r) Tactic(s): Defense Evasion and Technique(s): T1036.003, T1127.</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2019-02-09T04:08:19Z</authored_date>
+    <links></links>
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="c8986a1d-f40e-4a8f-8b99-23e65712f88c">
+      <Indicator operator="AND" id="630d68b1-2dc5-43af-80dd-ebe9b2013eeb">
+        <IndicatorItem id="fc35ba5c-22f3-4be0-8619-b3ab37749136" condition="is" preserve-case="false" negate="true">
+          <Context document="fileWriteEvent" search="fileWriteEvent/process" type="event"/>
+          <Content type="string">Microsoft.Workflow.Compiler.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="1a0caa50-604a-4f63-8175-fd330d461b0d" condition="matches" preserve-case="false" negate="false">
+          <Context document="fileWriteEvent" search="fileWriteEvent/textAtLowestOffset" type="event"/>
+          <Content type="string">^[\.\s]*&lt;\s*\?\s*xml\s+version\s*=.* encoding\s*=.*&lt;(WorkflowCompiler|WorkflowCompilerResults )</Content>
+        </IndicatorItem>
+        <Indicator operator="OR" id="3d0d4cb6-9c66-481f-8151-5bcc609a8e4a">
+          <Indicator operator="AND" id="25f582c8-a89b-407f-8f03-fe947a1e1079">
+            <IndicatorItem id="fd37fd59-8e9a-4617-be4c-ae0874f29487" condition="ends-with" preserve-case="false" negate="false">
+              <Context document="fileWriteEvent" search="fileWriteEvent/processPath" type="event"/>
+              <Content type="string">:\Windows</Content>
+            </IndicatorItem>
+            <IndicatorItem id="05fe61c3-70c5-4a60-a0ca-c2f101846fe1" condition="is" preserve-case="false" negate="true">
+              <Context document="fileWriteEvent" search="fileWriteEvent/process" type="event"/>
+              <Content type="string">explorer.exe</Content>
+            </IndicatorItem>
+          </Indicator>
+          <Indicator operator="AND" id="ae189094-0bca-46d4-9a9d-f7c4569d7979">
+            <IndicatorItem id="9ea9dfbb-f4cd-4e2d-9b09-7c3e7ec93c33" condition="matches" preserve-case="false" negate="false">
+              <Context document="fileWriteEvent" search="fileWriteEvent/processPath" type="event"/>
+              <Content type="string">:\\Program Files( \(x86\))?\\VMware\\VMware Workstation\\</Content>
+            </IndicatorItem>
+            <IndicatorItem id="e4a2e50b-f2c4-4eb5-ac6e-bad9c020d61d" condition="is" preserve-case="false" negate="true">
+              <Context document="fileWriteEvent" search="fileWriteEvent/process" type="event"/>
+              <Content type="string">vmware-vmx.exe</Content>
+            </IndicatorItem>
+          </Indicator>
+          <Indicator operator="AND" id="accd18c4-9437-4304-be6d-730cbd9e6a29">
+            <IndicatorItem id="816a9938-300a-4cf5-97da-d1c31b6d35f1" condition="ends-with" preserve-case="false" negate="true">
+              <Context document="fileWriteEvent" search="fileWriteEvent/processPath" type="event"/>
+              <Content type="string">:\Windows</Content>
+            </IndicatorItem>
+            <IndicatorItem id="d0f44890-4002-4351-91ac-e55574a2a21c" condition="matches" preserve-case="false" negate="true">
+              <Context document="fileWriteEvent" search="fileWriteEvent/processPath" type="event"/>
+              <Content type="string">:\\Program Files( \(x86\))?\\VMware\\VMware Workstation\\</Content>
+            </IndicatorItem>
+          </Indicator>
+        </Indicator>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters/>
+</OpenIOC>

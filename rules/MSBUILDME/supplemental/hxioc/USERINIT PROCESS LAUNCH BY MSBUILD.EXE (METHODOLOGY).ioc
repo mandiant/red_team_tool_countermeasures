@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="d04b6c9d-dfc6-4683-8580-1fd0e9c04296" last-modified="2020-12-02T13:44:49Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>USERINIT PROCESS LAUNCH BY MSBUILD.EXE (METHODOLOGY)</short_description>
+    <description>MSBuild is the build system for Visual Studio. This IOC detects the suspicious execution of userinit process by MSBUILD. This is associated with MITRE ATT&amp;CK (r) Tactic(s): Defense Evasion, Privilege Escalation and Technique(s): T1055.004.</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2020-12-02T11:52:43Z</authored_date>
+    <links></links>
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="446e1fa3-e912-49dd-945d-9a5f640fa03a">
+      <Indicator operator="AND" id="83d883e0-f8db-444e-8bf1-ef7f889a1a51">
+        <IndicatorItem id="5da6d8b0-6fd9-432e-8b97-0a84c43e11f0" condition="is" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/parentProcess" type="event" />
+          <Content type="string">MSBuild.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="157dc948-9c02-4a97-8dc7-f20838876f06" condition="is" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/process" type="event" />
+          <Content type="string">userinit.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="ee2ee6b9-1b7b-4b12-8d65-ff8cf0e7f979" condition="is" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/eventType" type="event" />
+          <Content type="string">start</Content>
+        </IndicatorItem>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

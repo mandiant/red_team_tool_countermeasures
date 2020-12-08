@@ -1,0 +1,1 @@
+alert tcp any $HTTP_PORTS -> any any (msg:"Backdoor.HTTP.BEACON.[CSBundle Original Server 3]"; content:"{\"alias\":\"apx\",\"prefix\":\"\",\"suffix\":null,\"suggestions\":[],\"responseId\":\"15QE9JX9CKE2P\",\"addon\": \""; content:"\",\"shuffled\":false}"; sid:25876; rev:1;)

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="f99a8a0d-c804-4e98-90f5-8bb5ba82770d" last-modified="2020-12-02T00:14:21Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>dwmapi.dll Hijack (Methodology)</short_description>
+    <description>Identifies possible DLL search order hijacking of dwmapi.dll based on image loads from unexpected locations.
+MITRE ATT&amp;CK
+Tactic: Persistence, Privilege Escalation, Defense Evasion
+Technique: T1574.001</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2020-11-25T16:27:51Z</authored_date>
+    <links />
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="fc0973a4-cb32-49be-a5ee-8309d54bff62">
+      <Indicator operator="AND" id="dc544adf-2150-49c3-b135-b46f63644ba4">
+        <IndicatorItem id="c1acdad0-6bc5-4ab2-8c77-b56536dba254" condition="is" preserve-case="false" negate="false">
+          <Context document="fileWriteEvent" search="fileWriteEvent/fileName" type="event" />
+          <Content type="string">dwmapi.dll</Content>
+        </IndicatorItem>
+        <Indicator operator="OR" id="3c0731a3-278b-40e1-bf0c-1a922780ba16">
+          <IndicatorItem id="0a791bd5-5b20-4855-a336-396f38936cb5" condition="is" preserve-case="false" negate="false">
+            <Context document="fileWriteEvent" search="fileWriteEvent/filePath" type="event" />
+            <Content type="string">windows\system32\sysprep</Content>
+          </IndicatorItem>
+          <IndicatorItem id="2300d9a6-0a80-42de-8148-02ad0bcf1cae" condition="is" preserve-case="false" negate="false">
+            <Context document="fileWriteEvent" search="fileWriteEvent/filePath" type="event" />
+            <Content type="string">Program Files\Common Files\microsoft shared\ink</Content>
+          </IndicatorItem>
+        </Indicator>
+      </Indicator>
+      <Indicator operator="AND" id="4cf40737-27e2-4a15-be60-c8f7e71cbb8b">
+        <IndicatorItem id="a635f1d9-8d95-4140-a2ac-fcfa794525f1" condition="is" preserve-case="false" negate="false">
+          <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+          <Content type="string">dwmapi.dll</Content>
+        </IndicatorItem>
+        <Indicator operator="OR" id="1ca29f13-6a22-473b-b55f-9312a241059a">
+          <IndicatorItem id="0c983b83-1bac-4187-ae7d-a052ba4f3bd0" condition="is" preserve-case="false" negate="false">
+            <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+            <Content type="string">Program Files\Common Files\microsoft shared\ink</Content>
+          </IndicatorItem>
+          <IndicatorItem id="aef56a97-bce2-48b5-947a-3561fed23419" condition="is" preserve-case="false" negate="false">
+            <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+            <Content type="string">windows\system32\sysprep</Content>
+          </IndicatorItem>
+        </Indicator>
+      </Indicator>
+      <Indicator operator="AND" id="0775e009-b514-4117-b289-8c5d837b0264">
+        <IndicatorItem id="36576f19-a904-4881-90e5-fff4aa8ee351" condition="is" preserve-case="false" negate="false">
+          <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+          <Content type="string">dwmapi.dll</Content>
+        </IndicatorItem>
+        <IndicatorItem id="c5f44f18-e4c2-4410-9202-7e41f6111b46" condition="is" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">windows\system32</Content>
+        </IndicatorItem>
+        <IndicatorItem id="8fde8f95-0e90-4bb1-baab-2f9418d31bda" condition="is" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">windows\syswow64</Content>
+        </IndicatorItem>
+        <IndicatorItem id="ca921081-fb87-40ca-b4fc-531e79f42f48" condition="is" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Program Files\Common Files\microsoft shared\ink</Content>
+        </IndicatorItem>
+        <IndicatorItem id="83856752-017f-4385-96b5-90431ecad91b" condition="is" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">windows\system32\sysprep</Content>
+        </IndicatorItem>
+        <IndicatorItem id="56a86eb1-e7da-404b-8ae2-48c24d166b25" condition="is" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">winnt\system32</Content>
+        </IndicatorItem>
+        <IndicatorItem id="52c3309e-d801-4ecc-a708-8599ebd45f46" condition="is" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">winnt\syswow64</Content>
+        </IndicatorItem>
+        <IndicatorItem id="c5e0c957-0a2b-4206-a5e1-ebabbfafc92f" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/fullPath" type="event" />
+          <Content type="string">/</Content>
+        </IndicatorItem>
+        <IndicatorItem id="57073df7-b271-4eef-8611-1691a2539b0f" condition="is" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">1\Windows\System32</Content>
+        </IndicatorItem>
+        <IndicatorItem id="258cd4d9-ad30-4be6-8c0e-02f533a96ba3" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Windows\winsxs\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="2aa48517-5750-4dde-9147-aa6700274902" condition="is" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Program Files\Windows Sidebar</Content>
+        </IndicatorItem>
+        <IndicatorItem id="7992c21b-bc55-48aa-92d2-5007e6ccca65" condition="matches" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/fullPath" type="event" />
+          <Content type="string">^[a-z]:\d*\\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="5d11ab5d-230a-4fc9-b0ec-01fd5c5465de" condition="is" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">C:\Windows\System32</Content>
+        </IndicatorItem>
+        <IndicatorItem id="f10b4e91-958c-46cc-ae71-0be8a8c299b5" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">\Device\HarddiskVolume</Content>
+        </IndicatorItem>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

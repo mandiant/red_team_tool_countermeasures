@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="413ef247-8559-472e-9ba5-3299d7cbf980" last-modified="2020-11-27T07:57:23Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>POTENTIAL COBALT STRIKE PROFILE (FAMILY)</short_description>
+    <description>This IOC detects indicators associated with cobalt strike beacon network activity. This is associated with MITRE ATT&amp;CK (r) Tactic(s): Command And Control, Exfiltration and Technique(s): T1071.001, T1029.</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2020-11-26T05:09:50Z</authored_date>
+    <links></links>
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="506fe219-d1e2-4937-a9b9-98036c153134">
+      <Indicator operator="AND" id="e9640942-a5f9-4c2e-8e34-b9b081bae304">
+        <IndicatorItem id="4faed678-10b6-4d44-88d5-8ff3511a22f3" condition="contains" preserve-case="false" negate="false">
+          <Context document="urlMonitorEvent" search="urlMonitorEvent/userAgent" type="event" />
+          <Content type="string">Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko</Content>
+        </IndicatorItem>
+        <Indicator operator="OR" id="c896364c-7a3e-4934-8ea8-c41803e2a3d1">
+          <IndicatorItem id="b7fcb8f7-eb31-448a-8764-dff972d83faf" condition="contains" preserve-case="false" negate="false">
+            <Context document="urlMonitorEvent" search="urlMonitorEvent/httpHeader" type="event" />
+            <Content type="string">SIDCC=AN0-TYutOSq-fxZK6e4kagm70VyKACiG1susXcYRuxK08Y-rHysliq0LWklTqjtulAhQOPH8uA</Content>
+          </IndicatorItem>
+          <IndicatorItem id="1ef65bd2-84ea-4858-9dc3-8be4ad07b112" condition="contains" preserve-case="false" negate="false">
+            <Context document="urlMonitorEvent" search="urlMonitorEvent/requestUrl" type="event" />
+            <Content type="string">/bunsen/api/bunsen/events/v1</Content>
+          </IndicatorItem>
+          <IndicatorItem id="8664bb88-5a79-42b8-bf76-fd3de876cf4c" condition="contains" preserve-case="false" negate="false">
+            <Context document="urlMonitorEvent" search="urlMonitorEvent/requestUrl" type="event" />
+            <Content type="string">/assets/img/svg_illustrations/delivery_takeout_109x86_v2.svg</Content>
+          </IndicatorItem>
+          <IndicatorItem id="08f8a1b3-3fd4-4452-848c-78a72e47d4f7" condition="contains" preserve-case="false" negate="false">
+            <Context document="urlMonitorEvent" search="urlMonitorEvent/httpHeader" type="event" />
+            <Content type="string">gnt_ub=86;gnt_sb=18;gup_clientid=344e8495-70ea-4e65-bed0-c55c4b4080c0;_li_dcdm_c=.usatoday.com;</Content>
+          </IndicatorItem>
+          <IndicatorItem id="d2270089-eb2b-4664-be94-f1f651f33277" condition="contains" preserve-case="false" negate="false">
+            <Context document="urlMonitorEvent" search="urlMonitorEvent/requestUrl" type="event" />
+            <Content type="string">/b/ss/globaldesktopmobilesite/1/JS-2.11.0/s</Content>
+          </IndicatorItem>
+          <IndicatorItem id="266e0323-75f6-4cd5-bf57-f46257923c02" condition="contains" preserve-case="false" negate="false">
+            <Context document="urlMonitorEvent" search="urlMonitorEvent/httpHeader" type="event" />
+            <Content type="string">GED_PLAYLIST_ACTIVITY=W3sidSI6IkZtTWUiLCJ0c2wiOjE1OTMwM;</Content>
+          </IndicatorItem>
+          <Indicator operator="AND" id="1056677f-b7ea-48ac-ba37-24933d09b591">
+            <IndicatorItem id="1bcfbde8-1c8b-4bce-8a13-7e8d36167529" condition="contains" preserve-case="false" negate="false">
+              <Context document="urlMonitorEvent" search="urlMonitorEvent/httpHeader" type="event" />
+              <Content type="string">application/json; charset=utf-8</Content>
+            </IndicatorItem>
+            <Indicator operator="OR" id="7a96fd38-19ba-4635-843d-d389cfd7491d">
+              <IndicatorItem id="7bb4dfe3-f245-4746-b0b1-00fae948bb95" condition="contains" preserve-case="false" negate="false">
+                <Context document="urlMonitorEvent" search="urlMonitorEvent/requestUrl" type="event" />
+                <Content type="string">/gql/batch</Content>
+              </IndicatorItem>
+              <IndicatorItem id="f7c030e3-7bee-48ea-aab2-2b2d14d35b84" condition="contains" preserve-case="false" negate="false">
+                <Context document="urlMonitorEvent" search="urlMonitorEvent/requestUrl" type="event" />
+                <Content type="string">/sit_rep</Content>
+              </IndicatorItem>
+              <IndicatorItem id="8a52e3dc-a0f2-415a-898b-610df6d3a700" condition="contains" preserve-case="false" negate="false">
+                <Context document="urlMonitorEvent" search="urlMonitorEvent/requestUrl" type="event" />
+                <Content type="string">/ad_acknowledgment</Content>
+              </IndicatorItem>
+            </Indicator>
+          </Indicator>
+          <Indicator operator="AND" id="bc59456e-4ce0-4a81-a177-d1901597eb56">
+            <IndicatorItem id="503b1f7c-2c75-4aa8-8111-20124934f756" condition="is" preserve-case="false" negate="true">
+              <Context document="urlMonitorEvent" search="urlMonitorEvent/process" type="event" />
+              <Content type="string">firefox.exe</Content>
+            </IndicatorItem>
+            <IndicatorItem id="f13ae6f0-5f87-4e6b-99c7-a7711fbb99e5" condition="matches" preserve-case="false" negate="false">
+              <Context document="urlMonitorEvent" search="urlMonitorEvent/process" type="event" />
+              <Content type="string">.</Content>
+            </IndicatorItem>
+            <Indicator operator="OR" id="9b294661-d844-4ba2-834b-bd3182fdaa6f">
+              <IndicatorItem id="db622bbc-ca02-45e8-871a-4cf1bbb11894" condition="contains" preserve-case="false" negate="false">
+                <Context document="urlMonitorEvent" search="urlMonitorEvent/requestUrl" type="event" />
+                <Content type="string">RestaurantsPriceRange2.</Content>
+              </IndicatorItem>
+              <IndicatorItem id="52ac30d3-8e1b-4d29-931d-4838d2c38b78" condition="contains" preserve-case="false" negate="false">
+                <Context document="urlMonitorEvent" search="urlMonitorEvent/requestUrl" type="event" />
+                <Content type="string">/search/snippet</Content>
+              </IndicatorItem>
+            </Indicator>
+          </Indicator>
+          <Indicator operator="AND" id="427afcac-a681-4a56-a74c-c93946949661">
+            <IndicatorItem id="db90b2b9-b481-4098-aa56-64471d049bec" condition="is" preserve-case="false" negate="false">
+              <Context document="urlMonitorEvent" search="urlMonitorEvent/urlMethod" type="event" />
+              <Content type="string">POST</Content>
+            </IndicatorItem>
+            <Indicator operator="OR" id="889dbe46-d21b-4fae-ad3e-b6668506c539">
+              <Indicator operator="AND" id="10e65c45-1cb8-490e-b5bb-5f373dc92865">
+                <IndicatorItem id="f5eb2ddf-09ef-4301-bae7-f12dd171bcc5" condition="contains" preserve-case="false" negate="false">
+                  <Context document="urlMonitorEvent" search="urlMonitorEvent/httpHeader" type="event" />
+                  <Content type="string">locale":"en","channel":"prod","addon":"</Content>
+                </IndicatorItem>
+                <Indicator operator="OR" id="4b6fe29e-9fd2-4423-9072-00ccce4d6f7d">
+                  <IndicatorItem id="92b41276-3409-4210-877d-f022f9f1ad47" condition="contains" preserve-case="false" negate="false">
+                    <Context document="urlMonitorEvent" search="urlMonitorEvent/requestUrl" type="event" />
+                    <Content type="string">/v1/push</Content>
+                  </IndicatorItem>
+                  <IndicatorItem id="32b5a7db-9ecf-4e26-be25-feb059caaab6" condition="contains" preserve-case="false" negate="false">
+                    <Context document="urlMonitorEvent" search="urlMonitorEvent/requestUrl" type="event" />
+                    <Content type="string">/notification</Content>
+                  </IndicatorItem>
+                  <IndicatorItem id="5667f005-5c95-48e6-8969-2024681c549f" condition="contains" preserve-case="false" negate="false">
+                    <Context document="urlMonitorEvent" search="urlMonitorEvent/requestUrl" type="event" />
+                    <Content type="string">/track</Content>
+                  </IndicatorItem>
+                  <IndicatorItem id="367b89c1-3f05-4d05-938b-c5d39c396213" condition="contains" preserve-case="false" negate="false">
+                    <Context document="urlMonitorEvent" search="urlMonitorEvent/requestUrl" type="event" />
+                    <Content type="string">/api/v1/survey/embed</Content>
+                  </IndicatorItem>
+                  <IndicatorItem id="7a83c358-efb3-4a89-a706-759e6fd5e7bf" condition="contains" preserve-case="false" negate="false">
+                    <Context document="urlMonitorEvent" search="urlMonitorEvent/requestUrl" type="event" />
+                    <Content type="string">/svc/weather/v2</Content>
+                  </IndicatorItem>
+                </Indicator>
+              </Indicator>
+              <Indicator operator="AND" id="909703ee-c9fe-4b13-bb37-60e0df2b8ec6">
+                <IndicatorItem id="96ebd40a-6be9-482c-a3d7-5dea14e41a2f" condition="contains" preserve-case="false" negate="false">
+                  <Context document="urlMonitorEvent" search="urlMonitorEvent/httpHeader" type="event" />
+                  <Content type="string">;nyt-gdpr=0;nyt-purr=cfh;nyt-geo=US}</Content>
+                </IndicatorItem>
+                <Indicator operator="OR" id="d55565af-ca96-479b-af69-db7e97c9f0c3">
+                  <IndicatorItem id="325bf711-1d09-4ac3-912e-0c3670556190" condition="contains" preserve-case="false" negate="false">
+                    <Context document="urlMonitorEvent" search="urlMonitorEvent/requestUrl" type="event" />
+                    <Content type="string">/ads/google</Content>
+                  </IndicatorItem>
+                  <IndicatorItem id="235d2ec7-c384-49d7-87a0-36e7d54d4e8e" condition="contains" preserve-case="false" negate="false">
+                    <Context document="urlMonitorEvent" search="urlMonitorEvent/requestUrl" type="event" />
+                    <Content type="string">/vi-assets/static-assets</Content>
+                  </IndicatorItem>
+                  <IndicatorItem id="b77de452-1764-4ff9-8e8a-3e11842333df" condition="contains" preserve-case="false" negate="false">
+                    <Context document="urlMonitorEvent" search="urlMonitorEvent/requestUrl" type="event" />
+                    <Content type="string">/v1/preferences</Content>
+                  </IndicatorItem>
+                  <IndicatorItem id="23c8cbe3-14d6-40fa-bd8c-ca4f5b9ce989" condition="contains" preserve-case="false" negate="false">
+                    <Context document="urlMonitorEvent" search="urlMonitorEvent/requestUrl" type="event" />
+                    <Content type="string">/idcta/translations</Content>
+                  </IndicatorItem>
+                  <IndicatorItem id="f8b13609-29f4-4c09-acf2-b72f16d9fc9f" condition="contains" preserve-case="false" negate="false">
+                    <Context document="urlMonitorEvent" search="urlMonitorEvent/requestUrl" type="event" />
+                    <Content type="string">/v2/preferences</Content>
+                  </IndicatorItem>
+                </Indicator>
+              </Indicator>
+            </Indicator>
+          </Indicator>
+          <Indicator operator="AND" id="a32cd788-66cc-4367-9331-d0559ab981cb">
+            <IndicatorItem id="0687c7ff-25bb-4b52-97f7-a05af22af24a" condition="is" preserve-case="false" negate="false">
+              <Context document="urlMonitorEvent" search="urlMonitorEvent/urlMethod" type="event" />
+              <Content type="string">GET</Content>
+            </IndicatorItem>
+            <Indicator operator="OR" id="be148e30-035a-4470-8f88-be8a17e0d670">
+              <Indicator operator="AND" id="c6850ed5-e4bb-42ff-80b3-14b43266469e">
+                <IndicatorItem id="c9d0f15f-4d07-40d1-80a2-010ae01adf9f" condition="contains" preserve-case="false" negate="false">
+                  <Context document="urlMonitorEvent" search="urlMonitorEvent/httpHeader" type="event" />
+                  <Content type="string">;auth=1}</Content>
+                </IndicatorItem>
+                <Indicator operator="OR" id="66d80c4b-61bc-4370-9d01-f760dd19b880">
+                  <IndicatorItem id="823f420d-c79e-43af-94fe-e540d4513aa3" condition="contains" preserve-case="false" negate="false">
+                    <Context document="urlMonitorEvent" search="urlMonitorEvent/requestUrl" type="event" />
+                    <Content type="string">/v1/docs/wsdl</Content>
+                  </IndicatorItem>
+                  <IndicatorItem id="b981a497-17b3-4781-bdc9-13211d9c88a5" condition="contains" preserve-case="false" negate="false">
+                    <Context document="urlMonitorEvent" search="urlMonitorEvent/requestUrl" type="event" />
+                    <Content type="string">/v1/queue</Content>
+                  </IndicatorItem>
+                  <IndicatorItem id="36d339b8-8215-4dc5-8867-ab30f5cfde58" condition="contains" preserve-case="false" negate="false">
+                    <Context document="urlMonitorEvent" search="urlMonitorEvent/requestUrl" type="event" />
+                    <Content type="string">/v1/profile</Content>
+                  </IndicatorItem>
+                  <IndicatorItem id="b3108323-3e6c-4b0f-bf65-759d1f2d78ca" condition="contains" preserve-case="false" negate="false">
+                    <Context document="urlMonitorEvent" search="urlMonitorEvent/requestUrl" type="event" />
+                    <Content type="string">/v1/pull</Content>
+                  </IndicatorItem>
+                </Indicator>
+              </Indicator>
+              <Indicator operator="AND" id="c84a5a2d-e7a7-4db1-bc80-c8536d9ab322">
+                <IndicatorItem id="34f6af9e-8373-44d3-9bbc-711fd425ae78" condition="contains" preserve-case="false" negate="false">
+                  <Context document="urlMonitorEvent" search="urlMonitorEvent/httpHeader" type="event" />
+                  <Content type="string">;auth=0;loc=US}</Content>
+                </IndicatorItem>
+                <Indicator operator="OR" id="e6731dac-a43b-4d1a-8d9d-c888004200f3">
+                  <IndicatorItem id="9b873826-d52d-4574-9e42-db3fde71a15b" condition="contains" preserve-case="false" negate="false">
+                    <Context document="urlMonitorEvent" search="urlMonitorEvent/requestUrl" type="event" />
+                    <Content type="string">/software-activation</Content>
+                  </IndicatorItem>
+                  <IndicatorItem id="e5864ec7-2156-4226-9d11-d24bae780d74" condition="contains" preserve-case="false" negate="false">
+                    <Context document="urlMonitorEvent" search="urlMonitorEvent/requestUrl" type="event" />
+                    <Content type="string">/docs/office</Content>
+                  </IndicatorItem>
+                  <IndicatorItem id="50c30d77-3082-440e-858a-4f38379358d0" condition="contains" preserve-case="false" negate="false">
+                    <Context document="urlMonitorEvent" search="urlMonitorEvent/requestUrl" type="event" />
+                    <Content type="string">/license/eula</Content>
+                  </IndicatorItem>
+                  <IndicatorItem id="149cc590-760a-4a1b-837a-e689b56414c4" condition="contains" preserve-case="false" negate="false">
+                    <Context document="urlMonitorEvent" search="urlMonitorEvent/requestUrl" type="event" />
+                    <Content type="string">/updates</Content>
+                  </IndicatorItem>
+                </Indicator>
+              </Indicator>
+            </Indicator>
+          </Indicator>
+        </Indicator>
+      </Indicator>
+      <Indicator operator="AND" id="d6a87137-2309-4882-b583-319c2c34e45b">
+        <IndicatorItem id="16a47491-ba3f-47f2-bd90-7876b5ebf0d2" condition="is" preserve-case="true" negate="false">
+          <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+          <Content type="string">Updater.dll</Content>
+        </IndicatorItem>
+        <IndicatorItem id="4da9a89e-137b-4d8c-958d-b55c5b79bc15" condition="is" preserve-case="false" negate="false">
+          <Context document="imageLoadEvent" search="imageLoadEvent/process" type="event" />
+          <Content type="string">SearchProtocolHost.exe</Content>
+        </IndicatorItem>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

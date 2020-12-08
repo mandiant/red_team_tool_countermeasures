@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="80e1a958-1ea6-4302-823d-bdab4f1c088d" last-modified="2020-11-27T06:34:48Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>SHARPIVOT (UTILITY)</short_description>
+    <description>SHARPIVOT is a .NET console application that can be used to perform command execution against a remote target for the purposes of lateral movement. This is associated with MITRE ATT&amp;CK (r) Tactic(s): Execution, Lateral Movement and Technique(s): T1021.003, T1559.001,T1059.003.</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2020-11-26T08:46:35Z</authored_date>
+    <links></links>
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="b4d2f9da-8b61-4aed-a235-d8962bf2540f">
+      <IndicatorItem id="2bcf862f-def2-4647-af70-1b40a71de652" condition="is" preserve-case="false" negate="false">
+        <Context document="fileWriteEvent" search="fileWriteEvent/md5" type="event" />
+        <Content type="md5">E4EFA759D425E2F26FBC29943A30F5BD</Content>
+      </IndicatorItem>
+      <Indicator operator="AND" id="848c38b9-c241-4a2b-a605-5a72f569ef88">
+        <IndicatorItem id="a8065bee-1bf2-4530-aee0-d94206c8abe5" condition="matches" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+          <Content type="string">\s-(t|technique)\s+?(wmi|rpc|schtask|servicefailure|com|winrm|schtaskmod|poisonhandler)(\s|$)</Content>
+        </IndicatorItem>
+        <Indicator operator="OR" id="55cd13cf-dfb6-4718-9a0d-3a357383f2c5">
+          <IndicatorItem id="f8d7a8fe-0022-425f-a4d8-98c29d62f840" condition="contains" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+            <Content type="string"> -remotehost </Content>
+          </IndicatorItem>
+          <IndicatorItem id="73606cad-a473-4108-844f-1507303e17be" condition="contains" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+            <Content type="string"> -r </Content>
+          </IndicatorItem>
+        </Indicator>
+        <Indicator operator="OR" id="84fb61b8-5cc4-4700-901c-32fa4c63c45d">
+          <IndicatorItem id="2f9059f5-61e6-46a2-8b3a-9c44e77a6e31" condition="matches" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+            <Content type="string">\s-(m|method)\s+?list(\s|$)</Content>
+          </IndicatorItem>
+          <Indicator operator="AND" id="f102e965-f059-4d96-b307-4165065b5fd4">
+            <IndicatorItem id="aaf7c166-1f17-44be-921e-39a2fafa7415" condition="matches" preserve-case="false" negate="false">
+              <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+              <Content type="string">\s-(m|method)\s+?(execute|check)(\s|$)</Content>
+            </IndicatorItem>
+            <Indicator operator="OR" id="5789bc9c-5a67-4b5c-ba6a-99f61e5a5be8">
+              <IndicatorItem id="ab44c4b0-2ebe-4863-8dc6-62fd4c7ed71c" condition="contains" preserve-case="false" negate="false">
+                <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+                <Content type="string"> -command </Content>
+              </IndicatorItem>
+              <IndicatorItem id="bdf514a8-d4f9-4931-a71e-abc4aaac9112" condition="contains" preserve-case="false" negate="false">
+                <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+                <Content type="string"> -c </Content>
+              </IndicatorItem>
+            </Indicator>
+            <Indicator operator="OR" id="432fce54-1b1e-46ec-9765-7bfb3b48017e">
+              <IndicatorItem id="0e7c12e2-3375-4031-bb6f-7c3d0dfcdee9" condition="contains" preserve-case="false" negate="false">
+                <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+                <Content type="string"> -argument </Content>
+              </IndicatorItem>
+              <IndicatorItem id="41cf0939-b527-42e7-b65f-c8965a696a94" condition="contains" preserve-case="false" negate="false">
+                <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+                <Content type="string"> -a </Content>
+              </IndicatorItem>
+            </Indicator>
+          </Indicator>
+        </Indicator>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

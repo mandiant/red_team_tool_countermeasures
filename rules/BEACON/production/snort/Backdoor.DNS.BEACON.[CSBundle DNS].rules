@@ -1,0 +1,1 @@
+alert udp any 53 -> any any (msg:"Backdoor.DNS.BEACON.[CSBundle DNS]"; content:"|00 01 00 01|"; offset:4; depth:4; content:"|03|"; within:15; content:"|0a|_domainkey"; distance:3; within:11; content:"|00 00 10 00 01 c0 0c 00 10 00 01 00 00 00 02 01 00 ff|v=DKIM1\; p="; sid:25866; rev:1;)

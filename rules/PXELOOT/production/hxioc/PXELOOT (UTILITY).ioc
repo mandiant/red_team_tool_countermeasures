@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="6bd47065-6862-451d-8fc4-ea37473001b8" last-modified="2020-12-02T04:43:44Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>PXELOOT (UTILITY)</short_description>
+    <description>PXELoot (PAL) is a C# tool designed to aid in the discovery and exploitation of misconfigurations in Windows Deployment Services (WDS).</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2020-11-27T21:42:33Z</authored_date>
+    <links></links>
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="1a54a513-f3b9-442f-ac04-36c5d739b97a">
+      <Indicator operator="AND" id="8ac3ce78-d91c-4faa-8fec-1d5e01e8a062">
+        <IndicatorItem id="f62dcddc-b257-4706-82bc-01d67bf686cf" condition="matches" preserve-case="false" negate="false">
+          <Context document="fileWriteEvent" search="fileWriteEvent/fullPath" type="event" />
+          <Content type="string">^.:\\Windows\\Temp\\\{[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\}:\$WIMMOUNTDATA$</Content>
+        </IndicatorItem>
+        <IndicatorItem id="28586c1e-9245-49f9-9a49-5d48d581477e" condition="is" preserve-case="false" negate="false">
+          <Context document="fileWriteEvent" search="fileWriteEvent/process" type="event" />
+          <Content type="string">dism.exe</Content>
+        </IndicatorItem>
+      </Indicator>
+      <Indicator operator="AND" id="67bfb643-9804-40ae-85d0-8b089490f340">
+        <IndicatorItem id="99313bb9-2812-446f-a7d4-b624d60836db" condition="is" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/eventType" type="event" />
+          <Content type="string">start</Content>
+        </IndicatorItem>
+        <Indicator operator="OR" id="2b06d60c-607e-4010-80e9-dc11da33547e">
+          <IndicatorItem id="af1cb940-f8d3-4ed7-8348-b1ef3866f908" condition="contains" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+            <Content type="string"> --dhcp-recon</Content>
+          </IndicatorItem>
+          <IndicatorItem id="b5d922bc-7415-406c-b3a8-7c887c655d8c" condition="matches" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+            <Content type="string">\s-(u|-unmount-path)\s+"?.:\\Windows\\Temp\\\{[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\}"?$</Content>
+          </IndicatorItem>
+          <Indicator operator="AND" id="da0e3f41-9375-43dc-b00a-478c4ee23b8a">
+            <IndicatorItem id="e0115e79-74e8-4a52-aa95-f2f38ee091d4" condition="contains" preserve-case="false" negate="false">
+              <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+              <Content type="string"> --targets </Content>
+            </IndicatorItem>
+            <IndicatorItem id="5f7d52bc-7753-4077-b412-d2e02e9cf5f6" condition="contains" preserve-case="false" negate="false">
+              <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+              <Content type="string"> --rpc</Content>
+            </IndicatorItem>
+          </Indicator>
+          <Indicator operator="AND" id="ab286f84-9eab-45bc-91b0-a83a43f3e82d">
+            <IndicatorItem id="77fd28c8-6fdf-4246-86fb-a9216bc20cc3" condition="matches" preserve-case="false" negate="false">
+              <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+              <Content type="string">\s-(w|-wim)\s.*?\\reminst\\.*?\.wim</Content>
+            </IndicatorItem>
+            <IndicatorItem id="a2109316-0cfe-4551-9606-52b4be9ff14f" condition="matches" preserve-case="false" negate="false">
+              <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+              <Content type="string">\s-(U|-Username)\s</Content>
+            </IndicatorItem>
+            <IndicatorItem id="488a4e21-aed7-4536-abdc-86214a3e2537" condition="matches" preserve-case="false" negate="false">
+              <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+              <Content type="string">\s-(P|-Password)\s</Content>
+            </IndicatorItem>
+            <IndicatorItem id="8ef21571-fcb0-4ccf-83c7-6c920f6ea027" condition="matches" preserve-case="false" negate="false">
+              <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+              <Content type="string">\s-(D|-Domain)\s</Content>
+            </IndicatorItem>
+          </Indicator>
+        </Indicator>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

@@ -1,0 +1,1 @@
+alert tcp any any -> any any (msg:"Backdoor.HTTP.GORAT.[SID1]"; content:"GET"; depth:3; content:"|0d 0a|Cookie: SID1="; content:!"|0d 0a|Referer:"; content:!"|0d 0a|Accept"; sid:25848; rev:1;)

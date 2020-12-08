@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="f954ba15-3433-41d9-a218-0fbf3b102f8d" last-modified="2020-12-02T00:14:22Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>mcutil.dll Hijack (Methodology)</short_description>
+    <description>Identifies possible DLL search order hijacking of  mcutil.dll based on image loads from unexpected locations.
+MITRE ATT&amp;CK
+Tactic: Persistence, Privilege Escalation, Defense Evasion
+Technique: T1574.001</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2020-11-29T20:49:49Z</authored_date>
+    <links />
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="29640d38-875e-46bd-a2f7-b3a3a2c949bb">
+      <Indicator operator="AND" id="7e7d8ab6-d54b-4049-9f36-7007a6e96229">
+        <IndicatorItem id="d82a40a5-424e-4f22-ac99-410faba2ea47" condition="is" preserve-case="false" negate="false">
+          <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+          <Content type="string">mcutil.dll</Content>
+        </IndicatorItem>
+        <IndicatorItem id="df804bbb-3674-4825-8adb-76c25e34fe55" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Program Files\Common Files\McAfee\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="32143687-c23a-4e3c-9149-848be6a58b01" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Program Files (x86)\Common Files\McAfee\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="37e51567-f987-44e7-8a9e-2b63ff8c0bae" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Program Files\McAfee </Content>
+        </IndicatorItem>
+        <IndicatorItem id="24c87dea-f9e2-4b8c-b116-507d94d4dd97" condition="contains" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Program Files (x86)\McAfee </Content>
+        </IndicatorItem>
+        <IndicatorItem id="83f51f22-6f99-4deb-a0f9-598c8ca11587" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">PROGRA~1\COMMON~1\mcafee</Content>
+        </IndicatorItem>
+        <IndicatorItem id="e740c18c-f9d4-4fd5-908e-18dd29731c5b" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Program Files\MagicInfo Premium\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="a90d28ab-41c6-4652-8f44-1c9bc1323f59" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Program Files\Media Cybernetics\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="f6e69bb7-aef8-4902-bf46-9730093b8fa4" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Program Files (x86)\Media Cybernetics\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="ab1983c1-0244-4e22-bd87-9a9ac8774538" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Program Files (x86)\MagicInfo Premium\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="4961b710-c046-4856-b985-6cc95bcc2bd6" condition="ends-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">\AppData\Local\Temp\McAfeeSafeConnect</Content>
+        </IndicatorItem>
+        <IndicatorItem id="4e9264d5-b1d4-49e8-b444-476b47670149" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">ProgramData\MagicInfo\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="c61ae886-a7da-49dc-8639-ce6634aadda3" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Program Files\Princeton Instruments\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="0601e305-acc4-4765-be00-9a94c308cef5" condition="ends-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">\McAfeeSafeConnect</Content>
+        </IndicatorItem>
+        <IndicatorItem id="30c7913e-6e24-4da1-85fc-c87c70ac9c91" condition="ends-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">\AppData\Local\Temp\IXP000.TMP</Content>
+        </IndicatorItem>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

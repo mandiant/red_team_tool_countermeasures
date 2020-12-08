@@ -1,0 +1,1 @@
+alert tcp any any -> any any (msg:"Backdoor.HTTP.GORAT.[POST]"; content:"POST / HTTP/1.1"; depth:15; content:"Connection: upgrade"; content:"|0d 0a|Upgrade: tcp/1|0d 0a|"; content:!"|0d 0a|Referer:"; content:!"|0d 0a|Accept"; content:!"|0d 0a|Cookie:"; sid:25849; rev:1;)

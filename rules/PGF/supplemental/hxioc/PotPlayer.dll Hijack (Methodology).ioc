@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="26cc3d88-33b0-4446-9a39-b0759fd51eb3" last-modified="2020-12-02T00:14:24Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>PotPlayer.dll Hijack (Methodology)</short_description>
+    <description>Identifies possible DLL search order hijacking of PotPlayer.dll based on image loads from unexpected locations.
+MITRE ATT&amp;CK
+Tactic: Persistence, Privilege Escalation, Defense Evasion
+Technique: T1574.001</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2020-11-25T19:20:46Z</authored_date>
+    <links></links>
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="299ebf24-71f6-4f61-8c9c-67c771684b4c">
+      <Indicator operator="AND" id="e8a8b4d3-0833-4008-8832-3b721adbd800">
+        <IndicatorItem id="6d2e5273-02c8-4776-bf97-6f7385ba27be" condition="is" preserve-case="false" negate="false">
+          <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+          <Content type="string">PotPlayer.dll</Content>
+        </IndicatorItem>
+        <IndicatorItem id="3f0828c8-3616-4730-b5c9-affb0ac752c8" condition="is" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Program Files (x86)\DAUM\PotPlayer</Content>
+        </IndicatorItem>
+        <IndicatorItem id="2b4c89d7-7580-409a-bd0d-f58ec29cab39" condition="is" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Program Files\DAUM\PotPlayer</Content>
+        </IndicatorItem>
+        <IndicatorItem id="fa52e611-d2dd-4af5-a3d5-2dafca468bd4" condition="is" preserve-case="true" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/process" type="event" />
+          <Content type="string">PotPlayerMini.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="8ce43bf3-d5f8-401f-854d-e2a7fde0c296" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Program Files (x86)\Final Codecs\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="c7115eac-6f37-4334-b982-1ac6672c2274" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Program Files\Final Codecs\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="73f53221-73ae-49a4-8586-98ad0f6a9f83" condition="matches" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">\\PotPlayer [0-9.]*\\PotPlayer\.dll</Content>
+        </IndicatorItem>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

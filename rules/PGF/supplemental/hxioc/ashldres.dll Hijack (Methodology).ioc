@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="7de04b5d-d00f-4016-8a49-36cc6effec3c" last-modified="2020-12-02T00:14:19Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>ashldres.dll Hijack (Methodology)</short_description>
+    <description>Identifies possible DLL search order hijacking of ashldres.dll based on image loads from unexpected locations.
+MITRE ATT&amp;CK
+Tactic: Persistence, Privilege Escalation, Defense Evasion
+Technique: T1574.001</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2020-11-29T20:51:20Z</authored_date>
+    <links />
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="77e0d12b-8dec-4ec1-800e-57a6aeb212a9">
+      <IndicatorItem id="b0a80bd1-df8b-4a47-b03d-96b224bc5bcd" condition="is" preserve-case="false" negate="false">
+        <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+        <Content type="string">ashldres.dll</Content>
+      </IndicatorItem>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="57242aca-6b86-4f13-9d53-1a5c904c2334" last-modified="2020-12-02T00:50:13Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>Possible Handler Poisoning (Methodology)</short_description>
+    <description>Identified possible protocol handler poisoning attacks, in which a new protocol handler is added to Windows in order to execute a specified malicious command.
+</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2020-11-26T01:45:50Z</authored_date>
+    <links></links>
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="e0d03a4d-720c-4400-992c-22809721f38c">
+      <Indicator operator="AND" id="114aa62d-7ead-4283-a842-d70256be506c">
+        <Indicator operator="OR" id="1a223f20-91bd-4842-b758-6449f9757c37">
+          <IndicatorItem id="bef23c13-4666-4c9c-af03-268c82a16ebe" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/parentProcess" type="event" />
+            <Content type="string">wmiprvse.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="a082362f-55c4-4594-bb96-70bc92d119e7" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/parentProcess" type="event" />
+            <Content type="string">svchost.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="cf390a40-d723-45fb-b7f0-06a4e9db2c7e" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/parentProcess" type="event" />
+            <Content type="string">services.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="236c0563-2f9a-4b3b-9a6b-472e0dd3f2bb" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/parentProcess" type="event" />
+            <Content type="string">taskeng.exe</Content>
+          </IndicatorItem>
+        </Indicator>
+        <Indicator operator="OR" id="9093dfaf-5df4-47e6-975e-1d1bc426c330">
+          <Indicator operator="AND" id="6f24abf9-ab1b-4d89-bd85-950387c0b8ad">
+            <IndicatorItem id="8f17aa48-aeb3-428e-b6be-248f8a718dd6" condition="is" preserve-case="false" negate="false">
+              <Context document="processEvent" search="processEvent/process" type="event" />
+              <Content type="string">cmd.exe</Content>
+            </IndicatorItem>
+            <IndicatorItem id="8ff82663-fcb5-40e7-9b74-105cf5e8051e" condition="matches" preserve-case="false" negate="false">
+              <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+              <Content type="string">\sstart\s.*://</Content>
+            </IndicatorItem>
+            <IndicatorItem id="8f3e9b3d-ba33-4f86-8aa6-7a8105a5ccd5" condition="contains" preserve-case="true" negate="true">
+              <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+              <Content type="string">cmd.EXE /c start hpdiags://</Content>
+            </IndicatorItem>
+            <IndicatorItem id="c4ebcd66-1a3f-4c0c-b44a-a1d09f2541ba" condition="contains" preserve-case="false" negate="true">
+              <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+              <Content type="string">start "C:\Program Files\internet explorer\iexplore.exe"</Content>
+            </IndicatorItem>
+            <IndicatorItem id="f33264ee-2b7b-4db1-b9cf-07162d440f70" condition="contains" preserve-case="false" negate="true">
+              <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+              <Content type="string">start iexplore http://</Content>
+            </IndicatorItem>
+            <IndicatorItem id="e054fcc0-d3e8-4a19-b4e2-2ca50c9f246b" condition="contains" preserve-case="false" negate="true">
+              <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+              <Content type="string">start curl "http://www.google.com"</Content>
+            </IndicatorItem>
+            <IndicatorItem id="09759ec4-7e0b-4af9-911d-75284e33cc63" condition="contains" preserve-case="false" negate="true">
+              <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+              <Content type="string">start http://</Content>
+            </IndicatorItem>
+          </Indicator>
+          <Indicator operator="AND" id="fa4e10e3-5428-4712-8c12-be32c72d366a">
+            <IndicatorItem id="fc755025-31a7-4b88-b3e7-06a074cb1d53" condition="is" preserve-case="false" negate="false">
+              <Context document="processEvent" search="processEvent/process" type="event" />
+              <Content type="string">rundll32.exe</Content>
+            </IndicatorItem>
+            <IndicatorItem id="ba563ab1-2285-4dc3-b388-353cd4e01479" condition="matches" preserve-case="false" negate="false">
+              <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+              <Content type="string">url.dll\s*FileProtocolHandler.*://</Content>
+            </IndicatorItem>
+          </Indicator>
+        </Indicator>
+      </Indicator>
+      <Indicator operator="AND" id="d6ea8bca-b521-4e88-bc5f-b1574fff3ca3">
+        <IndicatorItem id="7ec85f9d-58df-4159-8735-0ec495813d95" condition="is" preserve-case="false" negate="false">
+          <Context document="regKeyEvent" search="regKeyEvent/eventType" type="event" />
+          <Content type="int">3</Content>
+        </IndicatorItem>
+        <IndicatorItem id="bf2982af-d63f-4824-81e2-111365288239" condition="contains" preserve-case="false" negate="false">
+          <Context document="regKeyEvent" search="regKeyEvent/path" type="event" />
+          <Content type="string">\software\classes\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="1ec19c52-4c1b-4f77-9345-8093547245b2" condition="contains" preserve-case="false" negate="false">
+          <Context document="regKeyEvent" search="regKeyEvent/path" type="event" />
+          <Content type="string">\shell\open\command\</Content>
+        </IndicatorItem>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

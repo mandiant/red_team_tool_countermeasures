@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="6bd5c218-c472-41bd-9aa3-947eccb13773" last-modified="2020-12-02T00:25:45Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>Suspicious MOF File</short_description>
+    <description>Identifies malicious Windows Management Instrumentation (WMI) Managed Object Format (MOF) files developed from known templates.
+
+MITRE ATT&amp;CK
+Tactic: Execution
+Technique: T1047</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2020-11-30T19:57:24Z</authored_date>
+    <links />
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="9f281661-1445-4530-87fd-c40104205ffb">
+      <IndicatorItem id="d4d3a336-3441-4150-9c1b-17704c788c7f" condition="starts-with" preserve-case="false" negate="false">
+        <Context document="fileWriteEvent" search="fileWriteEvent/textAtLowestOffset" type="event" />
+        <Content type="string">instance of __EventFilter as $TimerFilter.{.    Name = "</Content>
+      </IndicatorItem>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

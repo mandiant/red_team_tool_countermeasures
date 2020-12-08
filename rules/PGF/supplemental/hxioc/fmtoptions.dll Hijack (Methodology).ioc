@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="85a9a457-0e47-4647-8b94-91f9f1ce4e4c" last-modified="2020-12-02T00:14:21Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>fmtoptions.dll Hijack (Methodology)</short_description>
+    <description>Identifies possible DLL search order hijacking of fmtoptions.dll based on image loads from unexpected locations.
+MITRE ATT&amp;CK
+Tactic: Persistence, Privilege Escalation, Defense Evasion
+Technique: T1574.001</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2020-11-29T21:00:57Z</authored_date>
+    <links />
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="b6b44c5b-dcf7-468a-a0c6-d898320eb2de">
+      <Indicator operator="AND" id="3ea01aef-f7f1-4d00-ae91-02a275dbbaa6">
+        <IndicatorItem id="4b41818f-5209-4a80-bf27-2136c76f3d71" condition="is" preserve-case="false" negate="false">
+          <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+          <Content type="string">fmtoptions.dll</Content>
+        </IndicatorItem>
+        <IndicatorItem id="2c93ce42-1a29-44a3-976f-c8b831a16b85" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Program Files\Quest Software\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="25ab3d66-40fb-4d1c-9104-2aa673435fe1" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Program Files (x86)\Quest Software\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="65063422-46af-4a23-b85b-a2d92091da14" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Quest Software\</Content>
+        </IndicatorItem>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

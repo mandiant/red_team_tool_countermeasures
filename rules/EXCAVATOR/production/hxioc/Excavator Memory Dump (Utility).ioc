@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="1d38295c-93d9-4290-bc58-eaff67930c62" last-modified="2020-12-02T00:18:27Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>Excavator Memory Dump (Utility)</short_description>
+    <description>Identifies memory dump files generated during the execution of the excavator credential theft tool.
+MITRE ATT&amp;CK
+Tactic: Credential Access
+Technique: T1003.001</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2020-11-26T21:32:50Z</authored_date>
+    <links />
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="c6f93c6f-fd31-4f02-a12c-a8b27429dd57">
+      <Indicator operator="AND" id="f250ad91-4e4d-4955-8779-02146bd02d22">
+        <IndicatorItem id="c03bf21a-c1f8-4f66-8949-1a43946a54eb" condition="is" preserve-case="false" negate="false">
+          <Context document="fileWriteEvent" search="fileWriteEvent/fileName" type="event" />
+          <Content type="string">memory.dmp</Content>
+        </IndicatorItem>
+        <IndicatorItem id="86cb5280-b409-4b13-9884-2af6af735fb7" condition="is" preserve-case="false" negate="false">
+          <Context document="fileWriteEvent" search="fileWriteEvent/filePath" type="event" />
+          <Content type="string">windows</Content>
+        </IndicatorItem>
+        <IndicatorItem id="680d0faf-140a-47c2-9afe-bd1d5873b4ae" condition="starts-with" preserve-case="false" negate="false">
+          <Context document="fileWriteEvent" search="fileWriteEvent/textAtLowestOffset" type="event" />
+          <Content type="string">MDMP</Content>
+        </IndicatorItem>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

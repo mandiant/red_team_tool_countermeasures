@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="d4ab6df7-73a5-42cd-9484-ecd488ba770f" last-modified="2020-12-02T00:14:25Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>tmas_wlmhook.dll Hijack (Methodology)</short_description>
+    <description>Identifies possible DLL search order hijacking of tmas_wlmhook.dll based on image loads from unexpected locations.
+MITRE ATT&amp;CK
+Tactic: Persistence, Privilege Escalation, Defense Evasion
+Technique: T1574.001</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2020-11-29T21:24:35Z</authored_date>
+    <links />
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="bc0c3fba-817a-4628-b969-292af02b8d4a">
+      <IndicatorItem id="2699943e-4b58-4d38-a6a9-e4b825a6ae6a" condition="is" preserve-case="false" negate="false">
+        <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+        <Content type="string">tmas_wlmhook.dll</Content>
+      </IndicatorItem>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="5a03584b-ef1e-4122-8e9c-bab45e785d85" last-modified="2020-12-02T00:23:32Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>Obfuscated Impacket smbexec (Utility)</short_description>
+    <description>Identifies a variant of the publicly-available lateral movement tool smbexec, which is part of the Impacket project.
+
+MITRE ATT&amp;CK
+Tactic: Execution
+Technique: T1569.002
+Software: S0357</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2020-11-25T20:34:37Z</authored_date>
+    <links />
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="ff196dff-9adc-4249-a8f7-a7552bfd95e3">
+      <IndicatorItem id="ef3e76e8-56f7-485a-8133-769bcce90ec5" condition="contains" preserve-case="true" negate="false">
+        <Context document="regKeyEvent" search="regKeyEvent/text" type="event" />
+        <Content type="string">%CoMSpEC% /q /K </Content>
+      </IndicatorItem>
+      <IndicatorItem id="ba70eaf1-e50b-414c-916e-0002ca0e1169" condition="contains" preserve-case="false" negate="false">
+        <Context document="regKeyEvent" search="regKeyEvent/keyPath" type="event" />
+        <Content type="string">services\Windows Update Control Service</Content>
+      </IndicatorItem>
+      <IndicatorItem id="c7c38f88-d7ad-4b26-b543-740b349b9698" condition="contains" preserve-case="false" negate="false">
+        <Context document="regKeyEvent" search="regKeyEvent/keyPath" type="event" />
+        <Content type="string">services\Windows 10 Defender</Content>
+      </IndicatorItem>
+      <IndicatorItem id="0f992758-00b1-40fd-9bd3-bd3f6b22bc4f" condition="contains" preserve-case="false" negate="false">
+        <Context document="regKeyEvent" search="regKeyEvent/keyPath" type="event" />
+        <Content type="string">services\Windows License Key Activation</Content>
+      </IndicatorItem>
+      <IndicatorItem id="2a832293-f00b-40fc-ba3b-a892b77addc3" condition="contains" preserve-case="false" negate="false">
+        <Context document="regKeyEvent" search="regKeyEvent/keyPath" type="event" />
+        <Content type="string">services\Office 365 Proxy</Content>
+      </IndicatorItem>
+      <IndicatorItem id="1261b6b9-56a6-43d4-bae5-62a61233740d" condition="contains" preserve-case="false" negate="false">
+        <Context document="regKeyEvent" search="regKeyEvent/keyPath" type="event" />
+        <Content type="string">services\Microsoft Security Center</Content>
+      </IndicatorItem>
+      <IndicatorItem id="c10c01ba-cbea-4a8a-b0d8-d42ef62860f5" condition="contains" preserve-case="false" negate="false">
+        <Context document="regKeyEvent" search="regKeyEvent/keyPath" type="event" />
+        <Content type="string">services\OneDrive Sync Center</Content>
+      </IndicatorItem>
+      <IndicatorItem id="f561b09e-af0c-4387-87b5-7923a3fb7133" condition="contains" preserve-case="false" negate="false">
+        <Context document="regKeyEvent" search="regKeyEvent/keyPath" type="event" />
+        <Content type="string">services\Background Action Manager</Content>
+      </IndicatorItem>
+      <IndicatorItem id="34b2561a-5854-4499-a254-a924f574f5b8" condition="contains" preserve-case="false" negate="false">
+        <Context document="regKeyEvent" search="regKeyEvent/keyPath" type="event" />
+        <Content type="string">services\Secure Token Messaging Service</Content>
+      </IndicatorItem>
+      <IndicatorItem id="e8960322-6afc-45ac-a5c3-d7810a4f2264" condition="contains" preserve-case="false" negate="false">
+        <Context document="regKeyEvent" search="regKeyEvent/keyPath" type="event" />
+        <Content type="string">services\Windows  Update</Content>
+      </IndicatorItem>
+      <IndicatorItem id="f0c98a79-f00e-4943-9119-2c6798a5cc99" condition="ends-with" preserve-case="false" negate="false">
+        <Context document="fileWriteEvent" search="fileWriteEvent/fullPath" type="event" />
+        <Content type="string">\Windows\Temp\setupAPI.dev.log</Content>
+      </IndicatorItem>
+      <IndicatorItem id="b53f4483-c8ec-4bd2-8c6c-23d388369199" condition="contains" preserve-case="false" negate="false">
+        <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+        <Content type="string">\Windows\Temp\setupAPI.dev.log</Content>
+      </IndicatorItem>
+      <Indicator operator="AND" id="9d6c044c-0362-4458-a15a-eadab62cecbe">
+        <IndicatorItem id="9048841d-63f7-4496-a3e3-5f9bbb5420a6" condition="matches" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+          <Content type="string">\/K\s*echo.*&gt;\s*\\\\127\..* 2\^?&gt;\^?&amp;1</Content>
+        </IndicatorItem>
+        <IndicatorItem id="31c21e3a-d086-421c-a375-42c400912e42" condition="is" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/process" type="event" />
+          <Content type="string">cmd.exe</Content>
+        </IndicatorItem>
+      </Indicator>
+      <Indicator operator="AND" id="4173fe88-a46f-46ff-b089-15ccd8f10a59">
+        <IndicatorItem id="bca5963e-b20f-4b60-a3ab-77cf50f0a031" condition="ends-with" preserve-case="false" negate="false">
+          <Context document="fileWriteEvent" search="fileWriteEvent/fullPath" type="event" />
+          <Content type="string">windows\temp\install.bat</Content>
+        </IndicatorItem>
+        <IndicatorItem id="c1a198ea-a2b9-457c-b201-78f0df92dfaa" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="fileWriteEvent" search="fileWriteEvent/textAtLowestOffset" type="event" />
+          <Content type="string">"%~dp0Setup.exe" /s /f</Content>
+        </IndicatorItem>
+      </Indicator>
+      <Indicator operator="AND" id="b8d9e0e4-ec14-4927-8f2a-d7f396a4e6b0">
+        <IndicatorItem id="4e18e31c-ba68-46b7-b75e-24b5e8554697" condition="contains" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+          <Content type="string">windows\temp\install.bat</Content>
+        </IndicatorItem>
+        <IndicatorItem id="cf9c8c18-f659-4dc1-9ae3-6a54b2cf917a" condition="contains" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+          <Content type="string">/k </Content>
+        </IndicatorItem>
+        <IndicatorItem id="0db82965-13ff-4ad9-9f10-100c07e54e11" condition="contains" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+          <Content type="string">/q</Content>
+        </IndicatorItem>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

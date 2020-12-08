@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="c7fd5c04-0afb-4b8f-a5ca-2d956f7cb035" last-modified="2020-12-02T00:53:29Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>[SVCS_IOC] SharPersist (utility)</short_description>
+    <description>Identifies artifacts created by the a variant of the SharPersist persistence creation tool.
+
+MITRE ATT&amp;CK
+Tactic: Privilege Escalation, Persistence
+Technique: T1547.001</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2020-12-01T01:36:59Z</authored_date>
+    <links />
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="75e0c70b-38d5-4ca9-ade7-f8e35b017360">
+      <IndicatorItem id="ac8cbed9-e801-4c76-8743-771ae5e92ca1" condition="starts-with" preserve-case="true" negate="false">
+        <Context document="fileWriteEvent" search="fileWriteEvent/textAtLowestOffset" type="event" />
+        <Content type="string">[ iNterNEtShoRtCUt   ]", @"UrL  = fILe:\/\</Content>
+      </IndicatorItem>
+      <Indicator operator="AND" id="68b95fca-b335-40f5-ac62-3897ab2f0392">
+        <IndicatorItem id="3fc71956-f4ec-4bdb-8496-6949163b49bf" condition="ends-with" preserve-case="false" negate="false">
+          <Context document="regKeyEvent" search="regKeyEvent/path" type="event" />
+          <Content type="string">\InprocServer32</Content>
+        </IndicatorItem>
+        <IndicatorItem id="74742526-0f03-4c0d-9ea1-9a31059bda52" condition="is" preserve-case="false" negate="true">
+          <Context document="regKeyEvent" search="regKeyEvent/hive" type="event" />
+          <Content type="string">HKEY_LOCAL_MACHINE</Content>
+        </IndicatorItem>
+        <Indicator operator="OR" id="21b71729-7cf3-4bb2-9e9e-9378c1f50260">
+          <IndicatorItem id="176b2892-428c-4632-8833-7cc4e124cb0a" condition="contains" preserve-case="false" negate="false">
+            <Context document="regKeyEvent" search="regKeyEvent/path" type="event" />
+            <Content type="string">\{2dea658f-54c1-4227-af9b-260ab5fc3543}\</Content>
+          </IndicatorItem>
+          <IndicatorItem id="06e24e3d-57af-4371-b6cc-3f95848c3a16" condition="contains" preserve-case="false" negate="false">
+            <Context document="regKeyEvent" search="regKeyEvent/path" type="event" />
+            <Content type="string">\{b1aebb5d-ead9-4476-b375-9c3ed9f32afc}\</Content>
+          </IndicatorItem>
+          <IndicatorItem id="1c72d73a-4a32-4f05-9379-8c89658908a3" condition="contains" preserve-case="false" negate="false">
+            <Context document="regKeyEvent" search="regKeyEvent/path" type="event" />
+            <Content type="string">\{0358b920-0ac7-461f-98f4-58e32cd89148}\</Content>
+          </IndicatorItem>
+          <IndicatorItem id="93051ee9-e9ff-41f1-854b-073e908da98a" condition="contains" preserve-case="false" negate="false">
+            <Context document="regKeyEvent" search="regKeyEvent/path" type="event" />
+            <Content type="string">\{01575CFE-9A55-4003-A5E1-F38D1EBDCBE1}\</Content>
+          </IndicatorItem>
+        </Indicator>
+        <Indicator operator="OR" id="8ae0a999-734d-43e3-856c-338fae86eb5c">
+          <IndicatorItem id="448624a1-b0d0-469f-87d4-2841e72c49bf" condition="is" preserve-case="false" negate="false">
+            <Context document="regKeyEvent" search="regKeyEvent/valueType" type="event" />
+            <Content type="string">1</Content>
+          </IndicatorItem>
+          <IndicatorItem id="885dacf0-8a09-47a8-8336-69887702519a" condition="is" preserve-case="false" negate="false">
+            <Context document="regKeyEvent" search="regKeyEvent/valueType" type="event" />
+            <Content type="string">3</Content>
+          </IndicatorItem>
+          <IndicatorItem id="0d7f646b-449a-4db6-a2ef-5a645e1834d4" condition="is" preserve-case="false" negate="false">
+            <Context document="regKeyEvent" search="regKeyEvent/valueType" type="event" />
+            <Content type="string">5</Content>
+          </IndicatorItem>
+        </Indicator>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

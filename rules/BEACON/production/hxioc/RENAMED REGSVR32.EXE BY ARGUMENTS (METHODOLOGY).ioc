@@ -1,0 +1,187 @@
+<?xml version='1.0' encoding='utf-8'?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://openioc.org/schemas/OpenIOC_1.1" id="057549a7-8251-41ee-9a01-cdd327e5d484" last-modified="2020-11-04T01:09:54Z" published-date="0001-01-01T00:00:00">
+  <metadata>
+    <short_description>RENAMED REGSVR32.EXE BY ARGUMENTS (METHODOLOGY)</short_description>
+    <description>Attackers will sometimes rename regsvr32.exe to another filename before executing to attempt to bypass detections that assume the process will be called regsvr32.exe. This trigger seeks to identify renamed regsvr32.exe binaries by looking for regsvr32.exe arguments on the command line where the binary is not regsvr32.exe or binaries that commonly launch regsvr32.exe (like cmd.exe, etc.). This is associated with MITRE ATT&amp;CK (r) Tactic(s): Defense Evasion and Technique(s): T1036.003.</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2017-08-15T22:46:33Z</authored_date>
+    <links></links>
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="e878ca63-47d0-43dc-b2c9-d6507cc7dafc">
+      <Indicator operator="AND" id="d077a871-7c39-40c1-8e25-603699c05cdb">
+        <IndicatorItem id="4188d41c-4f7f-410d-829c-80a917fff44c" condition="is" preserve-case="false" negate="true">
+          <Context document="ProcessItem" search="ProcessItem/name" type="mir"/>
+          <Content type="string">regsvr32.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="b3e1a1b7-af26-4404-96b2-a44c4cb26c41" condition="contains" preserve-case="false" negate="true">
+          <Context document="ProcessItem" search="ProcessItem/arguments" type="mir"/>
+          <Content type="string">regsvr32</Content>
+        </IndicatorItem>
+        <IndicatorItem id="8333e68e-b2e0-4886-9dce-ec12cf101266" condition="contains" preserve-case="false" negate="false">
+          <Context document="ProcessItem" search="ProcessItem/arguments" type="mir"/>
+          <Content type="string"> scrobj.dll</Content>
+        </IndicatorItem>
+        <Indicator operator="OR" id="5440d5d9-94da-49cc-888e-282a22b0fb11">
+          <IndicatorItem id="7a43f2ab-5dc7-42f8-a267-719c08377689" condition="contains" preserve-case="false" negate="false">
+            <Context document="ProcessItem" search="ProcessItem/arguments" type="mir"/>
+            <Content type="string"> /i:http:</Content>
+          </IndicatorItem>
+          <IndicatorItem id="d50d2265-5396-4ca3-9573-8c278c9cb174" condition="contains" preserve-case="false" negate="false">
+            <Context document="ProcessItem" search="ProcessItem/arguments" type="mir"/>
+            <Content type="string"> /i:https:</Content>
+          </IndicatorItem>
+          <IndicatorItem id="a3ba27de-47bf-44d8-82fa-734d05ea49d3" condition="contains" preserve-case="false" negate="false">
+            <Context document="ProcessItem" search="ProcessItem/arguments" type="mir"/>
+            <Content type="string"> /i:ftp:</Content>
+          </IndicatorItem>
+          <IndicatorItem id="13223c2b-3ea8-4e58-83c0-66e998c0fb8a" condition="contains" preserve-case="false" negate="false">
+            <Context document="ProcessItem" search="ProcessItem/arguments" type="mir"/>
+            <Content type="string"> /i:\\</Content>
+          </IndicatorItem>
+          <Indicator operator="AND" id="b7c5395d-05cc-41e0-8189-a91ec1dc9e89">
+            <IndicatorItem id="9ede8346-178b-44a4-bf99-8b9c562884f7" condition="contains" preserve-case="false" negate="false">
+              <Context document="ProcessItem" search="ProcessItem/arguments" type="mir"/>
+              <Content type="string"> /i:</Content>
+            </IndicatorItem>
+            <IndicatorItem id="dfa2c597-b40c-4582-b111-d5d0c944fe61" condition="contains" preserve-case="false" negate="false">
+              <Context document="ProcessItem" search="ProcessItem/arguments" type="mir"/>
+              <Content type="string">://</Content>
+            </IndicatorItem>
+            <IndicatorItem id="7c97b0c5-e25a-41d5-9679-991fb0ee4fa3" condition="contains" preserve-case="false" negate="false">
+              <Context document="ProcessItem" search="ProcessItem/arguments" type="mir"/>
+              <Content type="string">:\\</Content>
+            </IndicatorItem>
+          </Indicator>
+        </Indicator>
+        <Indicator operator="OR" id="59ebae0f-b036-4439-b7be-6d65968e1dff">
+          <IndicatorItem id="606a4ffe-4c31-4e3c-a356-ccca253b0a4d" condition="contains" preserve-case="false" negate="false">
+            <Context document="ProcessItem" search="ProcessItem/arguments" type="mir"/>
+            <Content type="string"> /u </Content>
+          </IndicatorItem>
+          <IndicatorItem id="7fd13d6d-5deb-41d9-a514-e55aa25a2302" condition="contains" preserve-case="false" negate="false">
+            <Context document="ProcessItem" search="ProcessItem/arguments" type="mir"/>
+            <Content type="string"> /s </Content>
+          </IndicatorItem>
+          <IndicatorItem id="44caa368-74c0-429e-acfd-d43bdd19ee8f" condition="matches" preserve-case="false" negate="false">
+            <Context document="ProcessItem" search="ProcessItem/arguments" type="mir"/>
+            <Content type="string">\s\/(u|s)$</Content>
+          </IndicatorItem>
+        </Indicator>
+      </Indicator>
+      <Indicator operator="AND" id="9717119b-3a8e-483b-8fb5-564833f54c1c">
+        <IndicatorItem id="190d5531-4f09-445a-b47d-22f51fb59330" condition="contains" preserve-case="false" negate="true">
+          <Context document="EventLogItem" search="EventLogItem/message" type="mir"/>
+          <Content type="string">regsvr32</Content>
+        </IndicatorItem>
+        <IndicatorItem id="7830e648-dadc-4448-b38c-2f6f4613777e" condition="contains" preserve-case="false" negate="false">
+          <Context document="EventLogItem" search="EventLogItem/message" type="mir"/>
+          <Content type="string"> scrobj.dll</Content>
+        </IndicatorItem>
+        <Indicator operator="OR" id="151f202a-f05e-4862-ab8e-b040c1be90d7">
+          <IndicatorItem id="f2d012b2-4ab3-45d3-bb19-78e7e5c7e9c2" condition="contains" preserve-case="false" negate="false">
+            <Context document="EventLogItem" search="EventLogItem/message" type="mir"/>
+            <Content type="string"> /i:http:</Content>
+          </IndicatorItem>
+          <IndicatorItem id="caa6303e-9006-43c9-ab8d-89a823d3eb66" condition="contains" preserve-case="false" negate="false">
+            <Context document="EventLogItem" search="EventLogItem/message" type="mir"/>
+            <Content type="string"> /i:https:</Content>
+          </IndicatorItem>
+          <IndicatorItem id="7624a29f-e546-4387-9af1-dca5d2117a6a" condition="contains" preserve-case="false" negate="false">
+            <Context document="EventLogItem" search="EventLogItem/message" type="mir"/>
+            <Content type="string"> /i:ftp:</Content>
+          </IndicatorItem>
+          <IndicatorItem id="ac32ec1d-79a2-48d6-91ca-d6841c22afbc" condition="contains" preserve-case="false" negate="false">
+            <Context document="EventLogItem" search="EventLogItem/message" type="mir"/>
+            <Content type="string"> /i:\\</Content>
+          </IndicatorItem>
+          <Indicator operator="AND" id="0ccd3f9c-b862-4993-80de-6a3874088afa">
+            <IndicatorItem id="cb787501-fd2b-4ca9-8dec-f4755d36ebaf" condition="contains" preserve-case="false" negate="false">
+              <Context document="EventLogItem" search="EventLogItem/message" type="mir"/>
+              <Content type="string"> /i:</Content>
+            </IndicatorItem>
+            <IndicatorItem id="a7575fe0-a809-44b3-84c4-f491be924196" condition="contains" preserve-case="false" negate="false">
+              <Context document="EventLogItem" search="EventLogItem/message" type="mir"/>
+              <Content type="string">://</Content>
+            </IndicatorItem>
+            <IndicatorItem id="c432de34-ce34-45cd-9765-9b4f259f9018" condition="contains" preserve-case="false" negate="false">
+              <Context document="EventLogItem" search="EventLogItem/message" type="mir"/>
+              <Content type="string">:\\</Content>
+            </IndicatorItem>
+          </Indicator>
+        </Indicator>
+        <Indicator operator="OR" id="93f2755a-a55d-4b33-b5a7-7d1d67539186">
+          <IndicatorItem id="9f9b56ef-cd63-497b-ab2d-c0eadb4da06f" condition="contains" preserve-case="false" negate="false">
+            <Context document="EventLogItem" search="EventLogItem/message" type="mir"/>
+            <Content type="string"> /u </Content>
+          </IndicatorItem>
+          <IndicatorItem id="2ae20ac9-4bb4-4e9f-adf7-707b71f67282" condition="contains" preserve-case="false" negate="false">
+            <Context document="EventLogItem" search="EventLogItem/message" type="mir"/>
+            <Content type="string"> /s </Content>
+          </IndicatorItem>
+          <IndicatorItem id="1461ee35-3393-4b61-8bc2-f25b00bbc860" condition="matches" preserve-case="false" negate="false">
+            <Context document="EventLogItem" search="EventLogItem/message" type="mir"/>
+            <Content type="string">\s\/(u|s)$</Content>
+          </IndicatorItem>
+        </Indicator>
+      </Indicator>
+      <Indicator operator="AND" id="b7007ffe-d5ee-4f25-8a2d-537c212aa284">
+        <IndicatorItem id="fdd84ad6-43d1-480a-883f-08788afe3bb2" condition="contains" preserve-case="false" negate="true">
+          <Context document="RegistryItem" search="RegistryItem/Text" type="mir"/>
+          <Content type="string">regsvr32</Content>
+        </IndicatorItem>
+        <IndicatorItem id="cbd4b50b-6618-464c-9833-19e41e1bb8c2" condition="contains" preserve-case="false" negate="false">
+          <Context document="RegistryItem" search="RegistryItem/Text" type="mir"/>
+          <Content type="string"> scrobj.dll</Content>
+        </IndicatorItem>
+        <Indicator operator="OR" id="ddbec9da-d143-4def-9fed-c59e5ba5b47d">
+          <IndicatorItem id="c8c5ae16-a925-4605-9874-5135a9c91594" condition="contains" preserve-case="false" negate="false">
+            <Context document="RegistryItem" search="RegistryItem/Text" type="mir"/>
+            <Content type="string"> /i:http:</Content>
+          </IndicatorItem>
+          <IndicatorItem id="20234db9-1771-4d3b-9e24-3723570cbe47" condition="contains" preserve-case="false" negate="false">
+            <Context document="RegistryItem" search="RegistryItem/Text" type="mir"/>
+            <Content type="string"> /i:https:</Content>
+          </IndicatorItem>
+          <IndicatorItem id="f516e042-c243-44c9-a41f-99dfd91f2dc5" condition="contains" preserve-case="false" negate="false">
+            <Context document="RegistryItem" search="RegistryItem/Text" type="mir"/>
+            <Content type="string"> /i:ftp:</Content>
+          </IndicatorItem>
+          <IndicatorItem id="18509085-7846-477e-beb2-4477e5599b64" condition="contains" preserve-case="false" negate="false">
+            <Context document="RegistryItem" search="RegistryItem/Text" type="mir"/>
+            <Content type="string"> /i:\\</Content>
+          </IndicatorItem>
+          <Indicator operator="AND" id="0d64e01b-eafc-48b1-88d7-6637f7ca319e">
+            <IndicatorItem id="199d6b55-1262-4c06-8517-e925f1bcd436" condition="contains" preserve-case="false" negate="false">
+              <Context document="RegistryItem" search="RegistryItem/Text" type="mir"/>
+              <Content type="string"> /i:</Content>
+            </IndicatorItem>
+            <IndicatorItem id="d26a8a4d-ddc7-49bb-9b5c-3d697b87818b" condition="contains" preserve-case="false" negate="false">
+              <Context document="RegistryItem" search="RegistryItem/Text" type="mir"/>
+              <Content type="string">://</Content>
+            </IndicatorItem>
+            <IndicatorItem id="63602de2-14d1-4870-b2a9-ad5609814385" condition="contains" preserve-case="false" negate="false">
+              <Context document="RegistryItem" search="RegistryItem/Text" type="mir"/>
+              <Content type="string">:\\</Content>
+            </IndicatorItem>
+          </Indicator>
+        </Indicator>
+        <Indicator operator="OR" id="763c2082-183d-4c13-9efd-f42953339cd2">
+          <IndicatorItem id="4fb4e438-9a5f-4b9a-8c6d-8d0720c7dd53" condition="contains" preserve-case="false" negate="false">
+            <Context document="RegistryItem" search="RegistryItem/Text" type="mir"/>
+            <Content type="string"> /u </Content>
+          </IndicatorItem>
+          <IndicatorItem id="4246cd67-2d51-4232-87f9-54e60f27839d" condition="contains" preserve-case="false" negate="false">
+            <Context document="RegistryItem" search="RegistryItem/Text" type="mir"/>
+            <Content type="string"> /s </Content>
+          </IndicatorItem>
+          <IndicatorItem id="f8a2508e-7c46-4fa0-8aab-2276480c7897" condition="matches" preserve-case="false" negate="false">
+            <Context document="RegistryItem" search="RegistryItem/Text" type="mir"/>
+            <Content type="string">\s\/(u|s)$</Content>
+          </IndicatorItem>
+        </Indicator>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters/>
+</OpenIOC>

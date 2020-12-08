@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="b44e4bb1-4c54-40bc-94dd-39677b74cb67" last-modified="2020-12-01T09:34:09Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>LOLBIN EXECUTION (METHODOLOGY)</short_description>
+    <description>Detects execution of numerous "living off the land" binaries - signed binaries used to launch arbitrary code, to bypass detection, application whitelisting and/or User Account Control. This is associated with MITRE ATT&amp;CK (r) Tactic(s): Defense Evasion, Privilege Escalation and Technique(s): T1216.001, T1218.001, T1218.002, T1218.003, T1218.004, T1218.005, T1218.007, T1218.008, T1218.009, T1218.010, T1218.011, T1548.002.</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2018-08-09T21:40:06Z</authored_date>
+    <links></links>
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="36da61bf-8b13-4997-90fc-02d81ff620e0">
+      <Indicator operator="AND" id="48f4b756-7598-45b4-b58e-3623c74d33db">
+        <IndicatorItem id="700772af-c4f0-408c-9217-3714b1f04fcc" condition="is" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/eventType" type="event" />
+          <Content type="string">start</Content>
+        </IndicatorItem>
+        <IndicatorItem id="5152b182-466d-4c47-92e2-d18a190d738b" condition="contains" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/parentProcessPath" type="event" />
+          <Content type="string">\ProgramData\FireEye\xagt\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="951e7e5a-ec43-4581-9c9c-5d405a2565a3" condition="is" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/parentProcess" type="event" />
+          <Content type="string">trustedinstaller.exe</Content>
+        </IndicatorItem>
+        <Indicator operator="OR" id="fe0c8962-18c1-4ca7-ab5f-d723067bbeb7">
+          <IndicatorItem id="44159871-9636-4abd-9662-1d54539e72d1" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">xwizard.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="9b8af0df-9780-4e42-ab71-ff71d2a34070" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">syncappvpublishingserver.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="716b32bc-74f3-46f2-8f58-266f38c2b0bb" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">wab.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="9289a2e2-df39-4930-8fbd-28e2123c5209" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">scriptrunner.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="d7e90663-74a9-4277-bcc8-e6f0bf9880b8" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">runscripthelper.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="72cb441c-f127-41a1-b4b1-9faa517be7e6" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">rpcping.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="1b53b4e4-f743-4662-ba77-53bd7812635c" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">robocopy.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="1ae2343f-619b-4b9b-a067-fb80c87bb2f1" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">replace.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="7bac503e-3dd8-48e2-9dfe-2154ba8846e9" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">register-cimprovider.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="427b3f5b-e903-41a7-8e99-976fc2864f7c" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">psr.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="e3355975-3d45-49db-b7d6-9a67eeb56121" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">print.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="f330e464-02b1-4eb0-b025-42b269d1c71e" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">presentationhost.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="8727f636-d75d-4778-9fd5-c81641127b57" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">pcwrun.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="5ebc50ca-34c7-4f20-9339-f22820955f7a" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">pcalua.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="bada8de2-5558-41a3-b2e0-b05a56e945c8" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">openwith.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="1c6e5a74-169d-44b7-b3a5-f47f7a50c433" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">odbcconf.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="26f67715-dca5-4da3-8ce5-46d22f720583" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">nltest.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="f537ad48-2cba-48e9-8b5f-23671df3dedb" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">msdt.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="66f32fc9-c75c-4efd-9fe5-836462fed7ee" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">msconfig.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="a93e0f46-f4d5-4372-ae02-1dad395a6e6e" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">mavinject.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="c00afff6-5ff3-49be-82e6-774afe362329" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">infdefaultinstall.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="554bb1d2-70c1-4cec-b526-56b99a0ecc09" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">ieexec.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="7a908c0e-d18c-47b3-804e-28d12c9e2cf5" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">hh.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="719912b3-0710-4592-9443-c0f8fd7f6ad6" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">forfiles.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="797eb67a-269d-4916-8947-cbae46a62356" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">gpscript.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="3f16796c-9384-4cfb-85cc-4e4f5aef9ba6" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">expand.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="4dbecc08-96fb-4ca3-9021-40846f6cd576" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">extrac32.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="2a7822d7-a562-4ff1-8f8b-494baf4862e9" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">extexport.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="33333f8b-05f7-4102-97bb-ef5c22fd9619" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">esentutl.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="a347202e-ea5c-428f-9f4c-116fed6da786" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">dnscmd.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="01b01ea5-3962-4a48-9f5c-c36d477e7c81" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">diskshadow.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="d41d7ce5-2721-4867-a37c-195728886baf" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">dfsvc.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="726d88ea-d51b-46f4-bf7d-50c8ad5f189f" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">control.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="bb48ee54-66c9-4777-87d6-0090b5b7a61e" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">bash.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="1c315cfb-7d7c-42aa-a655-eb7702b10067" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">cmdkey.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="de869f64-a800-481f-8613-c6b48219d58b" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">cstmp.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="c8248079-4c0a-481b-b1ff-992864774816" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">msbuild.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="9732bda1-9055-410a-b74f-ac46e633a5a5" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">regasm.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="45ee6269-d165-46ce-b564-dda1ab83d8f5" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">msdt.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="97ac184e-d871-41d7-b9d8-1905c1c81d9b" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">presentationhost.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="4c21855e-5a67-4c5c-8ee6-2518d2a138be" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">dfsvc.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="2c4a40c4-d91a-47df-8b62-c729833f43c3" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">regsvcs.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="b6123154-8b3b-418f-a322-869e4a9ebc25" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">installutil.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="28c37090-e63d-4a21-9a0b-7b4b8c4c24c5" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">mshta.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="7a669395-6166-4d37-99d5-c2c38da23710" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">cmstp.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="fd7a6d0d-db34-4459-b526-ecd532049c45" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">rasautou.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="8907b138-7640-4275-a951-4411e6cad1ef" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">coregen.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="9c826160-8637-4895-9c86-eed1afa8ea33" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">Microsoft.Workflow.Compiler.exe</Content>
+          </IndicatorItem>
+          <Indicator operator="AND" id="3b89a8e6-8166-4346-952c-ed117148e40d">
+            <IndicatorItem id="d758b97f-3f3a-4ed1-8f10-a713c0784a2b" condition="is" preserve-case="false" negate="false">
+              <Context document="processEvent" search="processEvent/process" type="event" />
+              <Content type="string">regsvr32.exe</Content>
+            </IndicatorItem>
+            <IndicatorItem id="ebe3680b-0eb9-438d-a8d5-83db30067665" condition="is" preserve-case="false" negate="true">
+              <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+              <Content type="string">"C:\Windows\System32\regsvr32.exe" /s /n /i:U shell32.dll</Content>
+            </IndicatorItem>
+            <IndicatorItem id="cb07952a-8609-4151-ac6e-1763f3c27660" condition="ends-with" preserve-case="false" negate="true">
+              <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+              <Content type="string">\themeui.dll</Content>
+            </IndicatorItem>
+          </Indicator>
+          <Indicator operator="AND" id="018b5c94-b239-4134-bce7-099a7c1dd256">
+            <IndicatorItem id="23def782-8338-4b26-b37b-b994fe1fb9b5" condition="is" preserve-case="false" negate="false">
+              <Context document="processEvent" search="processEvent/process" type="event" />
+              <Content type="string">msiexec.exe</Content>
+            </IndicatorItem>
+            <IndicatorItem id="ab36f2eb-0054-421e-8510-71245c71e5c5" condition="starts-with" preserve-case="false" negate="true">
+              <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+              <Content type="string">C:\Windows\syswow64\MsiExec.exe -Embedding</Content>
+            </IndicatorItem>
+          </Indicator>
+          <Indicator operator="AND" id="0aedf3e1-ed40-4e31-b196-df8471bbbde1">
+            <IndicatorItem id="4e46c5bf-1477-488f-a71a-25568c38f896" condition="is" preserve-case="false" negate="true">
+              <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+              <Content type="string">C:\Windows\System32\sdclt.exe /CONFIGNOTIFICATION</Content>
+            </IndicatorItem>
+            <IndicatorItem id="0c86421d-044d-40b6-bb72-4815da7e072e" condition="is" preserve-case="false" negate="false">
+              <Context document="processEvent" search="processEvent/process" type="event" />
+              <Content type="string">sdclt.exe</Content>
+            </IndicatorItem>
+          </Indicator>
+          <Indicator operator="AND" id="1033068d-0960-41b6-a785-04fcd9c1131e">
+            <IndicatorItem id="77d4998a-20ab-4a32-90f6-6cc4b6c39516" condition="contains" preserve-case="false" negate="true">
+              <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+              <Content type="string">Windows\Logs\CBS\CbsPersist</Content>
+            </IndicatorItem>
+            <IndicatorItem id="38ef418f-1196-46e8-a41e-3ad784f4c3a8" condition="is" preserve-case="false" negate="false">
+              <Context document="processEvent" search="processEvent/process" type="event" />
+              <Content type="string">makecab.exe</Content>
+            </IndicatorItem>
+          </Indicator>
+          <Indicator operator="AND" id="a6b4f1e4-0ded-4577-b6c6-05b5b3358477">
+            <IndicatorItem id="a2e601db-0b51-4a50-b98c-aaebc4aa391d" condition="contains" preserve-case="false" negate="true">
+              <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+              <Content type="string">http delete urlacl https://+:443</Content>
+            </IndicatorItem>
+            <IndicatorItem id="ef9b93f9-2dd4-41a9-a0b8-4b8dd6d4dcac" condition="contains" preserve-case="false" negate="true">
+              <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+              <Content type="string">http delete urlacl http://+:80</Content>
+            </IndicatorItem>
+            <IndicatorItem id="d7d24bf7-2fdb-465b-9ad6-90e361ea5dfc" condition="is" preserve-case="false" negate="false">
+              <Context document="processEvent" search="processEvent/process" type="event" />
+              <Content type="string">netsh.exe</Content>
+            </IndicatorItem>
+          </Indicator>
+          <Indicator operator="AND" id="f9231ec1-4443-43cc-b191-0d4f4bf3c8b6">
+            <IndicatorItem id="068f6c51-0304-490a-95b9-95c1cbc3d4dd" condition="is" preserve-case="false" negate="false">
+              <Context document="processEvent" search="processEvent/process" type="event" />
+              <Content type="string">ie4uinit.exe</Content>
+            </IndicatorItem>
+            <IndicatorItem id="6ab07cb3-31b4-457d-b667-b9b1f3fa3a1f" condition="contains" preserve-case="false" negate="true">
+              <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+              <Content type="string">-cleariconcache</Content>
+            </IndicatorItem>
+            <IndicatorItem id="1419f77d-51ad-47de-aa22-480a108bca00" condition="contains" preserve-case="false" negate="true">
+              <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+              <Content type="string">-userconfig</Content>
+            </IndicatorItem>
+          </Indicator>
+        </Indicator>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

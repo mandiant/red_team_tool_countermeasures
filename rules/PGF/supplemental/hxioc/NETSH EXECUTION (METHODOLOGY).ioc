@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="9ddb3369-7881-404c-b51f-c4db5ebe11ca" last-modified="2020-11-27T12:48:43Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>NETSH EXECUTION (METHODOLOGY)</short_description>
+    <description>Detects execution of the Windows netsh utility. This is associated with MITRE ATT&amp;CK (r) Tactic(s): Defense Evasion, Discovery and Technique(s): T1016, T1518.001, T1562.001.</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2018-10-19T19:08:48Z</authored_date>
+    <links></links>
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="8088a9f9-3598-43c4-9685-8331a9148772">
+      <Indicator operator="AND" id="79159de9-fb9b-4b15-ac34-496cbd7f53ec">
+        <IndicatorItem id="392b4a1b-b216-4345-821e-f3269abedb9b" condition="is" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/process" type="event" />
+          <Content type="string">netsh.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="5a11df55-8e31-4651-adf2-cbcad162c388" condition="is" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/eventType" type="event" />
+          <Content type="string">start</Content>
+        </IndicatorItem>
+        <IndicatorItem id="c9921240-e3bf-4c7a-89b2-9146e26185e4" condition="contains" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/parentProcessPath" type="event" />
+          <Content type="string">\ProgramData\FireEye\xagt\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="0da3fda6-043c-47f8-8bbf-628914377186" condition="is" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/parentProcess" type="event" />
+          <Content type="string">trustedinstaller.exe</Content>
+        </IndicatorItem>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

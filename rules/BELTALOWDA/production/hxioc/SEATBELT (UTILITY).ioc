@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="5ff109ac-8225-4749-8b85-cd3176e24d1e" last-modified="2020-12-01T15:39:51Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>SEATBELT (UTILITY)</short_description>
+    <description>Seatbelt is an open source C# project that performs a number of security oriented host-survey "safety checks" relevant from both offensive and defensive security perspectives. This IOC also detects some variations of this project namely Beltalowda and Shamwow. </description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2020-11-26T21:43:34Z</authored_date>
+    <links></links>
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="6d2dafa3-7c50-428f-a4e3-fd99b6ad2448">
+      <Indicator operator="AND" id="3e8b9bc9-8c28-48e6-b46d-83c4faa6a8fa">
+        <IndicatorItem id="93295839-bbce-4706-a73c-dea1887d3074" condition="is" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/eventType" type="event" />
+          <Content type="string">start</Content>
+        </IndicatorItem>
+        <Indicator operator="OR" id="47a0c706-fced-45b5-b189-1e4b40f05c74">
+          <IndicatorItem id="728ab1ce-0ace-4f03-af0f-0c42b72b1749" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">Shamwow.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="637c8c95-aa5f-4805-a44b-2811204686ea" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">Seatbelt.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="bfe21f45-aee2-4686-8c98-84c8443e0731" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">Beltalowda.exe</Content>
+          </IndicatorItem>
+        </Indicator>
+      </Indicator>
+      <Indicator operator="AND" id="64a220e5-062f-4f99-b1a5-3bc97dc805b1">
+        <IndicatorItem id="5ecdaab5-1710-4f8f-a4ba-4f03547f2f51" condition="starts-with" preserve-case="false" negate="false">
+          <Context document="fileWriteEvent" search="fileWriteEvent/textAtLowestOffset" type="event" />
+          <Content type="string">MZ</Content>
+        </IndicatorItem>
+        <Indicator operator="OR" id="a8e593e6-a90a-4081-a08d-687d67c4e776">
+          <IndicatorItem id="027eb243-cf45-40d6-8779-d5f185efdf0c" condition="is" preserve-case="false" negate="false">
+            <Context document="fileWriteEvent" search="fileWriteEvent/fileName" type="event" />
+            <Content type="string">Shamwow.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="fa5b217d-df58-4487-b376-9a4c916ab943" condition="is" preserve-case="false" negate="false">
+            <Context document="fileWriteEvent" search="fileWriteEvent/fileName" type="event" />
+            <Content type="string">Seatbelt.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="cedd0896-7b9b-446b-acda-d1b1cefc1f19" condition="is" preserve-case="false" negate="false">
+            <Context document="fileWriteEvent" search="fileWriteEvent/fileName" type="event" />
+            <Content type="string">Beltalowda.exe</Content>
+          </IndicatorItem>
+        </Indicator>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

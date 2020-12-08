@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="169e774d-edb3-44a4-ba3b-f4fb19b6dc97" last-modified="2020-12-02T16:21:59Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>DISM EXECUTION IN SUSPICIOUS LOCATION (METHODOLOGY)</short_description>
+    <description>Deployment Image Servicing and Management (DISM.exe) is a command-line tool that can be used to service and prepare Windows images. This IOC execution of DISM.exe placed outside its legitimate location. This is associated with MITRE ATT&amp;CK (r) Tactic(s): Defense Evasion, Privilege Escalation and Technique(s): T1036.005, T1055.</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2020-11-27T13:03:54Z</authored_date>
+    <links></links>
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="0d744d57-9dd7-4399-ba7b-70e3495d10f9">
+      <Indicator operator="AND" id="00076977-1dc0-4250-93fd-eebe5b3a52ca">
+        <IndicatorItem id="36fea90d-710b-4a3d-b174-43c07afe4350" condition="contains" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/processPath" type="event" />
+          <Content type="string">\Windows\System32\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="ccd5ddac-ce5f-4d30-b729-3d7c8acec23c" condition="contains" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/processPath" type="event" />
+          <Content type="string">\Windows\SysWOW64\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="99ce5a0b-7ca3-4432-a388-c276d4892aef" condition="is" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/process" type="event" />
+          <Content type="string">Dism.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="96d893f5-b88c-431c-924d-5c975080b4f2" condition="matches" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/processPath" type="event" />
+          <Content type="string">\\Windows\\servicing\\LCU\\Package_for_RollupFix[^\\]+\\[^\\]+(\\(f|r))?\\dism\.exe$</Content>
+        </IndicatorItem>
+        <IndicatorItem id="96e698ab-a9fb-476b-b73e-9fb8c3169980" condition="matches" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/processPath" type="event" />
+          <Content type="string">\\Windows\\WinSxS\\[^\\]+(\\(f|r))?\\dism\.exe$</Content>
+        </IndicatorItem>
+        <IndicatorItem id="28f0d93c-c91c-4e06-bd6d-d3926d56d6d5" condition="contains" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/processPath" type="event" />
+          <Content type="string">\Windows Kits\10\Assessment and Deployment Kit\Deployment Tools\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="ec96a4c2-b906-40a6-85c3-1d7121c83554" condition="is" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/eventType" type="event" />
+          <Content type="string">start</Content>
+        </IndicatorItem>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

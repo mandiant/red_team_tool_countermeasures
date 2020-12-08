@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="2a43c8f8-06b9-40dd-a08a-c571145692b8" last-modified="2020-12-02T00:14:22Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>hpcustpartui.dll Hijack (Methodology)</short_description>
+    <description>Identifies possible DLL search order hijacking of hpcustpartui.dll based on image loads from unexpected locations.
+MITRE ATT&amp;CK
+Tactic: Persistence, Privilege Escalation, Defense Evasion
+Technique: T1574.001</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2020-11-29T20:48:30Z</authored_date>
+    <links />
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="3f4df5bd-5272-4f8c-9064-9eca4d23dd3a">
+      <Indicator operator="AND" id="bded03ca-f0b9-4039-8547-feb1dac88794">
+        <IndicatorItem id="33388c8c-c419-41c9-900f-6a62742dd0e4" condition="is" preserve-case="false" negate="false">
+          <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+          <Content type="string">hpcustpartui.dll</Content>
+        </IndicatorItem>
+        <IndicatorItem id="3c49751a-a7fd-45d9-85a5-acfcf0813834" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Program Files\HP\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="55b71e86-163a-4a1a-bfd5-74103470b54b" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Program Files (x86)\HP\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="b0a63473-ba06-4313-beaf-9becfcb7ed5d" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">PROGRA~</Content>
+        </IndicatorItem>
+        <IndicatorItem id="8f319807-686c-4e41-b0b6-7f4bf805b65d" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Program Files\Trend Micro\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="df58b137-0196-4bd4-8ef0-1ea9a14a17d1" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Program Files (x86)\Trend Micro\</Content>
+        </IndicatorItem>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

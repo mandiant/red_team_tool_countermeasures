@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="99da75fa-cdc1-480e-8709-02484e09a0a8" last-modified="2020-12-02T16:14:31Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>REGASM PARENT PROCESS (METHODOLOGY)</short_description>
+    <description>This IOC detects the spawning of a process by RegAsm.exe, a Windows command-line utility used to register .NET Component Object Model (COM) assemblies.. This is associated with MITRE ATT&amp;CK (r) Tactic(s): Defense Evasion, Privilege Escalation and Technique(s): T1218.009, T1055.</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2020-11-26T11:11:00Z</authored_date>
+    <links></links>
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="accf0466-fe0c-4d58-b15a-fc49df7b7cba">
+      <Indicator operator="AND" id="d3c64a77-3564-4b06-86e9-03a381e607a5">
+        <IndicatorItem id="6ad7a18a-f63e-46ef-8153-7f56925479e7" condition="is" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/eventType" type="event" />
+          <Content type="string">start</Content>
+        </IndicatorItem>
+        <IndicatorItem id="2a7abe5b-af0d-4b1e-9286-f0438ddbd1df" condition="is" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/parentProcess" type="event" />
+          <Content type="string">RegAsm.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="ef09821a-c46a-42d1-97fd-fb2eb83dd9e8" condition="is" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/process" type="event" />
+          <Content type="string">conhost.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="a72e1116-9d0d-4ece-890e-a998236e59b7" condition="matches" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/process" type="event" />
+          <Content type="string">.</Content>
+        </IndicatorItem>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

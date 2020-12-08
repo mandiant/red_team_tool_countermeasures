@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="6420c9ed-76be-4ca5-85c6-0a25baf7c8f8" last-modified="2020-11-29T22:43:49Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>SEARCHPROTOCOLHOST.EXE SUSPICIOUS CHILD PROCESSES (METHODOLOGY)</short_description>
+    <description>This alert looks for suspicious child processes of searchprotocolhost.exe, a known process used by malicious actors for process injection. </description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2020-11-24T03:02:46Z</authored_date>
+    <links></links>
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="40feff2c-db9e-402c-b84b-34fec2faa572">
+      <Indicator operator="AND" id="6db20b15-f64c-4ba3-833d-40d0c7c848f6">
+        <IndicatorItem id="85243e74-9b9a-4ae8-aea4-4a782eabf35b" condition="is" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/parentProcess" type="event" />
+          <Content type="string">SearchProtocolHost.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="775309ce-898e-4d35-b768-e9476f56b02b" condition="is" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/eventType" type="event" />
+          <Content type="string">start</Content>
+        </IndicatorItem>
+        <Indicator operator="OR" id="a3d3ffb3-1a91-45d0-880a-d3849dc239f4">
+          <IndicatorItem id="6fb50acc-b765-4936-83de-42f8e81aa249" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">cmd.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="486a8592-8725-4a7e-805e-d8c1468ee63a" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">powershell.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="34858fa9-cd1a-4c0d-9257-a417e3410501" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">whoami.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="7f027d2e-8ea5-4c1a-88b7-cd1e13b98e11" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">nslookup.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="3d4fdf58-9519-4f45-b003-24d90395f9e1" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">hostname.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="7185176e-b152-4a5f-a43a-ca2bbfd3b45c" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">net.exe</Content>
+          </IndicatorItem>
+        </Indicator>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

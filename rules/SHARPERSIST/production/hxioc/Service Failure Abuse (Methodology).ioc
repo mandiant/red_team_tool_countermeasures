@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="3477e132-316d-4fb9-8f3e-13cdc99c3427" last-modified="2020-12-02T00:51:53Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>Service Failure Abuse (Methodology)</short_description>
+    <description>Identifies abuse of the "FailureCommand" feature in known-abusable services.
+
+MITRE ATT&amp;CK
+Tactic: Persistence, Privilege Escalation
+Technique: T1543.003</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2020-11-26T20:46:54Z</authored_date>
+    <links />
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="bf25d4c3-278b-405d-bb13-b491ab0e0b42">
+      <Indicator operator="AND" id="76b7861b-c165-460d-ae71-65c0555bc461">
+        <IndicatorItem id="8f20a0f6-ab07-4a33-b5e5-b6d9885601e5" condition="contains" preserve-case="false" negate="false">
+          <Context document="regKeyEvent" search="regKeyEvent/path" type="event" />
+          <Content type="string">\failurecommand</Content>
+        </IndicatorItem>
+        <IndicatorItem id="3531178e-1752-4a14-baf4-219f340e48f7" condition="is" preserve-case="false" negate="false">
+          <Context document="regKeyEvent" search="regKeyEvent/eventType" type="event" />
+          <Content type="int">3</Content>
+        </IndicatorItem>
+        <Indicator operator="OR" id="a883c111-c637-4af3-868e-a8a42c8bc996">
+          <IndicatorItem id="8d64ac50-98a0-4eff-ab1a-c4f6ee12b81d" condition="contains" preserve-case="false" negate="false">
+            <Context document="regKeyEvent" search="regKeyEvent/path" type="event" />
+            <Content type="string">services\AppVClient</Content>
+          </IndicatorItem>
+          <IndicatorItem id="8fca63ad-3296-40a2-a204-7b4b6e05ca1a" condition="contains" preserve-case="false" negate="false">
+            <Context document="regKeyEvent" search="regKeyEvent/path" type="event" />
+            <Content type="string">services\UI0Detect</Content>
+          </IndicatorItem>
+        </Indicator>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

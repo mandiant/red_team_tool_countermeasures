@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="283998ad-dd0a-4923-8f26-3a87516e2087" last-modified="2020-12-02T00:36:59Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>DueDLLigence FileWrites (Utility)</short_description>
+    <description>This rule detects filewrite events for md5 hashes corresponding to known binaries used for DLL Sideloading in DueDLLigence.</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2020-11-30T22:32:19Z</authored_date>
+    <links></links>
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="900eb715-1b11-411b-9681-3e6239b012d4">
+      <Indicator operator="AND" id="f6ff49c2-7edb-40cd-b3eb-80672d87ca3e">
+        <IndicatorItem id="a30788e2-4776-483f-bd86-a093b3ff22f3" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="fileWriteEvent" search="fileWriteEvent/filePath" type="event" />
+          <Content type="string">Program Files</Content>
+        </IndicatorItem>
+        <IndicatorItem id="b2855cfc-c33a-4e76-baa5-be5d756ad455" condition="greater-than" preserve-case="false" negate="false">
+          <Context document="fileWriteEvent" search="fileWriteEvent/writes" type="event" />
+          <Content type="int">0</Content>
+        </IndicatorItem>
+        <IndicatorItem id="09628396-ae56-4469-a6cc-52c89bce3cfb" condition="contains" preserve-case="false" negate="true">
+          <Context document="fileWriteEvent" search="fileWriteEvent/filePath" type="event" />
+          <Content type="string">windows\winsxs</Content>
+        </IndicatorItem>
+        <IndicatorItem id="5d302416-3cdb-4484-8ac2-e26c4401742a" condition="contains" preserve-case="false" negate="true">
+          <Context document="fileWriteEvent" search="fileWriteEvent/filePath" type="event" />
+          <Content type="string">windows\carbonblack\store</Content>
+        </IndicatorItem>
+        <IndicatorItem id="c18bf362-62f5-47f0-a24f-989d18476c40" condition="contains" preserve-case="false" negate="true">
+          <Context document="fileWriteEvent" search="fileWriteEvent/filePath" type="event" />
+          <Content type="string">windows\softwaredistribution\download</Content>
+        </IndicatorItem>
+        <IndicatorItem id="2a3e785d-6071-40ba-bd39-7581f8112798" condition="is" preserve-case="false" negate="true">
+          <Context document="fileWriteEvent" search="fileWriteEvent/process" type="event" />
+          <Content type="string">SftService.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="782ae4fd-b125-4aba-8a87-2166e26ca43f" condition="is" preserve-case="false" negate="true">
+          <Context document="fileWriteEvent" search="fileWriteEvent/process" type="event" />
+          <Content type="string">msiexec.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="5ed0a94e-f4c5-46a9-8a17-0fcdd5a540a2" condition="is" preserve-case="false" negate="true">
+          <Context document="fileWriteEvent" search="fileWriteEvent/process" type="event" />
+          <Content type="string">tiworker.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="e3a2e1a6-7238-4f6a-b1b4-173f20f81059" condition="is" preserve-case="false" negate="true">
+          <Context document="fileWriteEvent" search="fileWriteEvent/process" type="event" />
+          <Content type="string">wbengine.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="f059acb6-f920-4a05-9482-81c05d70af32" condition="is" preserve-case="false" negate="true">
+          <Context document="fileWriteEvent" search="fileWriteEvent/process" type="event" />
+          <Content type="string">fastcopy.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="495f1ec2-e9e0-4d5a-acab-d052e1602ad5" condition="is" preserve-case="false" negate="true">
+          <Context document="fileWriteEvent" search="fileWriteEvent/process" type="event" />
+          <Content type="string">vmware-converter-a.exe</Content>
+        </IndicatorItem>
+        <Indicator operator="OR" id="f8658a6d-b4c0-458c-932f-11c09d811104">
+          <IndicatorItem id="28db475a-3c20-42d8-977d-0883f86e7af5" condition="is" preserve-case="false" negate="false">
+            <Context document="fileWriteEvent" search="fileWriteEvent/md5" type="event" />
+            <Content type="md5">F23B3DF6470CC1D080F2542C6FD34DDE</Content>
+          </IndicatorItem>
+          <IndicatorItem id="4744272c-3740-42df-a340-bd2b3764280f" condition="is" preserve-case="false" negate="false">
+            <Context document="fileWriteEvent" search="fileWriteEvent/md5" type="event" />
+            <Content type="md5">67D731B086011DB4D87E680CF7514EDB</Content>
+          </IndicatorItem>
+          <IndicatorItem id="44ce31dc-56de-4203-95de-13e49a58f47b" condition="is" preserve-case="false" negate="false">
+            <Context document="fileWriteEvent" search="fileWriteEvent/md5" type="event" />
+            <Content type="md5">F16903B2FF82689404F7D0820F461E5D</Content>
+          </IndicatorItem>
+          <IndicatorItem id="5359a8ae-6010-4d5a-b44a-05e0646500bf" condition="is" preserve-case="false" negate="false">
+            <Context document="fileWriteEvent" search="fileWriteEvent/md5" type="event" />
+            <Content type="md5">9D0DA088D2BB135611B5450554C99672</Content>
+          </IndicatorItem>
+          <IndicatorItem id="e2975fac-bf0b-4dfd-b232-94d7f4cc51f2" condition="is" preserve-case="false" negate="false">
+            <Context document="fileWriteEvent" search="fileWriteEvent/md5" type="event" />
+            <Content type="md5">53076ABBB58EBFFB79177BEF0DB30888</Content>
+          </IndicatorItem>
+          <IndicatorItem id="722af0c2-2f74-4f69-ae19-6ce4688c7020" condition="is" preserve-case="false" negate="false">
+            <Context document="fileWriteEvent" search="fileWriteEvent/md5" type="event" />
+            <Content type="md5">F848764F21653CB94037945A76A59171</Content>
+          </IndicatorItem>
+          <IndicatorItem id="8426d74c-a33a-4855-b8ea-169672b7a2ea" condition="is" preserve-case="false" negate="false">
+            <Context document="fileWriteEvent" search="fileWriteEvent/md5" type="event" />
+            <Content type="md5">C422A95929DD627B4C2BE52226287003</Content>
+          </IndicatorItem>
+          <IndicatorItem id="411eeba5-a7fd-4da7-82d4-c9d208adf82c" condition="is" preserve-case="false" negate="false">
+            <Context document="fileWriteEvent" search="fileWriteEvent/md5" type="event" />
+            <Content type="md5">62AEE7C6855AA984284F0FF80C2A1999</Content>
+          </IndicatorItem>
+          <IndicatorItem id="91332bf4-fbad-486c-99ed-bc79a131e955" condition="is" preserve-case="false" negate="false">
+            <Context document="fileWriteEvent" search="fileWriteEvent/md5" type="event" />
+            <Content type="md5">15FB71D70B15DA6B9A68E505FC553BAC</Content>
+          </IndicatorItem>
+          <IndicatorItem id="673c6c44-3d4d-4560-841f-3653d2d4ca14" condition="is" preserve-case="false" negate="false">
+            <Context document="fileWriteEvent" search="fileWriteEvent/md5" type="event" />
+            <Content type="md5">C7DB627A9DCE2ADC1AE9A3EC5A1DB4CB</Content>
+          </IndicatorItem>
+        </Indicator>
+      </Indicator>
+      <Indicator operator="AND" id="70e6c916-6b18-4026-b84a-01ec807aa631">
+        <IndicatorItem id="3b9a0f06-674e-4c62-b7f6-74b64ba49b09" condition="is" preserve-case="false" negate="true">
+          <Context document="fileWriteEvent" search="fileWriteEvent/filePath" type="event" />
+          <Content type="string">ProgramData</Content>
+        </IndicatorItem>
+        <IndicatorItem id="cc22aeac-47b9-4c7e-ab06-458abf95e5f1" condition="is" preserve-case="false" negate="true">
+          <Context document="fileWriteEvent" search="fileWriteEvent/process" type="event" />
+          <Content type="string">Ntrtscan.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="5acf0236-1fb4-4871-ad7c-c384cdd9de04" condition="is" preserve-case="false" negate="false">
+          <Context document="fileWriteEvent" search="fileWriteEvent/md5" type="event" />
+          <Content type="md5">B795E6138E29A37508285FC31E92BD78</Content>
+        </IndicatorItem>
+        <IndicatorItem id="ac4f7309-e94e-43eb-8f35-5aa7368ab3f4" condition="is" preserve-case="false" negate="true">
+          <Context document="fileWriteEvent" search="fileWriteEvent/process" type="event" />
+          <Content type="string">fastcopy.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="b7d7ef48-7f6a-4d50-a52c-e4afb81104cb" condition="is" preserve-case="false" negate="true">
+          <Context document="fileWriteEvent" search="fileWriteEvent/process" type="event" />
+          <Content type="string">wbengine.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="c2e15b25-5221-4ed2-8ee5-d3e5cdf0eb3e" condition="greater-than" preserve-case="false" negate="false">
+          <Context document="fileWriteEvent" search="fileWriteEvent/writes" type="event" />
+          <Content type="int">0</Content>
+        </IndicatorItem>
+        <IndicatorItem id="a0da671c-e513-4e01-b393-373e1dbaf962" condition="is" preserve-case="false" negate="true">
+          <Context document="fileWriteEvent" search="fileWriteEvent/process" type="event" />
+          <Content type="string">vmware-converter-a.exe</Content>
+        </IndicatorItem>
+      </Indicator>
+      <Indicator operator="AND" id="8859eba0-d66f-4630-aa61-ce7b0058170c">
+        <IndicatorItem id="f4665961-ded0-402b-bcb4-a12e1f030473" condition="is" preserve-case="false" negate="false">
+          <Context document="fileWriteEvent" search="fileWriteEvent/md5" type="event" />
+          <Content type="md5">5E70AB0BF74BBA785B83DA53A3056A21</Content>
+        </IndicatorItem>
+        <IndicatorItem id="52f312d4-7804-44f2-934c-81114f1416bc" condition="is" preserve-case="false" negate="true">
+          <Context document="fileWriteEvent" search="fileWriteEvent/process" type="event" />
+          <Content type="string">TrustedInstaller.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="7f7415b4-64ae-48a4-b19e-0fc2b44e977b" condition="is" preserve-case="false" negate="true">
+          <Context document="fileWriteEvent" search="fileWriteEvent/process" type="event" />
+          <Content type="string">Ntrtscan.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="25b4d70f-d2a5-4228-871c-a80553d082c7" condition="is" preserve-case="false" negate="true">
+          <Context document="fileWriteEvent" search="fileWriteEvent/process" type="event" />
+          <Content type="string">fastcopy.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="a4949a3d-a7b8-4c3b-afe1-dfe1797bb615" condition="is" preserve-case="false" negate="true">
+          <Context document="fileWriteEvent" search="fileWriteEvent/process" type="event" />
+          <Content type="string">wbengine.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="444eac7d-62aa-4458-b658-a6c5bac9bb7d" condition="greater-than" preserve-case="false" negate="false">
+          <Context document="fileWriteEvent" search="fileWriteEvent/writes" type="event" />
+          <Content type="int">0</Content>
+        </IndicatorItem>
+        <IndicatorItem id="f6726801-a230-411b-b72b-67e89b9ec569" condition="is" preserve-case="false" negate="true">
+          <Context document="fileWriteEvent" search="fileWriteEvent/process" type="event" />
+          <Content type="string">vmware-converter-a.exe</Content>
+        </IndicatorItem>
+      </Indicator>
+      <Indicator operator="AND" id="2f737380-7544-4a7b-9b06-94797f2c1b0f">
+        <IndicatorItem id="1619e2a5-17cb-43bd-b00f-b71eaa3053ab" condition="is" preserve-case="false" negate="false">
+          <Context document="fileWriteEvent" search="fileWriteEvent/md5" type="event" />
+          <Content type="md5">AC07B84AD3F23F043D494AA8ACAF84CF</Content>
+        </IndicatorItem>
+        <IndicatorItem id="c6e56e2f-c9b2-4f5d-8dbc-26c55301cf95" condition="is" preserve-case="false" negate="true">
+          <Context document="fileWriteEvent" search="fileWriteEvent/process" type="event" />
+          <Content type="string">msiexec.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="eb1cae87-6770-4e71-8212-4d960acac5c4" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="fileWriteEvent" search="fileWriteEvent/filePath" type="event" />
+          <Content type="string">program files</Content>
+        </IndicatorItem>
+        <IndicatorItem id="6aa637eb-4fa7-476a-a277-a000f4aff858" condition="greater-than" preserve-case="false" negate="false">
+          <Context document="fileWriteEvent" search="fileWriteEvent/writes" type="event" />
+          <Content type="int">0</Content>
+        </IndicatorItem>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

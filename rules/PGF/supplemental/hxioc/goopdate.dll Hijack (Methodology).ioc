@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="03804a73-0178-4a8f-bc05-64ab7ed8cc71" last-modified="2020-12-02T00:14:22Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>goopdate.dll Hijack (Methodology)</short_description>
+    <description>Identifies possible DLL search order hijacking of goopdate.dll based on image loads from unexpected locations.
+MITRE ATT&amp;CK
+Tactic: Persistence, Privilege Escalation, Defense Evasion
+Technique: T1574.001</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2020-11-29T20:46:46Z</authored_date>
+    <links />
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="15263bdf-8d55-4281-a866-430ea2a4385e">
+      <Indicator operator="AND" id="e645d762-2797-4640-bd27-e10f1786a6aa">
+        <IndicatorItem id="10803578-cc52-4e71-b17a-2f493879afdc" condition="is" preserve-case="false" negate="false">
+          <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+          <Content type="string">goopdate.dll</Content>
+        </IndicatorItem>
+        <IndicatorItem id="82fab64e-20a7-4f6e-b940-52bde1c007ef" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Program Files (x86)\GUM</Content>
+        </IndicatorItem>
+        <IndicatorItem id="0b6a4331-a5a0-49c9-a04f-9b3b4ca33108" condition="matches" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">\\AppData\\Local\\Temp\\\d*\\?GUM</Content>
+        </IndicatorItem>
+        <IndicatorItem id="d86a173f-9bc6-4921-92eb-92923bfa7fc4" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Program Files\GUM</Content>
+        </IndicatorItem>
+        <IndicatorItem id="f33e3db3-9a05-47c8-b980-0e219bf743a1" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Program Files (x86)\Nok Nok Labs\MFACUpdater\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="bced663a-8dcc-4c81-9ec8-3662c4bed6a7" condition="matches" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/fullPath" type="event" />
+          <Content type="string">^[a-z]:\d*\\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="82b76e31-ccca-4940-8564-dbe83a18dbc1" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/fullPath" type="event" />
+          <Content type="string">\Device\HarddiskVolume</Content>
+        </IndicatorItem>
+        <IndicatorItem id="1fcbd5f5-86ec-4ca1-a8df-638b3a2b66d8" condition="contains" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">\Program Files (x86)\Google\Update</Content>
+        </IndicatorItem>
+        <IndicatorItem id="f452a339-8af3-401e-ae03-56b00bcde229" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Program Files (x86)\Common Files\HCL\AutoUpdate\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="b97f8537-d9f1-4729-8dc0-f3de12d9dc30" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Program Files\Common Files\HCL\AutoUpdate\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="3e93280e-f1d0-45ef-8105-140f9d038750" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">C:\Program Files</Content>
+        </IndicatorItem>
+        <IndicatorItem id="557312fe-2820-4796-b5e6-5ecaa1d05ad7" condition="matches" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">^Program Files( \(x86\))?\\.*(\\Browser)?\\(Update|Temp)\\[0-9.]*$</Content>
+        </IndicatorItem>
+        <IndicatorItem id="27def4f1-5e05-44e7-b27e-937e746253dc" condition="matches" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">^Users\\.*\\AppData\\Local\\.*\\(Update|Installer)\\[0-9.]*$</Content>
+        </IndicatorItem>
+        <IndicatorItem id="39001d4b-1e01-4802-bdb3-0fcad8594689" condition="matches" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">^Documents and Settings\\.*\\Local Settings\\Application Data\\.*\\Update\\[0-9.]*$</Content>
+        </IndicatorItem>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

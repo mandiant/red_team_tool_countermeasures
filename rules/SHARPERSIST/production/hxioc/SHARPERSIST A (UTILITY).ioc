@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="3c720634-26b9-4772-8884-d3c3c991ab26" last-modified="2020-12-02T06:59:56Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>SHARPERSIST A (UTILITY)</short_description>
+    <description>This IOC detects windows persistence activity performed by the Sharpersist utility. It has multiple persistence functionalities such as Keepass, hotkey, new schedule task, Startup Folder and Scheduled Task Backdoor. This is associated with MITRE ATT&amp;CK (r) Tactic(s): Execution, Persistence, Privilege Escalation and Technique(s): T1047, T1053.005.</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2020-11-27T12:07:57Z</authored_date>
+    <links></links>
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="ed267cdb-91e1-4768-8a3a-a5b57a47dd6e">
+      <Indicator operator="AND" id="d19892e7-4104-4f7b-b97c-881149cd9665">
+        <IndicatorItem id="dcc4a501-2fb8-41be-9d8c-2d8c18ac95ff" condition="is" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/eventType" type="event" />
+          <Content type="string">start</Content>
+        </IndicatorItem>
+        <IndicatorItem id="cef06cd8-cb10-4f7d-b4c3-1a8120f47501" condition="is" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/process" type="event" />
+          <Content type="string">sharpersist.exe</Content>
+        </IndicatorItem>
+      </Indicator>
+      <Indicator operator="AND" id="0cce7c59-f30d-4994-a62b-cf6c04b7ef44">
+        <IndicatorItem id="e51b76bf-f833-441d-b466-f4d6fa548f37" condition="is" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/eventType" type="event" />
+          <Content type="string">start</Content>
+        </IndicatorItem>
+        <IndicatorItem id="6f3a0592-57c3-48d4-8dc9-63f5e8daf978" condition="contains" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+          <Content type="string"> -t </Content>
+        </IndicatorItem>
+        <IndicatorItem id="ffa0ad58-7118-494c-8ace-5a515e854555" condition="contains" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+          <Content type="string"> -c </Content>
+        </IndicatorItem>
+        <IndicatorItem id="9d46da11-2be0-49eb-b227-02aa31a88879" condition="matches" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+          <Content type="string">\s\-m\s+?(add|check|remove|list)\s</Content>
+        </IndicatorItem>
+        <Indicator operator="OR" id="ba844e9f-00a2-4a78-b807-995478476651">
+          <Indicator operator="AND" id="3c133173-ae67-46db-81dd-9047dbb082db">
+            <IndicatorItem id="ad64bb58-0274-404a-9af5-44797fd9c80e" condition="contains" preserve-case="false" negate="false">
+              <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+              <Content type="string"> hotkey </Content>
+            </IndicatorItem>
+            <IndicatorItem id="3b3bdacd-034c-4955-8630-4d03bef61496" condition="contains" preserve-case="false" negate="false">
+              <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+              <Content type="string"> -k </Content>
+            </IndicatorItem>
+            <IndicatorItem id="2a65c117-278d-479b-8971-e4506b534582" condition="contains" preserve-case="false" negate="false">
+              <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+              <Content type="string"> -f </Content>
+            </IndicatorItem>
+          </Indicator>
+          <Indicator operator="AND" id="58e91a07-6b58-4f5f-9ab1-a210e493dbe9">
+            <IndicatorItem id="e487d97d-1af2-4198-8b9e-14c5ee9ca72f" condition="contains" preserve-case="false" negate="false">
+              <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+              <Content type="string"> schtaskbackdoor </Content>
+            </IndicatorItem>
+            <IndicatorItem id="846ba559-8dbc-49c7-bdcd-98353bdfa612" condition="contains" preserve-case="false" negate="false">
+              <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+              <Content type="string"> -n </Content>
+            </IndicatorItem>
+          </Indicator>
+          <Indicator operator="AND" id="ea5c5ef1-99bc-40f5-8cab-e1ad1de7ea52">
+            <IndicatorItem id="9aa9fb6d-bd53-40e9-bda9-973857447f64" condition="contains" preserve-case="false" negate="false">
+              <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+              <Content type="string"> wmi </Content>
+            </IndicatorItem>
+            <IndicatorItem id="db35d29e-dd67-4abc-ae69-921cc190f2c8" condition="contains" preserve-case="false" negate="false">
+              <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+              <Content type="string"> -n </Content>
+            </IndicatorItem>
+          </Indicator>
+          <Indicator operator="AND" id="3ed4dddb-d817-4df2-a472-d90c4fec91eb">
+            <IndicatorItem id="4d094b6b-497d-4b6e-a1d4-a5f2b2f0af71" condition="contains" preserve-case="false" negate="false">
+              <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+              <Content type="string"> comhijack </Content>
+            </IndicatorItem>
+            <IndicatorItem id="74d22d20-e1e0-446d-90f3-9c25262c1f26" condition="contains" preserve-case="false" negate="false">
+              <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+              <Content type="string">.dll</Content>
+            </IndicatorItem>
+          </Indicator>
+        </Indicator>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

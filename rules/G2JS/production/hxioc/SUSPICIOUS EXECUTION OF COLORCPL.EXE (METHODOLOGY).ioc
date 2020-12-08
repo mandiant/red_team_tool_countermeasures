@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="e363428e-4e4a-471f-8a5f-c86fe568483a" last-modified="2020-12-02T05:33:58Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>SUSPICIOUS EXECUTION OF COLORCPL.EXE (METHODOLOGY)</short_description>
+    <description>This IOC detects suspicious parent and child processes relation with colorcpl.exe. This is associated with MITRE ATT&amp;CK (r) Tactic(s): Execution and Technique(s): T1059.005, T1059.007.</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2020-11-27T09:56:11Z</authored_date>
+    <links></links>
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="fd2041bd-ccb3-4e20-8b74-6be32de3cebd">
+      <Indicator operator="AND" id="3861301d-5272-476b-a6cd-984582792e4b">
+        <IndicatorItem id="c2489cee-7901-4684-9677-bb9d67578afa" condition="matches" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/processPath" type="event" />
+          <Content type="string">:\\Windows\\(SysWOW64|system32)\\colorcpl\.exe$</Content>
+        </IndicatorItem>
+        <IndicatorItem id="cc9df1a9-09a1-4993-bd3a-b2c75e23332d" condition="is" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/eventType" type="event" />
+          <Content type="string">start</Content>
+        </IndicatorItem>
+        <Indicator operator="OR" id="15b62750-c5c9-45ae-9aeb-159d45094abf">
+          <IndicatorItem id="775151d9-48cb-43fa-8b2d-e52afa7a920c" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/parentProcess" type="event" />
+            <Content type="string">cscript.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="6d5774b9-711f-497c-a331-f7abd3632e36" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/parentProcess" type="event" />
+            <Content type="string">wscript.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="f94ba4d9-f75a-4f28-96d2-f229b96ce237" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/parentProcess" type="event" />
+            <Content type="string">MSHTA.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="0ab63b49-d1b6-4ed6-982e-69fb91ed2095" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/parentProcess" type="event" />
+            <Content type="string">winword.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="cdac1a19-0183-42a6-b382-8a7426f47f2a" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/parentProcess" type="event" />
+            <Content type="string">excel.exe</Content>
+          </IndicatorItem>
+        </Indicator>
+      </Indicator>
+      <Indicator operator="AND" id="2a48233b-bbfd-47ae-8509-05d0507d8500">
+        <IndicatorItem id="8b71d680-a32d-4b5c-b466-6f8fa74ef6b5" condition="matches" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/parentProcessPath" type="event" />
+          <Content type="string">:\\Windows\\(SysWOW64|system32)\\colorcpl\.exe$</Content>
+        </IndicatorItem>
+        <IndicatorItem id="3ce04110-32dd-49aa-b0d0-66a93481290a" condition="is" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/eventType" type="event" />
+          <Content type="string">start</Content>
+        </IndicatorItem>
+        <Indicator operator="OR" id="966c2182-e896-4a8e-9e65-6b32f6069887">
+          <IndicatorItem id="a84137bf-3fa2-4e73-92d3-cd35f5a46988" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">cmd.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="cf9c82be-a56c-455f-b383-8619d19b87de" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">powershell.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="9c1b3a75-963b-4e46-9a28-bff3924e694f" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">nslookup.exe</Content>
+          </IndicatorItem>
+        </Indicator>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

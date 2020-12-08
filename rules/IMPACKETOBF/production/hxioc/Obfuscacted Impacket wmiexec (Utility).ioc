@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="66d8e005-ad46-43e0-96c8-576386f5f8c1" last-modified="2020-12-02T00:23:35Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>Obfuscacted Impacket wmiexec (Utility)</short_description>
+    <description>Identifies evidence of a modified variant of the publicly-available wmiexec tool, which is part of the Impacket project.
+
+MITRE ATT&amp;CK
+Tactic: Execution
+Technique: T1047
+Software: S0357</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2020-11-25T21:29:46Z</authored_date>
+    <links />
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="4f3925a4-c18d-4297-8954-4b45b4afebf2">
+      <Indicator operator="AND" id="e03c2542-2fff-4ff7-b7b5-324a3d4a25aa">
+        <IndicatorItem id="9824b725-93a7-4984-90dc-8a4dfa9b01fa" condition="matches" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+          <Content type="string">\/Q\s*\/K.*1&gt;\s*\\\\127\.0\.0\.1\\.*\\[0-9a-f]{18}\.dat.*2&gt;&amp;1</Content>
+        </IndicatorItem>
+        <IndicatorItem id="8595c504-461f-4ffd-8ea4-1dd71b61ffca" condition="is" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/process" type="event" />
+          <Content type="string">cmd.exe</Content>
+        </IndicatorItem>
+      </Indicator>
+      <Indicator operator="AND" id="2020c793-c2ce-4cb4-9673-ac4389c98ffd">
+        <IndicatorItem id="dc83e43a-a967-42d4-a54c-09847df0bf79" condition="is" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/parentProcess" type="event" />
+          <Content type="string">wmiprvse.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="665d5a39-1e3e-4c5b-bbc3-b710c8c70d6b" condition="is" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/process" type="event" />
+          <Content type="string">cmd.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="871cfc83-8c06-4eac-9280-6c49f0c3dc62" condition="matches" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+          <Content type="string">\/Q\s*\/K.*1\s*&gt;\s*\\\\.*2&gt;&amp;1</Content>
+        </IndicatorItem>
+        <IndicatorItem id="ff0455f3-1ee4-4e86-82f1-12caf18501ff" condition="ends-with" preserve-case="true" negate="true">
+          <Context document="processEvent" search="processEvent/username" type="event" />
+          <Content type="string">\Svc_Block64</Content>
+        </IndicatorItem>
+      </Indicator>
+      <Indicator operator="AND" id="a573ebff-c6a8-4583-af5e-588d2d74ff16">
+        <IndicatorItem id="8ae3af92-0e42-421d-afc2-8386ce155606" condition="matches" preserve-case="true" negate="false">
+          <Context document="fileWriteEvent" search="fileWriteEvent/fileName" type="event" />
+          <Content type="string">^[0-9a-f]{18}\.dat$</Content>
+        </IndicatorItem>
+        <IndicatorItem id="79c8d819-90c8-44ef-aea1-21db2e0703aa" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="fileWriteEvent" search="fileWriteEvent/fileName" type="event" />
+          <Content type="string">dat</Content>
+        </IndicatorItem>
+        <Indicator operator="OR" id="3ef1ef57-d358-427c-8a1e-63d4823c49be">
+          <IndicatorItem id="8d21f76e-1bb7-4ce4-b212-60b2eead7d55" condition="is" preserve-case="false" negate="false">
+            <Context document="fileWriteEvent" search="fileWriteEvent/filePath" type="event" />
+            <Content type="string">windows</Content>
+          </IndicatorItem>
+          <IndicatorItem id="30da85a6-fc28-41ad-b4fd-ff2172652c5f" condition="is" preserve-case="false" negate="false">
+            <Context document="fileWriteEvent" search="fileWriteEvent/filePath" type="event" />
+            <Content type="string">windows\temp</Content>
+          </IndicatorItem>
+        </Indicator>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

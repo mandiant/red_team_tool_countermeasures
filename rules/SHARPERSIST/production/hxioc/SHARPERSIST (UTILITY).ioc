@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="9e74a7c4-9518-4d95-a953-9df144fc80d5" last-modified="2019-09-20T08:41:58Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>SHARPERSIST (UTILITY)</short_description>
+    <description>This IOC detects a Windows Persistence Toolkit called SharPersist.</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2019-09-05T10:56:17Z</authored_date>
+    <links></links>
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="f089e8a5-1fe9-4d45-ab82-645e9e10c432">
+      <IndicatorItem id="e5b19e86-1c12-42d4-a165-bceda026ce3c" condition="is" preserve-case="false" negate="false">
+        <Context document="fileWriteEvent" search="fileWriteEvent/fileName" type="event" />
+        <Content type="string">SharPersist.exe</Content>
+      </IndicatorItem>
+      <IndicatorItem id="9017f7f4-dc13-4eba-8f36-5211132fd0f0" condition="is" preserve-case="false" negate="false">
+        <Context document="fileWriteEvent" search="fileWriteEvent/md5" type="event" />
+        <Content type="md5">AD9B68820DE30D71CC2EC17235BB4AD1</Content>
+      </IndicatorItem>
+      <Indicator operator="AND" id="68bea2c0-a915-4d1f-b699-03a2995d84cf">
+        <IndicatorItem id="04dbc0d0-45e1-4a91-b337-0ca214173502" condition="contains" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+          <Content type="string"> -m add </Content>
+        </IndicatorItem>
+        <IndicatorItem id="0384b167-b434-48fb-a902-9d65635c88fb" condition="contains" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+          <Content type="string"> -t </Content>
+        </IndicatorItem>
+        <IndicatorItem id="6738a374-85ad-490a-a965-e20d927e2100" condition="contains" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+          <Content type="string"> -c </Content>
+        </IndicatorItem>
+        <Indicator operator="OR" id="2467bd8d-8e14-485f-8043-24fd1312d0d9">
+          <IndicatorItem id="0800b3c6-c0e9-4fbd-bf3e-e8aed6bb99da" condition="contains" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+            <Content type="string"> keepass</Content>
+          </IndicatorItem>
+          <IndicatorItem id="b934d48f-880a-42c8-aa7d-3caa8f9e91b5" condition="contains" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+            <Content type="string"> reg</Content>
+          </IndicatorItem>
+          <IndicatorItem id="00fccd63-1b43-4ea9-8b99-95e31dc00ba2" condition="contains" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+            <Content type="string"> startupfolder</Content>
+          </IndicatorItem>
+          <IndicatorItem id="1b6e6fd5-89c0-44d8-aeca-2151b236449d" condition="contains" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+            <Content type="string"> tortoisesvn</Content>
+          </IndicatorItem>
+          <IndicatorItem id="2ca4c1b6-01a1-4e60-8490-84a6e0b3fb5c" condition="contains" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+            <Content type="string"> service</Content>
+          </IndicatorItem>
+          <IndicatorItem id="7264001c-d9a7-4491-b75a-5863b7bdb549" condition="contains" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+            <Content type="string"> schtask</Content>
+          </IndicatorItem>
+        </Indicator>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="8c2bee89-1afc-4358-8a81-cce702e65649" last-modified="2020-11-26T11:59:36Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>POSSIBLE SRPROXY SIDE-LOADING (METHODOLOGY)</short_description>
+    <description>SRProxy is a tool that is part of the Citrix Receiver package. This IOC will detect the possible DLL side-loading attempt on SRProxy.exe. This is associated with MITRE ATT&amp;CK (r) Tactic(s): Defense Evasion, Privilege Escalation and Technique(s): T1574.002.</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2020-11-26T11:32:36Z</authored_date>
+    <links></links>
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="94e211ac-f21a-465a-bd69-6f56187bc98c">
+      <Indicator operator="AND" id="c1fc259f-7099-4c0e-bd42-bd4ae37c17d8">
+        <IndicatorItem id="fed1def1-92cf-4efe-9b4c-2561d4564282" condition="matches" preserve-case="false" negate="false">
+          <Context document="fileWriteEvent" search="fileWriteEvent/fullPath" type="event" />
+          <Content type="string">^.:\\Program Files( \(X86\))\\Citrix\\ICA Client\\Receiver\\PackageIdentification\.dll$</Content>
+        </IndicatorItem>
+        <IndicatorItem id="cae16942-4cc9-4e92-ac69-a908ccedf529" condition="starts-with" preserve-case="false" negate="false">
+          <Context document="fileWriteEvent" search="fileWriteEvent/textAtLowestOffset" type="event" />
+          <Content type="string">MZ</Content>
+        </IndicatorItem>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="c5b7bd45-7e33-4073-b85d-8536793197c8" last-modified="2020-12-02T00:14:19Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>cclib.dll Hijack (Methodology)</short_description>
+    <description>Identifies possible DLL search order hijacking of cclib.dll based on image loads from unexpected locations.
+MITRE ATT&amp;CK
+Tactic: Persistence, Privilege Escalation, Defense Evasion
+Technique: T1574.001</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2020-11-29T21:22:22Z</authored_date>
+    <links />
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="fedb715b-a19d-45ca-8364-9e5324a76fe6">
+      <Indicator operator="AND" id="39629146-9db2-4565-89dd-9e59f5f8a066">
+        <IndicatorItem id="256a612a-21c7-434e-9632-bbfe4fe20ef4" condition="is" preserve-case="false" negate="false">
+          <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+          <Content type="string">cclib.dll</Content>
+        </IndicatorItem>
+        <IndicatorItem id="a224abb6-19b5-4720-bc81-d9414dc347b1" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Program Files\Symantec</Content>
+        </IndicatorItem>
+        <IndicatorItem id="39ca6b68-67fb-422a-a33d-30bcf5265ad0" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Program Files (x86)\Symantec</Content>
+        </IndicatorItem>
+        <IndicatorItem id="71bf49bf-8f2a-4ac7-b43e-e4aa15f17b4b" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">ProgramData\Symantec</Content>
+        </IndicatorItem>
+        <IndicatorItem id="2b7847c4-5da9-4165-8651-c18c824fdcfc" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">PROGRA~</Content>
+        </IndicatorItem>
+        <IndicatorItem id="d6360752-8ade-4139-b6e4-4c5526817cf4" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Program Files (x86)\Norton</Content>
+        </IndicatorItem>
+        <IndicatorItem id="30bb888a-3831-4fb2-8e00-8e79dd2359c3" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Program Files\Norton</Content>
+        </IndicatorItem>
+        <IndicatorItem id="c63966bf-8067-4f40-98f0-ce435f824be9" condition="contains" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">\Symantec\Symantec Endpoint Protection\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="fe2a76a6-6d4f-40c6-a239-e7d779948076" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Symantec</Content>
+        </IndicatorItem>
+        <IndicatorItem id="308c978c-5f24-4f4d-b145-0a59cfd3cdbe" condition="ends-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/fullPath" type="event" />
+          <Content type="string">\Endpoint Agent\ccLib.dll</Content>
+        </IndicatorItem>
+        <IndicatorItem id="ce00fef1-53f6-4436-9617-01335b439633" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Programs File\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="e297a567-5d11-4b71-b054-705304946488" condition="ends-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/fullPath" type="event" />
+          <Content type="string">\bin\ccLib.dll</Content>
+        </IndicatorItem>
+        <IndicatorItem id="05f0c251-4f0f-44e9-b9a7-ab89b8c8e8df" condition="ends-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/fullPath" type="event" />
+          <Content type="string">\Bin64\ccLib.dll</Content>
+        </IndicatorItem>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

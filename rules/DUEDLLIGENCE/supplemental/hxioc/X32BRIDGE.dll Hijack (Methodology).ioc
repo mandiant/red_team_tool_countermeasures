@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="b163ec46-5883-41d5-a02e-4ec0e174933d" last-modified="2020-12-02T00:14:25Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>X32BRIDGE.dll Hijack (Methodology)</short_description>
+    <description>Identifies possible DLL search order hijacking of X32BRIDGE.dll based on image loads from unexpected locations.
+MITRE ATT&amp;CK
+Tactic: Persistence, Privilege Escalation, Defense Evasion
+Technique: T1574.001</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2020-11-25T19:27:01Z</authored_date>
+    <links />
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="ae6e6ac9-238c-4b44-b0d5-c1d88449efb6">
+      <IndicatorItem id="6574d869-6710-4f00-9090-5408eeccfdb8" condition="is" preserve-case="false" negate="false">
+        <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+        <Content type="string">X32BRIDGE.dll</Content>
+      </IndicatorItem>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

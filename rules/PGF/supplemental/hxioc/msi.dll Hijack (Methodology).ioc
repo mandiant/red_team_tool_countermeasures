@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="cec0c1fc-9dad-4fb3-bff9-3b6a7c7ef28b" last-modified="2020-12-02T00:14:23Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>msi.dll Hijack (Methodology)</short_description>
+    <description>Identifies possible DLL search order hijacking of msi.dll based on image loads from unexpected locations.
+MITRE ATT&amp;CK
+Tactic: Persistence, Privilege Escalation, Defense Evasion
+Technique: T1574.001</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2020-11-29T21:05:33Z</authored_date>
+    <links />
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="0f92245c-348d-4809-bd60-8b9c4d50c768">
+      <Indicator operator="AND" id="d50e9206-5e7a-49db-abe9-36de166d2285">
+        <IndicatorItem id="5ae2aae2-5b5f-4855-8724-5c56f094b7f1" condition="is" preserve-case="false" negate="false">
+          <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+          <Content type="string">msi.dll</Content>
+        </IndicatorItem>
+        <IndicatorItem id="6fa81ec5-c3b9-48bf-95af-306db0a19082" condition="is" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">windows\system32</Content>
+        </IndicatorItem>
+        <IndicatorItem id="f32f6671-7cb1-4276-a4d6-5ff51667be80" condition="is" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">windows\syswow64</Content>
+        </IndicatorItem>
+        <IndicatorItem id="d247b2f9-f369-4156-bf26-bfac2138bd7b" condition="is" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">winnt\system32</Content>
+        </IndicatorItem>
+        <IndicatorItem id="08d0aa4d-17d2-42c4-961c-65147b6ce05d" condition="is" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">winnt\syswow64</Content>
+        </IndicatorItem>
+        <IndicatorItem id="4c7d82e6-8452-4597-99c4-ea030f0c7788" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">windows\winsxs</Content>
+        </IndicatorItem>
+        <IndicatorItem id="5cf1edb7-dd8a-424d-a900-dc7bc06c32d3" condition="is" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">C:\Windows\System32</Content>
+        </IndicatorItem>
+        <IndicatorItem id="b3f45d1f-bfa0-4fbf-b0a0-2ac41178dc89" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/fullPath" type="event" />
+          <Content type="string">\Device\HarddiskDmVolumes\PhysicalDmVolumes\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="5295cb9d-4a69-46fc-818a-51fbd0d639f2" condition="matches" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/fullPath" type="event" />
+          <Content type="string">^[a-z]:\d*\\</Content>
+        </IndicatorItem>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

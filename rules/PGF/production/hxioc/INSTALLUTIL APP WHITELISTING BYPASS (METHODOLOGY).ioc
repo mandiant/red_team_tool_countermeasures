@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding='utf-8'?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://openioc.org/schemas/OpenIOC_1.1" id="81017b7f-e5ed-47a4-8a86-613fcc3cd30c" last-modified="2020-11-04T01:09:55Z" published-date="0001-01-01T00:00:00">
+  <metadata>
+    <short_description>INSTALLUTIL APP WHITELISTING BYPASS (METHODOLOGY)</short_description>
+    <description>This alert looks for evidence of the native signed Windows binary InstallUtil.exe being used to load PE files. This technique can be used to bypass application whitelisting and has been observed used in the wild. This is associated with MITRE ATT&amp;CK (r) Tactic(s): Defense Evasion and Technique(s): T1218.004.</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2017-04-04T17:54:55Z</authored_date>
+    <links></links>
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="fa9f8ea2-6aeb-4832-b42a-110b66b58c6a">
+      <Indicator operator="AND" id="a5332d6d-58f5-4da2-8518-ce4cb6bae60b">
+        <IndicatorItem id="f1f197fe-fc22-4260-9ef4-640db6c5c2ac" condition="contains" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event"/>
+          <Content type="string">InstallUtil</Content>
+        </IndicatorItem>
+        <IndicatorItem id="b923ebd8-a7c0-44fc-9ec8-efbbc0bd324e" condition="ends-with" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/parentProcessPath" type="event"/>
+          <Content type="string">:\Windows\System32\msiexec.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="668d7dc0-26fc-4d17-aee2-4756d1eceef1" condition="ends-with" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/parentProcessPath" type="event"/>
+          <Content type="string">:\Windows\SysWOW64\msiexec.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="7d9752f9-936d-4bb1-a984-7ccca78e3abd" condition="matches" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/parentProcessPath" type="event"/>
+          <Content type="string">^[A-Z]:\\Windows\\winsxs\\[^\\]+\\msiexec\.exe$</Content>
+        </IndicatorItem>
+        <IndicatorItem id="ad3ef35e-c95a-422b-8bc3-1387c9088afb" condition="ends-with" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/processPath" type="event"/>
+          <Content type="string">:\Program Files\KARDEX\Power Pick Global\InstallUtil.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="01397997-f1be-48de-ad94-f7979ff37368" condition="ends-with" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/processPath" type="event"/>
+          <Content type="string">:\Program Files (x86)\KARDEX\Power Pick Global\InstallUtil.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="e7e2994a-be95-486f-813f-bbe132df0205" condition="matches" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event"/>
+          <Content type="string"> D:\\Applications\\[^\\]+\\Private\\[^\\]+\\.*\.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="0f626e22-d9dc-4a29-a4c8-e78c4997a745" condition="contains" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event"/>
+          <Content type="string">C:\Program Files (x86)\IBM\WinCollect Console\bin\WinCollectUserInterface.dll</Content>
+        </IndicatorItem>
+        <IndicatorItem id="6d3e0e24-58f1-4e43-83f4-26c641ce5574" condition="contains" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event"/>
+          <Content type="string">\Microsoft.Workflow.Compiler.exe.lib</Content>
+        </IndicatorItem>
+        <IndicatorItem id="1cccb080-5efa-4608-8bac-0cbc4cbeff38" condition="contains" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event"/>
+          <Content type="string">\UIAutomationClientsideProviders.dll.rsp</Content>
+        </IndicatorItem>
+        <IndicatorItem id="65f5d0e0-20ef-4713-8ef0-851b5a035234" condition="contains" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event"/>
+          <Content type="string">\AppData\sbscmp20_mscorwks.dll.rsp</Content>
+        </IndicatorItem>
+        <IndicatorItem id="d6b5fbd9-f7ac-4131-9490-32dfa0c069d3" condition="matches" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event"/>
+          <Content type="string">\"C:\\Program Files( \(x86\))?\\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="2147881f-a7f4-4c66-b7d0-68d536772932" condition="matches" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event"/>
+          <Content type="string">[-/]logfile= </Content>
+        </IndicatorItem>
+        <IndicatorItem id="5489d3c3-4c8d-4961-8239-9379547e1bc4" condition="matches" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event"/>
+          <Content type="string">[-/]u</Content>
+        </IndicatorItem>
+        <IndicatorItem id="02fd4230-a90a-4c5b-a432-1166df76fb3c" condition="contains" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event"/>
+          <Content type="string">/showcallstack</Content>
+        </IndicatorItem>
+        <IndicatorItem id="c49162a1-7659-45e3-a411-5595bc512338" condition="contains" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event"/>
+          <Content type="string"> /user=</Content>
+        </IndicatorItem>
+        <IndicatorItem id="96c4400a-c137-48a6-b349-e5e07d9771d5" condition="matches" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event"/>
+          <Content type="string">team\s*foundation</Content>
+        </IndicatorItem>
+        <IndicatorItem id="63611260-633b-44ef-8eeb-19387fe76d93" condition="matches" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/parentProcessPath" type="event"/>
+          <Content type="string">^.:\\BUILD\\[^\\]+\\Nant\\NAnt\.exe$</Content>
+        </IndicatorItem>
+        <Indicator operator="OR" id="7d22efd5-3fc8-4d6b-99b7-d54379b19228">
+          <IndicatorItem id="0b6d2d5d-2933-4036-b00d-73158cb50f1b" condition="matches" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/processCmdLine" type="event"/>
+            <Content type="string">[-/]LogToConsole=false</Content>
+          </IndicatorItem>
+          <Indicator operator="AND" id="f897fd64-8948-402f-8ef3-a296cbf2a100">
+            <IndicatorItem id="16a11f1d-2da6-4e95-8577-7f495ea53d5a" condition="matches" preserve-case="false" negate="false">
+              <Context document="processEvent" search="processEvent/processCmdLine" type="event"/>
+              <Content type="string">[-/]LogToConsole=true</Content>
+            </IndicatorItem>
+            <IndicatorItem id="aba203ff-02d9-41d7-b368-9e85a0beda5f" condition="contains" preserve-case="false" negate="true">
+              <Context document="processEvent" search="processEvent/parentProcessPath" type="event"/>
+              <Content type="string">:\Program Files\</Content>
+            </IndicatorItem>
+            <IndicatorItem id="28a4aad2-fb93-43df-95cc-db8904839ea4" condition="contains" preserve-case="false" negate="true">
+              <Context document="processEvent" search="processEvent/parentProcessPath" type="event"/>
+              <Content type="string">:\Program Files (x86)\</Content>
+            </IndicatorItem>
+          </Indicator>
+        </Indicator>
+      </Indicator>
+      <Indicator operator="AND" id="1b4b1f01-2173-4976-b6a9-ee65a1ba0df2">
+        <IndicatorItem id="c700659a-c8ed-4ab3-a384-456c44500493" condition="contains" preserve-case="false" negate="false">
+          <Context document="RegistryItem" search="RegistryItem/Text" type="mir"/>
+          <Content type="string">installutil</Content>
+        </IndicatorItem>
+        <IndicatorItem id="8ab5b6d1-0963-4386-b2db-26641d491be3" condition="matches" preserve-case="false" negate="false">
+          <Context document="RegistryItem" search="RegistryItem/Text" type="mir"/>
+          <Content type="string">[-/]logfile= </Content>
+        </IndicatorItem>
+        <IndicatorItem id="ad5aa244-f70b-44d6-a620-67729ab0c022" condition="matches" preserve-case="false" negate="false">
+          <Context document="RegistryItem" search="RegistryItem/Text" type="mir"/>
+          <Content type="string">[-/]u</Content>
+        </IndicatorItem>
+        <IndicatorItem id="85ffb442-c444-40a9-940d-44821ee4583e" condition="matches" preserve-case="false" negate="false">
+          <Context document="RegistryItem" search="RegistryItem/Text" type="mir"/>
+          <Content type="string">[-/]LogToConsole=</Content>
+        </IndicatorItem>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters/>
+</OpenIOC>

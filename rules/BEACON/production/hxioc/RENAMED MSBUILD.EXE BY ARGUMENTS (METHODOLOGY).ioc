@@ -1,0 +1,155 @@
+<?xml version='1.0' encoding='utf-8'?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://openioc.org/schemas/OpenIOC_1.1" id="800a17e8-02ff-4ec6-b6d2-23e18c70f6fe" last-modified="2020-11-04T01:09:55Z" published-date="0001-01-01T00:00:00">
+  <metadata>
+    <short_description>RENAMED MSBUILD.EXE BY ARGUMENTS (METHODOLOGY)</short_description>
+    <description>This alert looks for renamed msbuild.exe process executions based on common command line arguments used for msbuild.exe. Attackers frequently use msbuild.exe (or renamed versions of this binary) to execute arbitrary CSharp payloads written to disk most commonly as .csproj files (though any file with an extension ending in "proj" will work) either referenced on the command line or located in the same directory as the msbuild.exe binary. The XML payload on disk should be acquired and examined to determine the functionality of the payload. This is associated with MITRE ATT&amp;CK (r) Tactic(s): Defense Evasion and Technique(s): T1036.003.</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2018-08-18T15:00:48Z</authored_date>
+    <links></links>
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="ebc24167-f889-4f0d-8f8e-4758458c9017">
+      <Indicator operator="AND" id="a6350510-ac12-4d7c-a0d1-b561c8712600">
+        <IndicatorItem id="bf94d9cd-8aa4-496b-963e-f16c2b33c468" condition="is" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/process" type="event"/>
+          <Content type="string">msbuild.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="ece0cbb4-8ac9-4bdc-86fc-f56849197d4a" condition="matches" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event"/>
+          <Content type="string">[^a-z0-9]msbuild(\.exe)?[^a-z0-9]</Content>
+        </IndicatorItem>
+        <IndicatorItem id="fbcc2b12-c657-4627-8ce6-99fec6b7ff06" condition="ends-with" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/parentProcessPath" type="event"/>
+          <Content type="string">.0\bin\nact.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="6c5b6653-4390-457c-b184-016734b411e4" condition="ends-with" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/parentProcessPath" type="event"/>
+          <Content type="string">\MSBuild\15.0\Bin\amd64\Tracker.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="20f6a48a-0ee2-43c3-bd8a-350f1044a5f4" condition="ends-with" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/processPath" type="event"/>
+          <Content type="string">:\Program Files\dotnet\dotnet.exe</Content>
+        </IndicatorItem>
+        <Indicator operator="OR" id="6aef82f3-bab9-4726-bd74-603a660d2e61">
+          <IndicatorItem id="8dac8974-8031-459e-89b5-ed7aeebf655d" condition="contains" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/processCmdLine" type="event"/>
+            <Content type="string">/noconsolelogger</Content>
+          </IndicatorItem>
+          <IndicatorItem id="e595e009-3e4b-4e0c-af6f-10b60c56e931" condition="contains" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/processCmdLine" type="event"/>
+            <Content type="string">-noconsolelogger</Content>
+          </IndicatorItem>
+          <IndicatorItem id="b7d1d665-d344-4582-aa2c-a4db67d3c8b3" condition="matches" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/processCmdLine" type="event"/>
+            <Content type="string">/\s+noconsolelogger</Content>
+          </IndicatorItem>
+          <IndicatorItem id="33d1f45f-f8ed-4a26-a73f-dd8a8f4793d2" condition="matches" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/processCmdLine" type="event"/>
+            <Content type="string">-\s+noconsolelogger</Content>
+          </IndicatorItem>
+          <IndicatorItem id="40d73f0f-281e-4aea-9b28-4a780e25a105" condition="contains" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/processCmdLine" type="event"/>
+            <Content type="string">/noconlog</Content>
+          </IndicatorItem>
+          <IndicatorItem id="c674af1f-a8bb-4dbe-90f7-da095ff915b8" condition="contains" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/processCmdLine" type="event"/>
+            <Content type="string">-noconlog</Content>
+          </IndicatorItem>
+          <IndicatorItem id="d2fe0397-700c-4cee-a862-f7baab848a54" condition="matches" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/processCmdLine" type="event"/>
+            <Content type="string">/\s+noconlog</Content>
+          </IndicatorItem>
+          <IndicatorItem id="df649a33-3c85-4642-b0ba-d9904b54c200" condition="matches" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/processCmdLine" type="event"/>
+            <Content type="string">-\s+noconlog</Content>
+          </IndicatorItem>
+        </Indicator>
+      </Indicator>
+      <Indicator operator="AND" id="36d7d4aa-c54c-40e1-9e90-039d65459fc2">
+        <IndicatorItem id="44265ba6-e741-4379-af52-7d3c31aacc17" condition="matches" preserve-case="false" negate="true">
+          <Context document="RegistryItem" search="RegistryItem/Text" type="mir"/>
+          <Content type="string">[^a-z0-9]msbuild(\.exe)?[^a-z0-9]</Content>
+        </IndicatorItem>
+        <IndicatorItem id="eeae7235-6411-46b1-8e24-507b1a3d0e1c" condition="is" preserve-case="false" negate="true">
+          <Context document="RegistryItem" search="RegistryItem/KeyPath" type="mir"/>
+          <Content type="string">CurrentControlSet\services\sk\Parameters</Content>
+        </IndicatorItem>
+        <Indicator operator="OR" id="1d0af9a1-ccd5-48fb-9b28-439f754064e9">
+          <IndicatorItem id="e96c4533-e559-428d-8365-68f545ea5824" condition="contains" preserve-case="false" negate="false">
+            <Context document="RegistryItem" search="RegistryItem/Text" type="mir"/>
+            <Content type="string">/noconsolelogger</Content>
+          </IndicatorItem>
+          <IndicatorItem id="f428ae0d-dc2b-4371-8d41-7e6d57bdd703" condition="contains" preserve-case="false" negate="false">
+            <Context document="RegistryItem" search="RegistryItem/Text" type="mir"/>
+            <Content type="string">-noconsolelogger</Content>
+          </IndicatorItem>
+          <IndicatorItem id="61c446f1-ed3d-43d5-969e-e60a224e8f8c" condition="matches" preserve-case="false" negate="false">
+            <Context document="RegistryItem" search="RegistryItem/Text" type="mir"/>
+            <Content type="string">/\s+noconsolelogger</Content>
+          </IndicatorItem>
+          <IndicatorItem id="aca1bdd1-6e78-47e7-b4eb-6c48a448d193" condition="matches" preserve-case="false" negate="false">
+            <Context document="RegistryItem" search="RegistryItem/Text" type="mir"/>
+            <Content type="string">-\s+noconsolelogger</Content>
+          </IndicatorItem>
+          <IndicatorItem id="003b573e-bf34-49f2-9f7a-a7e6998556c8" condition="contains" preserve-case="false" negate="false">
+            <Context document="RegistryItem" search="RegistryItem/Text" type="mir"/>
+            <Content type="string">/noconlog</Content>
+          </IndicatorItem>
+          <IndicatorItem id="c2646308-1372-4416-8d12-9723ffd1d3f0" condition="contains" preserve-case="false" negate="false">
+            <Context document="RegistryItem" search="RegistryItem/Text" type="mir"/>
+            <Content type="string">-noconlog</Content>
+          </IndicatorItem>
+          <IndicatorItem id="c1ac96b8-e3cd-4e92-89dc-fe5a328aadb3" condition="matches" preserve-case="false" negate="false">
+            <Context document="RegistryItem" search="RegistryItem/Text" type="mir"/>
+            <Content type="string">/\s+noconlog</Content>
+          </IndicatorItem>
+          <IndicatorItem id="7ca4fa66-5ae5-461e-9f3a-db26b01a2681" condition="matches" preserve-case="false" negate="false">
+            <Context document="RegistryItem" search="RegistryItem/Text" type="mir"/>
+            <Content type="string">-\s+noconlog</Content>
+          </IndicatorItem>
+        </Indicator>
+      </Indicator>
+      <Indicator operator="AND" id="4d2f49c5-9ff0-41a9-afc0-88c12398d623">
+        <IndicatorItem id="70f36038-98f7-47d9-9159-b7ed0f82951f" condition="matches" preserve-case="false" negate="false">
+          <Context document="EventLogItem" search="EventLogItem/message" type="mir"/>
+          <Content type="string">[^a-z0-9]msbuild(\.exe)?[^a-z0-9]</Content>
+        </IndicatorItem>
+        <Indicator operator="OR" id="6b763979-0205-469f-9a47-4d8f0379d084">
+          <IndicatorItem id="760d37b4-44e3-41af-950d-8f47323f5ec9" condition="contains" preserve-case="false" negate="false">
+            <Context document="EventLogItem" search="EventLogItem/message" type="mir"/>
+            <Content type="string">/noconsolelogger</Content>
+          </IndicatorItem>
+          <IndicatorItem id="143c80e7-7381-4237-a429-1083531efaaf" condition="contains" preserve-case="false" negate="false">
+            <Context document="EventLogItem" search="EventLogItem/message" type="mir"/>
+            <Content type="string">-noconsolelogger</Content>
+          </IndicatorItem>
+          <IndicatorItem id="59505f54-6fc8-45e7-bab1-d641617073a3" condition="matches" preserve-case="false" negate="false">
+            <Context document="EventLogItem" search="EventLogItem/message" type="mir"/>
+            <Content type="string">/\s+noconsolelogger</Content>
+          </IndicatorItem>
+          <IndicatorItem id="90b0140d-a4d9-4363-93e2-f09c71c1f610" condition="matches" preserve-case="false" negate="false">
+            <Context document="EventLogItem" search="EventLogItem/message" type="mir"/>
+            <Content type="string">-\s+noconsolelogger</Content>
+          </IndicatorItem>
+          <IndicatorItem id="c3004f86-654b-4d92-8442-995cfc83bc73" condition="contains" preserve-case="false" negate="false">
+            <Context document="EventLogItem" search="EventLogItem/message" type="mir"/>
+            <Content type="string">/noconlog</Content>
+          </IndicatorItem>
+          <IndicatorItem id="8a0adc4a-ae0e-4bc5-819c-a1d128e28dda" condition="contains" preserve-case="false" negate="false">
+            <Context document="EventLogItem" search="EventLogItem/message" type="mir"/>
+            <Content type="string">-noconlog</Content>
+          </IndicatorItem>
+          <IndicatorItem id="d7973e7a-79dc-4af9-b584-c7d691bc1989" condition="matches" preserve-case="false" negate="false">
+            <Context document="EventLogItem" search="EventLogItem/message" type="mir"/>
+            <Content type="string">/\s+noconlog</Content>
+          </IndicatorItem>
+          <IndicatorItem id="11f8bbb0-e95e-4bae-a0c8-a9e67845e229" condition="matches" preserve-case="false" negate="false">
+            <Context document="EventLogItem" search="EventLogItem/message" type="mir"/>
+            <Content type="string">-\s+noconlog</Content>
+          </IndicatorItem>
+        </Indicator>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters/>
+</OpenIOC>

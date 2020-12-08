@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="91504d29-84fb-4b90-a299-2bc869fa1bab" last-modified="2020-12-02T00:14:24Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>sidebar.dll Hijack (Methodology)</short_description>
+    <description>Identifies possible DLL search order hijacking of sidebar.dll based on image loads from unexpected locations.
+MITRE ATT&amp;CK
+Tactic: Persistence, Privilege Escalation, Defense Evasion
+Technique: T1574.001</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2020-11-29T21:19:16Z</authored_date>
+    <links />
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="329a694f-15ba-47d7-aba1-2eb9ff26d47d">
+      <IndicatorItem id="c1e3eac6-93e7-46e7-b495-c487e43efd43" condition="is" preserve-case="false" negate="false">
+        <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+        <Content type="string">sidebar.dll</Content>
+      </IndicatorItem>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

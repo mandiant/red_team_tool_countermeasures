@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="602fe89f-9756-4396-b829-9e9997592fb9" last-modified="2020-12-02T19:28:48Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>Wdscore.dll Hijack (Methodology)</short_description>
+    <description>Identifies possible DLL search order hijacking of Wdscore.dll based on image loads from unexpected locations.
+
+MITRE ATT&amp;CK
+Tactic: Persistence, Privilege Escalation, Defense Evasion
+Technique: T1574.001</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2020-11-25T16:55:31Z</authored_date>
+    <links></links>
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="ad0e2ccc-95ef-4aa5-9ddf-40409a3e9844">
+      <Indicator operator="AND" id="d215bedd-3c09-48b0-af7c-42e482bb1eec">
+        <IndicatorItem id="305a2c91-3dba-4e95-89bd-343c5f662a3b" condition="is" preserve-case="false" negate="false">
+          <Context document="fileWriteEvent" search="fileWriteEvent/fileName" type="event" />
+          <Content type="string">Wdscore.dll</Content>
+        </IndicatorItem>
+        <IndicatorItem id="060e23d3-cd4a-4e81-a4b8-184c62aedd49" condition="is" preserve-case="false" negate="false">
+          <Context document="fileWriteEvent" search="fileWriteEvent/filePath" type="event" />
+          <Content type="string">windows\system32\oobe</Content>
+        </IndicatorItem>
+      </Indicator>
+      <Indicator operator="AND" id="b9ae08dc-f164-4afa-95bd-64a124b81a6b">
+        <IndicatorItem id="1cb922d4-de8f-464d-b3e2-39642fd7e1f3" condition="is" preserve-case="false" negate="false">
+          <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+          <Content type="string">Wdscore.dll</Content>
+        </IndicatorItem>
+        <IndicatorItem id="3fd73d85-3042-4ea2-81c3-28f55783aab6" condition="is" preserve-case="false" negate="false">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">windows\system32\oobe</Content>
+        </IndicatorItem>
+      </Indicator>
+      <Indicator operator="AND" id="11be95ab-f5a3-420d-934f-c169aa473abf">
+        <IndicatorItem id="5d409d85-d781-4861-b7ae-fb67b514f83c" condition="is" preserve-case="false" negate="false">
+          <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+          <Content type="string">Wdscore.dll</Content>
+        </IndicatorItem>
+        <IndicatorItem id="e2032b03-22ed-47cc-94b4-64ae8efe592c" condition="is" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">windows\system32\oobe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="b54ea6c7-64f8-4889-a5e3-94834cdd664f" condition="is" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">windows\system32</Content>
+        </IndicatorItem>
+        <IndicatorItem id="191723ba-6527-44b8-bf9f-6d19f7ae9990" condition="is" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">windows\syswow64</Content>
+        </IndicatorItem>
+        <IndicatorItem id="70613e93-c640-42c5-8ecb-ac11311480b6" condition="is" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">winnt\system32</Content>
+        </IndicatorItem>
+        <IndicatorItem id="419220dc-76fb-48df-808d-b4ebd070d6ec" condition="is" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">winnt\syswow64</Content>
+        </IndicatorItem>
+        <IndicatorItem id="73ea335b-0353-488b-8f3c-793408c4a69a" condition="is" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">$WINDOWS.~BT\Sources</Content>
+        </IndicatorItem>
+        <IndicatorItem id="99b5c785-d56a-4e7c-b665-c80318af2a73" condition="is" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">ProgramData\Druva\inSync4\SystemState\amd64</Content>
+        </IndicatorItem>
+        <IndicatorItem id="ccfd932c-fb8d-476c-b71f-f55b21c44ef2" condition="contains" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Windows\WinSxS\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="d31090bd-91c6-4179-adc2-288a2c7d235d" condition="is" preserve-case="true" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/process" type="event" />
+          <Content type="string">DismHost.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="1b93482b-a851-440b-88a3-31077c9b2553" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">ProgramData\docker\windowsfilter\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="91ecdb0c-f74a-43cd-b7d8-e5e0efdae979" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">$Windows.~WS\Sources</Content>
+        </IndicatorItem>
+        <IndicatorItem id="69d3bd0d-5210-4551-a722-38ac735822a9" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">IPUTemp\sources\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="b6c6677e-580e-4dca-a519-0ebe8885bc3f" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Program Files\USMT</Content>
+        </IndicatorItem>
+        <IndicatorItem id="e9c4fd05-105e-4475-a769-2fa5b9eb38de" condition="matches" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/fullPath" type="event" />
+          <Content type="string">^[a-z]:\d*\\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="c66734d5-9e9b-4840-886c-136ed7b185b9" condition="is" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Windows\System32\CompatTel</Content>
+        </IndicatorItem>
+        <IndicatorItem id="8b3bd1b3-f275-4a7d-92c0-6cf216a38f56" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Windows\ccmcache\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="70540564-058d-4402-82a8-4965dadbced4" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">ProgramData\Druva\inSync</Content>
+        </IndicatorItem>
+        <IndicatorItem id="27fe39c6-83f4-4eff-bca0-d8dc8d38a794" condition="matches" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/fullPath" type="event" />
+          <Content type="string">\\Temp\\[A-F0-9]{8}-[A-F0-9]{4}-[A-F0-9]{4}-[A-F0-9]{4}-[A-F0-9]{12}\\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="f6871756-9ea6-48e1-9de3-5f370c2da618" condition="matches" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">C:\Windows\System32</Content>
+        </IndicatorItem>
+        <IndicatorItem id="374c2f02-cf6c-4eaa-b75e-ef5687066c2f" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">_SMSTaskSequence\Packages\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="bd068501-335e-4c0a-b829-9c95e97558e8" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/fullPath" type="event" />
+          <Content type="string">\</Content>
+        </IndicatorItem>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

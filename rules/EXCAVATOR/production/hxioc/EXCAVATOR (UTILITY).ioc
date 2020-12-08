@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="f24f32bc-a2f2-4314-bf93-d1f4a791c3e6" last-modified="2020-11-26T10:57:30Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>EXCAVATOR (UTILITY)</short_description>
+    <description>Excavator is a tool for dumping the process via a service. It can also dump the process directly if not used as a service. This is associated with MITRE ATT&amp;CK (r) Tactic(s): Credential Access and Technique(s): T1003.001.</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2020-11-26T10:36:23Z</authored_date>
+    <links></links>
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="58cd0443-cb12-46b9-a77e-d46bce52ad90">
+      <Indicator operator="AND" id="ae70051a-19f5-44f1-a67d-16f4dd392a87">
+        <IndicatorItem id="980b8e6a-6158-4534-9106-a45f2a1a09e4" condition="ends-with" preserve-case="false" negate="false">
+          <Context document="fileWriteEvent" search="fileWriteEvent/fullPath" type="event" />
+          <Content type="string">:\Windows\MEMORY.DMP</Content>
+        </IndicatorItem>
+        <IndicatorItem id="74267f5b-8778-4fef-9221-670448ebc03f" condition="starts-with" preserve-case="false" negate="false">
+          <Context document="fileWriteEvent" search="fileWriteEvent/textAtLowestOffset" type="event" />
+          <Content type="string">MDMP</Content>
+        </IndicatorItem>
+      </Indicator>
+      <Indicator operator="AND" id="8b082175-629d-4414-8967-3d924ac9c18c">
+        <IndicatorItem id="5e61a44e-8f9c-424b-bdcc-dcfc0fed7085" condition="is" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/eventType" type="event" />
+          <Content type="string">start</Content>
+        </IndicatorItem>
+        <IndicatorItem id="dbfa7235-f476-4ed1-96a0-1e2bf642203a" condition="is" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/process" type="event" />
+          <Content type="string">excavator.exe</Content>
+        </IndicatorItem>
+      </Indicator>
+      <Indicator operator="AND" id="f0005e49-d635-4bf3-86fc-aca763baf657">
+        <IndicatorItem id="cc1a0562-969d-46b2-892d-07fbefe49895" condition="ends-with" preserve-case="false" negate="false">
+          <Context document="regKeyEvent" search="regKeyEvent/path" type="event" />
+          <Content type="string">CurrentControlSet\services\iphlpsvc6\ImagePath</Content>
+        </IndicatorItem>
+        <IndicatorItem id="67b07b57-71eb-4fef-84c0-bfffddc49773" condition="is" preserve-case="false" negate="false">
+          <Context document="regKeyEvent" search="regKeyEvent/eventType" type="event" />
+          <Content type="int">1</Content>
+        </IndicatorItem>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

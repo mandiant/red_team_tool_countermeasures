@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="edd0f322-b351-4e8b-91c0-eac25e0c9adc" last-modified="2020-12-02T00:14:25Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>ushata.dll Hijack (Methodology)</short_description>
+    <description>Identifies possible DLL search order hijacking of ushata.dll based on image loads from unexpected locations.
+MITRE ATT&amp;CK
+Tactic: Persistence, Privilege Escalation, Defense Evasion
+Technique: T1574.001</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2020-11-25T18:46:15Z</authored_date>
+    <links></links>
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="7adb328d-0c03-44b2-a9ad-6f6ecda1db04">
+      <Indicator operator="AND" id="fcf71077-9d19-40b5-aeda-35508ab73565">
+        <IndicatorItem id="8039e6e2-b844-4bf9-a29d-4aa8673fc131" condition="is" preserve-case="false" negate="false">
+          <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+          <Content type="string">ushata.dll</Content>
+        </IndicatorItem>
+        <IndicatorItem id="70b66435-4491-4bfa-845b-0610ca942d37" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Program Files (x86)\Kaspersky Lab\Kaspersky </Content>
+        </IndicatorItem>
+        <IndicatorItem id="4d0fca82-eab2-4c7a-a736-78a6f156143e" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Program Files\Kaspersky Lab\Kaspersky </Content>
+        </IndicatorItem>
+        <IndicatorItem id="cc9de543-639a-4b8a-9848-96ef0c1440cb" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Program Files (x86)\LANDesk\LDClient\antivirus\</Content>
+        </IndicatorItem>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

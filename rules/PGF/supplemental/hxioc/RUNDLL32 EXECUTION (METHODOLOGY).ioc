@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="9eab798e-1ef6-4ccf-9c60-b996bd2a188f" last-modified="2020-11-27T12:48:17Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>RUNDLL32 EXECUTION (METHODOLOGY)</short_description>
+    <description>Detects execution of Windows rundll32 utility. This is associated with MITRE ATT&amp;CK (r) Tactic(s): Defense Evasion and Technique(s): T1218.011.</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2018-08-10T20:31:39Z</authored_date>
+    <links></links>
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="fc6d9aa3-08f3-4fa4-9ec6-4a68f745c7c5">
+      <Indicator operator="AND" id="5c87279c-95b4-4dff-9095-5a4105a17243">
+        <IndicatorItem id="be566e3e-022d-439a-be28-eee6640ae105" condition="is" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/process" type="event" />
+          <Content type="string">rundll32.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="03eaa333-20cb-41dc-b421-9afd21f13830" condition="is" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/parentProcessPath" type="event" />
+          <Content type="string">C:\Windows\System32\CompatTelRunner.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="3f9e7cc5-6158-41a8-b05e-858db2ed76e8" condition="is" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+          <Content type="string">rundll32.exe AppXDeploymentExtensions.OneCore.dll,ShellRefresh</Content>
+        </IndicatorItem>
+        <IndicatorItem id="dd3d672d-c78d-4ffd-8301-6b4280c38f62" condition="is" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+          <Content type="string">C:\WINDOWS\system32\rundll32.exe Startupscan.dll,SusRunTask</Content>
+        </IndicatorItem>
+        <IndicatorItem id="deb65c74-9f59-4958-862f-bf51f566c2dd" condition="is" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+          <Content type="string">C:\Windows\system32\rundll32.exe /d srrstr.dll,ExecuteScheduledSPPCreation</Content>
+        </IndicatorItem>
+        <IndicatorItem id="0f11e1da-4c0f-49cd-95fc-da6ab430188d" condition="matches" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+          <Content type="string">C:\\Windows\\System32\\rundll32\.exe (C:\\WINDOWS\\System32\\)?shell32\.dll,SHCreateLocalServerRunDll \{[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}\} -Embedding</Content>
+        </IndicatorItem>
+        <IndicatorItem id="b70104b9-2995-4f30-896b-d72bc1c5580d" condition="is" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+          <Content type="string">C:\WINDOWS\system32\rundll32.exe Windows.Storage.ApplicationData.dll,CleanupTemporaryState</Content>
+        </IndicatorItem>
+        <IndicatorItem id="49805765-c51f-4a6d-aee7-421c99759fae" condition="is" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+          <Content type="string">C:\WINDOWS\system32\rundll32.exe dfdts.dll,DfdGetDefaultPolicyAndSMART</Content>
+        </IndicatorItem>
+        <IndicatorItem id="3d2325a9-b91f-4745-92f7-d2fa36b5aa0a" condition="is" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+          <Content type="string">C:\Windows\system32\rundll32.exe /d acproxy.dll,PerformAutochkOperations</Content>
+        </IndicatorItem>
+        <IndicatorItem id="5e07cf0d-ca85-4594-81e2-52f649b7ce29" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+          <Content type="string">C:\Windows\system32\rundll32.exe C:\Windows\system32\pla.dll,PlaHost "RTEvents"</Content>
+        </IndicatorItem>
+        <IndicatorItem id="463edb69-fac5-4cb9-9b35-2eae908e1d29" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+          <Content type="string">C:\Windows\system32\rundll32.exe C:\Windows\system32\pla.dll,PlaHost "GAEvents"</Content>
+        </IndicatorItem>
+        <IndicatorItem id="41fb4283-bf43-44a7-bd0e-dc631f42d1d8" condition="is" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+          <Content type="string">C:\Windows\system32\rundll32.exe C:\Windows\system32\AppxDeploymentClient.dll,AppxPreStageCleanupRunTask</Content>
+        </IndicatorItem>
+        <IndicatorItem id="2d46db7e-bb6d-468b-ab5b-8e21ea5f743f" condition="is" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/eventType" type="event" />
+          <Content type="string">start</Content>
+        </IndicatorItem>
+        <IndicatorItem id="f8fe94ed-a76e-4223-a74c-388a31fecf64" condition="is" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+          <Content type="string">C:\Windows\system32\rundll32.exe sysmain.dll,PfSvWsSwapAssessmentTask</Content>
+        </IndicatorItem>
+        <IndicatorItem id="672cb2fb-347b-4fda-b9f8-02249fbe4ff9" condition="is" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/parentProcessPath" type="event" />
+          <Content type="string">C:\Windows\servicing\TrustedInstaller.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="f4c6a966-900a-4d14-8c56-6391bdf9eb6f" condition="contains" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+          <Content type="string">Windows\System32\rundll32.exe" streamci,StreamingDeviceSetup {</Content>
+        </IndicatorItem>
+        <IndicatorItem id="238f59c0-83eb-4d56-9b27-e66319ce98de" condition="is" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+          <Content type="string">C:\windows\system32\rundll32.exe C:\windows\system32\Windows.StateRepositoryClient.dll,StateRepositoryDoMaintenanceTasks</Content>
+        </IndicatorItem>
+        <IndicatorItem id="8b883fb1-3fd2-42ab-8617-50664a3cc832" condition="is" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+          <Content type="string">C:\windows\system32\RunDll32.exe C:\windows\system32\migration\WininetPlugin.dll,MigrateCacheForUser /m /0</Content>
+        </IndicatorItem>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

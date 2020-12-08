@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="3892a85e-eecd-4879-ae7b-874e827660bb" last-modified="2020-12-02T00:14:22Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>mscorsvc.dll Hijack (Methodology)</short_description>
+    <description>Identifies possible DLL search order hijacking of mscorsvc.dll based on image loads from unexpected locations.
+MITRE ATT&amp;CK
+Tactic: Persistence, Privilege Escalation, Defense Evasion
+Technique: T1574.001</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2020-11-25T16:46:59Z</authored_date>
+    <links />
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="d27541a6-3354-4202-b821-2d16e77446b0">
+      <Indicator operator="AND" id="c78dea49-3db3-4674-a92a-eaa6c8af6cfb">
+        <IndicatorItem id="036b7425-eda9-4aa8-823d-4f1b9a092be9" condition="is" preserve-case="false" negate="false">
+          <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+          <Content type="string">mscorsvc.dll</Content>
+        </IndicatorItem>
+        <IndicatorItem id="93620681-b30b-4e97-8bd0-fa6360e2c9d9" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">windows\microsoft.net\Framework</Content>
+        </IndicatorItem>
+        <IndicatorItem id="60327efc-360f-44f4-bddb-da6668d44773" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Windows\winsxs\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="1ece5a21-d6dc-4df0-8871-b23da91441cd" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">1\Windows\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="f12df48f-777b-4c4f-8a7f-07e02af379b0" condition="matches" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/fullPath" type="event" />
+          <Content type="string">^[a-z]:\d*\\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="c2800e49-fb65-45ff-bf58-775664dcfc2c" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">\Device\HarddiskVolume</Content>
+        </IndicatorItem>
+        <IndicatorItem id="bd6fdaa7-80da-48d8-877a-133b6e48e158" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">/</Content>
+        </IndicatorItem>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

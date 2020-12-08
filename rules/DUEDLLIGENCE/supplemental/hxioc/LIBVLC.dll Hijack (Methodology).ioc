@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="b00779bd-068a-4428-ad1a-a0cab88a3cb6" last-modified="2020-12-02T00:14:22Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>LIBVLC.dll Hijack (Methodology)</short_description>
+    <description>Identifies possible DLL search order hijacking of LIBVLC.dll based on image loads from unexpected locations.
+MITRE ATT&amp;CK
+Tactic: Persistence, Privilege Escalation, Defense Evasion
+Technique: T1574.001</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2020-11-25T19:29:42Z</authored_date>
+    <links />
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="df9865bc-7bf1-45be-a00a-bf6ea4c73bc5">
+      <Indicator operator="AND" id="d5286cef-15c5-424c-a07e-21cb7f95e64f">
+        <IndicatorItem id="9448423e-fdeb-4abc-a784-9a5482d0d620" condition="is" preserve-case="false" negate="false">
+          <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+          <Content type="string">LIBVLC.dll</Content>
+        </IndicatorItem>
+        <IndicatorItem id="fefd5f3f-99df-4d4f-9901-844ed7530950" condition="is" preserve-case="false" negate="false">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">program files\videolan</Content>
+        </IndicatorItem>
+        <IndicatorItem id="2d8d2ec0-91bd-485e-b589-5dac1f90a666" condition="is" preserve-case="false" negate="false">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">program files (x86)\videolan</Content>
+        </IndicatorItem>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

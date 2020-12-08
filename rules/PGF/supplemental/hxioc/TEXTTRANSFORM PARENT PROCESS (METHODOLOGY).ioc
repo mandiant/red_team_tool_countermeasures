@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="d2456332-4ae6-41c6-905a-7c7d0567418b" last-modified="2020-12-06T12:27:14Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>TEXTTRANSFORM PARENT PROCESS (METHODOLOGY)</short_description>
+    <description>TextTransform.exe is a command-line tool used to transform a text template. This IOC detects the spawning of a process by TextTransform.exe, which could possibly indicate an attempt at process injection. This is associated with MITRE ATT&amp;CK (r) Tactic(s): Defense Evasion, Privilege Escalation and Technique(s): T1055.</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2020-11-26T11:19:52Z</authored_date>
+    <links></links>
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="6571bf54-0256-48cf-aadd-8c5a7bfe18ef">
+      <Indicator operator="AND" id="3e8778da-4825-4dd9-bf39-62519f6bbf9e">
+        <IndicatorItem id="9e52c521-265d-457a-ac79-afc6465b9964" condition="is" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/eventType" type="event" />
+          <Content type="string">start</Content>
+        </IndicatorItem>
+        <IndicatorItem id="a1ee39ff-e9d9-44c2-a88e-c79c42adc84a" condition="is" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/parentProcess" type="event" />
+          <Content type="string">TextTransform.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="1e9cf301-f8fe-43d6-8b34-0b922743b170" condition="is" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/process" type="event" />
+          <Content type="string">conhost.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="d25ab328-c4fe-49f5-bfa3-a6ea19ab831b" condition="is" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/process" type="event" />
+          <Content type="string">csc.exe</Content>
+        </IndicatorItem>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

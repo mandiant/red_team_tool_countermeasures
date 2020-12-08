@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="4cd54ac5-4740-4d4a-a8fe-c8c4fd4b26cc" last-modified="2020-12-01T15:44:43Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>IMPACKET-OBFUSCATION WMIEXEC (UTILITY)</short_description>
+    <description>Impacket-Obfuscation is a slightly obfuscated version of the open source Impacket framework. This IOC looks for artifacts from the execution of WMIEXEC python script which is part of Impacket-Obfuscation framework. This is associated to MITRE ATT&amp;CK (r) Tactic(s): Execution and Technique(s): T1047</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2020-11-26T16:44:59Z</authored_date>
+    <links></links>
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="a9b92962-0030-44b3-ba34-f1dc78ba3164">
+      <Indicator operator="AND" id="3bec9319-a003-44b2-b7f0-b9cc4129b179">
+        <IndicatorItem id="6932cfa6-c15d-48a3-88e1-86cfeb2b7801" condition="matches" preserve-case="false" negate="false">
+          <Context document="fileWriteEvent" search="fileWriteEvent/fullPath" type="event" />
+          <Content type="string">^.:\\Windows\\[0-9]{10}[0-9a-f]{8}\.dat$</Content>
+        </IndicatorItem>
+        <IndicatorItem id="9c890be6-650a-49bf-a3ea-e46c1caf7cb1" condition="matches" preserve-case="false" negate="false">
+          <Context document="fileWriteEvent" search="fileWriteEvent/textAtLowestOffset" type="event" />
+          <Content type="string">.</Content>
+        </IndicatorItem>
+      </Indicator>
+      <Indicator operator="AND" id="db4f797b-b763-435a-a122-33fd656e75bc">
+        <IndicatorItem id="99ce305b-9865-453a-9aa9-75850d1fc378" condition="is" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/eventType" type="event" />
+          <Content type="string">start</Content>
+        </IndicatorItem>
+        <IndicatorItem id="5bbf0786-f0f0-4a78-8d8d-5696fed2a9b6" condition="is" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/parentProcess" type="event" />
+          <Content type="string">WmiPrvSE.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="dafce84a-38c9-40ba-901d-ba347f16cd26" condition="starts-with" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+          <Content type="string">cmd.exe /Q /K </Content>
+        </IndicatorItem>
+        <IndicatorItem id="1aa8b40b-0e29-4626-b8ce-250457ea992a" condition="matches" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+          <Content type="string">1\s*&gt;\s*\\\\127\.0\.0\.1\\ADMIN\$\\[0-9]{10}[0-9a-f]{8}\.dat\s+2&gt;&amp;1$</Content>
+        </IndicatorItem>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

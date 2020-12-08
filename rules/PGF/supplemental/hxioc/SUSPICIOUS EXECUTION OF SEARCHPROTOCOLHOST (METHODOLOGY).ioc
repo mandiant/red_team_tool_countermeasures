@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="536bd592-6cf4-4ab1-97a7-175a45d389af" last-modified="2020-11-27T07:00:55Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>SUSPICIOUS EXECUTION OF SEARCHPROTOCOLHOST (METHODOLOGY)</short_description>
+    <description>This IOC detects suspicious execution of SearchProtocolHost.exe. This is associated with MITRE ATT&amp;CK (r) Tactic(s): Defense Evasion, Privilege Escalation and Technique(s): T1055.004.</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2020-11-25T09:48:39Z</authored_date>
+    <links></links>
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="572f9ca9-2aaa-44c7-a222-c2d6901d37d1">
+      <Indicator operator="AND" id="13498470-298d-4746-9f3f-72cf822206d1">
+        <IndicatorItem id="3ca38ea2-c7e2-4ae3-bdfd-e428a19676c3" condition="matches" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/parentProcessPath" type="event" />
+          <Content type="string">:\\Windows\\(SysWOW64|system32)\\SearchProtocolHost\.exe$</Content>
+        </IndicatorItem>
+        <IndicatorItem id="cc88aaf2-dea3-455b-bfff-e4de5f75909f" condition="matches" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/process" type="event" />
+          <Content type="string">.</Content>
+        </IndicatorItem>
+        <IndicatorItem id="0f7e6e21-48d0-47ed-a1c0-8240ab2b0652" condition="matches" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+          <Content type="string">.</Content>
+        </IndicatorItem>
+        <IndicatorItem id="9b3b31a6-ef31-4263-b476-50c6e281021e" condition="is" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/process" type="event" />
+          <Content type="string">conhost.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="ac8c0b7b-d6bd-4e65-9c77-b0ec8c83ef8d" condition="is" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/eventType" type="event" />
+          <Content type="string">start</Content>
+        </IndicatorItem>
+      </Indicator>
+      <Indicator operator="AND" id="87336307-480c-4806-88f3-a68271fdee0b">
+        <IndicatorItem id="d229a01c-b2f6-47c5-a683-10101083b1bb" condition="matches" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/processPath" type="event" />
+          <Content type="string">:\\Windows\\(SysWOW64|system32)\\SearchProtocolHost\.exe$</Content>
+        </IndicatorItem>
+        <IndicatorItem id="597ebec4-d563-4ece-b215-cda04070f330" condition="is" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/parentProcess" type="event" />
+          <Content type="string">SearchIndexer.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="9db4c1f7-8fcc-4aba-8fbf-4c58b3e71b9c" condition="is" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/parentProcess" type="event" />
+          <Content type="string">SearchFilterHost.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="f0582d44-e008-4004-94b9-6462c7bad316" condition="matches" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/parentProcess" type="event" />
+          <Content type="string">.</Content>
+        </IndicatorItem>
+        <IndicatorItem id="1822ae3d-daa1-42ab-a99d-44f29d417c9b" condition="is" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/eventType" type="event" />
+          <Content type="string">start</Content>
+        </IndicatorItem>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

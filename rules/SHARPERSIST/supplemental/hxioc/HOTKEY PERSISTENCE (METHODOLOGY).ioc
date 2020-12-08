@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="2c1eda86-5fc6-4da2-bd7b-dd70f12b9b3e" last-modified="2020-12-04T08:49:13Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>HOTKEY PERSISTENCE (METHODOLOGY)</short_description>
+    <description>This IOC detects HOTKEY based persistence techniques. This is associated with MITRE ATT&amp;CK (r) Tactic(s): Persistence, Privilege Escalation and Technique(s): T1547.001.</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2020-11-27T14:38:11Z</authored_date>
+    <links></links>
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="442997fd-a3e9-4f5a-b443-f8763cbc02ad">
+      <Indicator operator="AND" id="aea175ea-34e2-414f-8d60-c2f01d1304c5">
+        <IndicatorItem id="83f77aac-70b4-4a52-9b95-0f6ccb8595e3" condition="matches" preserve-case="false" negate="false">
+          <Context document="fileWriteEvent" search="fileWriteEvent/textAtLowestOffset" type="event" />
+          <Content type="string">.</Content>
+        </IndicatorItem>
+        <IndicatorItem id="f22d94aa-dc6a-488a-8d91-308dc55d1779" condition="is" preserve-case="false" negate="true">
+          <Context document="fileWriteEvent" search="fileWriteEvent/process" type="event" />
+          <Content type="string">urbackup_srv.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="0a51b517-3441-4e2e-a8dc-eb53ff3e0dd3" condition="is" preserve-case="false" negate="true">
+          <Context document="fileWriteEvent" search="fileWriteEvent/fileExtension" type="event" />
+          <Content type="string">tmp</Content>
+        </IndicatorItem>
+        <IndicatorItem id="52babec2-ac14-4e48-9acb-aec223b4723b" condition="is" preserve-case="false" negate="true">
+          <Context document="fileWriteEvent" search="fileWriteEvent/fileName" type="event" />
+          <Content type="string">desktop.ini</Content>
+        </IndicatorItem>
+        <IndicatorItem id="da4b21f1-a898-4c55-b649-c25ca19687f1" condition="is" preserve-case="false" negate="true">
+          <Context document="fileWriteEvent" search="fileWriteEvent/fileName" type="event" />
+          <Content type="string">ALZip.lnk</Content>
+        </IndicatorItem>
+        <Indicator operator="OR" id="a1bbd528-f3d5-49fe-ac7e-6b096eaa14aa">
+          <IndicatorItem id="16680d0f-96fb-48d0-b79c-e5eb571aee0c" condition="ends-with" preserve-case="false" negate="false">
+            <Context document="fileWriteEvent" search="fileWriteEvent/filePath" type="event" />
+            <Content type="string">\Internet Explorer\Quick Launch\User Pinned\ImplicitAppShortcuts</Content>
+          </IndicatorItem>
+          <IndicatorItem id="8a293703-a3b6-4a1a-8b7a-43973a32de4b" condition="ends-with" preserve-case="false" negate="false">
+            <Context document="fileWriteEvent" search="fileWriteEvent/filePath" type="event" />
+            <Content type="string">\Internet Explorer\Quick Launch\User Pinned\TaskBar\</Content>
+          </IndicatorItem>
+          <IndicatorItem id="a8b6cd7e-c3f3-46ae-8ef1-e1fcd7ca8b88" condition="ends-with" preserve-case="false" negate="false">
+            <Context document="fileWriteEvent" search="fileWriteEvent/filePath" type="event" />
+            <Content type="string">\Microsoft\Windows\Start Menu</Content>
+          </IndicatorItem>
+        </Indicator>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

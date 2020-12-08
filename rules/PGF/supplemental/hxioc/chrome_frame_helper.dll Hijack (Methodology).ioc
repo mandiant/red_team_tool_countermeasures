@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="1ce55b02-5000-45a7-83f4-52ba5869f5a8" last-modified="2020-12-02T00:14:20Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>chrome_frame_helper.dll Hijack (Methodology)</short_description>
+    <description>Identifies possible DLL search order hijacking of chrome_frame_helper.dll based on image loads from unexpected locations.
+MITRE ATT&amp;CK
+Tactic: Persistence, Privilege Escalation, Defense Evasion
+Technique: T1574.001</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2020-11-29T20:28:40Z</authored_date>
+    <links />
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="94d66d9d-a878-45f9-ab8c-c80e0b842365">
+      <Indicator operator="AND" id="4242c93a-b133-46e2-aa23-1e99fb6d0e36">
+        <IndicatorItem id="1a53550f-2478-48fa-b4e7-5c722140f8a3" condition="is" preserve-case="false" negate="false">
+          <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+          <Content type="string">chrome_frame_helper.dll</Content>
+        </IndicatorItem>
+        <IndicatorItem id="bacb0d8f-94cc-48c2-9729-2588db0dcbd7" condition="contains" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/fullPath" type="event" />
+          <Content type="string">\AppData\Local\Google\Chrome\Application\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="0a1f4167-2c02-4ca9-91a1-505ba585c0f4" condition="ends-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/fullPath" type="event" />
+          <Content type="string">\Chromium\chrome_frame_helper.dll</Content>
+        </IndicatorItem>
+        <IndicatorItem id="16db841f-5a98-41b6-b9c0-0fce4a28b986" condition="contains" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">\GoogleChromePortable\App\Chrome-bin\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="85701657-cbd8-49cb-a406-042300a4c4be" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Program Files (x86)\Google\Chrome\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="57ccee2f-048b-4617-b6fb-4098de8222fe" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Program Files\Google\Chrome\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="630710e8-6f6a-4112-9173-6672fd768109" condition="contains" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">\Local Settings\Application Data\Google\Chrome\Application\</Content>
+        </IndicatorItem>
+      </Indicator>
+      <Indicator operator="AND" id="fe1e1976-5107-4960-826f-c8483923fa1f">
+        <IndicatorItem id="f082b957-ea27-4057-8835-39ebd7565500" condition="is" preserve-case="false" negate="false">
+          <Context document="fileWriteEvent" search="fileWriteEvent/fileName" type="event" />
+          <Content type="string">chrome_frame_helper.dll</Content>
+        </IndicatorItem>
+        <IndicatorItem id="b6a107a9-1860-4e5d-ad14-d64000b57163" condition="ends-with" preserve-case="false" negate="true">
+          <Context document="fileWriteEvent" search="fileWriteEvent/fullPath" type="event" />
+          <Content type="string">\Chromium\chrome_frame_helper.dll</Content>
+        </IndicatorItem>
+        <IndicatorItem id="884ff82a-5393-4d6b-9156-cad27afc1fa0" condition="contains" preserve-case="false" negate="true">
+          <Context document="fileWriteEvent" search="fileWriteEvent/filePath" type="event" />
+          <Content type="string">\AppData\Local\Google\Chrome\Application\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="6175200d-4797-40f0-828b-926081d006d4" condition="contains" preserve-case="false" negate="true">
+          <Context document="fileWriteEvent" search="fileWriteEvent/filePath" type="event" />
+          <Content type="string">\GoogleChromePortable\App\Chrome-bin\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="095d2233-6235-487c-93ca-5398cc6cd72b" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="fileWriteEvent" search="fileWriteEvent/filePath" type="event" />
+          <Content type="string">Program Files (x86)\Google\Chrome\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="9c29bb45-c949-4d8d-a59b-8b6c60983dc5" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="fileWriteEvent" search="fileWriteEvent/filePath" type="event" />
+          <Content type="string">Program Files\Google\Chrome\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="b13b961c-3a39-4f5e-b2c5-44557355d37e" condition="contains" preserve-case="false" negate="true">
+          <Context document="fileWriteEvent" search="fileWriteEvent/filePath" type="event" />
+          <Content type="string">\Local Settings\Application Data\Google\Chrome\Application\</Content>
+        </IndicatorItem>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

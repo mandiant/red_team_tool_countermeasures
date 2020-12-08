@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="7631f336-9f6d-4ca5-ad6a-def36d3ed327" last-modified="2020-12-01T21:24:49Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>SHARPSTOMP (UTILITY)</short_description>
+    <description>SharpStomp is a C# utility that can be used to timestomp the specified file's creation, last access, and last write time. This is associated with MITRE ATT&amp;CK (r) Tactic(s): Defense Evasion and Technique(s): T1070.006.</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2020-12-01T21:02:55Z</authored_date>
+    <links></links>
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="9a6a8b2c-e975-4d48-92eb-8add55a98082">
+      <IndicatorItem id="c7c2afb1-c506-4812-9e01-ca27312cbb90" condition="is" preserve-case="false" negate="false">
+        <Context document="fileWriteEvent" search="fileWriteEvent/md5" type="event" />
+        <Content type="md5">83ed748cd94576700268d35666bf3e01</Content>
+      </IndicatorItem>
+      <IndicatorItem id="22fde613-d455-407c-853f-3e6a459062ef" condition="is" preserve-case="false" negate="false">
+        <Context document="processEvent" search="processEvent/md5" type="event" />
+        <Content type="md5">83ed748cd94576700268d35666bf3e01</Content>
+      </IndicatorItem>
+      <Indicator operator="AND" id="e2e8210d-3a7e-4292-b829-1d03fb155342">
+        <IndicatorItem id="3c470752-b243-4048-a8fd-9ead20353bc8" condition="is" preserve-case="false" negate="false">
+          <Context document="fileWriteEvent" search="fileWriteEvent/fileName" type="event" />
+          <Content type="string">SharpStomp.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="8e2e3445-338a-4bf3-95aa-3b82a711565d" condition="starts-with" preserve-case="true" negate="false">
+          <Context document="fileWriteEvent" search="fileWriteEvent/textAtLowestOffset" type="event" />
+          <Content type="string">MZ</Content>
+        </IndicatorItem>
+      </Indicator>
+      <Indicator operator="AND" id="6ff210f3-6944-48ea-a06b-6dfb1094a5f7">
+        <IndicatorItem id="b2fd67e5-cd25-4d5a-b575-6df7134824c1" condition="is" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/eventType" type="event" />
+          <Content type="string">Start</Content>
+        </IndicatorItem>
+        <IndicatorItem id="a97419a7-db5e-4cec-8857-202155649938" condition="is" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/process" type="event" />
+          <Content type="string">SharpStomp.exe</Content>
+        </IndicatorItem>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

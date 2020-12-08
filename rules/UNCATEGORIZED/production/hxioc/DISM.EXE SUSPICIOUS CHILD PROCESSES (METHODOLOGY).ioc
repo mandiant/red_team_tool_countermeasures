@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="52fe8cc2-b2d6-41d5-b22c-9bdd4bdde587" last-modified="2020-11-29T22:20:39Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>DISM.EXE SUSPICIOUS CHILD PROCESSES (METHODOLOGY)</short_description>
+    <description>This alert looks for suspicious child processes of dism.exe, a known process used by malicious actors for process injection. </description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2020-11-25T17:42:11Z</authored_date>
+    <links></links>
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="5b4102c6-d03d-4978-8890-91278585285a">
+      <Indicator operator="AND" id="9e1bf8be-b161-4e5d-9d0e-14f574ab9312">
+        <IndicatorItem id="62045c31-45d0-4b95-8ea9-ec0fff0f75cc" condition="is" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/parentProcess" type="event" />
+          <Content type="string">dism.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="6a6f5a63-1fb6-4bc8-b292-04553c879388" condition="is" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/eventType" type="event" />
+          <Content type="string">start</Content>
+        </IndicatorItem>
+        <IndicatorItem id="43d7383c-ff5b-47fb-bf7d-4fb3023cc8a8" condition="is" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/process" type="event" />
+          <Content type="string">dismhost.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="449745bf-896c-42da-ab63-d1b840ea158d" condition="is" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/process" type="event" />
+          <Content type="string">conhost.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="51c660a6-124a-473a-8ea7-87e7fe82bfdf" condition="is" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/process" type="event" />
+          <Content type="string">wimserv.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="c568f08c-fd59-4297-b41c-e34b2a0d5049" condition="is" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/process" type="event" />
+          <Content type="string">werfault.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="542498b4-0f20-4b40-a7b7-a24476b1fbe4" condition="ends-with" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+          <Content type="string">\extra\MSMQ.cmd"</Content>
+        </IndicatorItem>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

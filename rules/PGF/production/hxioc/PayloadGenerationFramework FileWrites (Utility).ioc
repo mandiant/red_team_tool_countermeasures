@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="811495f7-913c-4d44-991a-e740a9bbc4c7" last-modified="2020-12-02T00:37:28Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>PayloadGenerationFramework FileWrites (Utility)</short_description>
+    <description>This rule detects filewrites for known executable MD5 hashes leveraged by the PayloadGenerationFramework for DLL SideLoading. MD5 hashes map to the following, avpui.exe, chrome_frame_helper.exe (3 MD5s), googleupdate.exe (3 MD5s), HPCustParticUI.exe, mcoemcpy.exe, mcupdui.exe, mcvsmap.exe, mcvsshld.exe, mobpopup.exe, nav32.exe, pplive.exe, quest.exe, securitycenter.exe, silverlightconfiguration.exe, sosoGadget.exe, start.exe, symerr.exe, tmas_wlmmon.exe, vpndownloader.exe, zlh.exe (2 MD5s)</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2020-11-30T21:10:35Z</authored_date>
+    <links></links>
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="baf98653-ed85-48bc-86bd-b13e39fceb2a">
+      <Indicator operator="AND" id="20aa7d6e-e4db-4cfc-82d1-a05e18ed597d">
+        <IndicatorItem id="03ca175b-f7c9-4a4a-a268-7738ff9a9e65" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="fileWriteEvent" search="fileWriteEvent/filePath" type="event" />
+          <Content type="string">Program Files</Content>
+        </IndicatorItem>
+        <IndicatorItem id="76054976-d525-4aea-a6b0-1cb41a530b77" condition="greater-than" preserve-case="false" negate="false">
+          <Context document="fileWriteEvent" search="fileWriteEvent/writes" type="event" />
+          <Content type="int">0</Content>
+        </IndicatorItem>
+        <IndicatorItem id="ab804941-db6e-4a08-8f5b-28e0a0d0a36f" condition="is" preserve-case="false" negate="true">
+          <Context document="fileWriteEvent" search="fileWriteEvent/fileExtension" type="event" />
+          <Content type="string">tmp</Content>
+        </IndicatorItem>
+        <IndicatorItem id="5dfed00f-e945-4337-a1a7-943d3de8c18f" condition="is" preserve-case="false" negate="true">
+          <Context document="fileWriteEvent" search="fileWriteEvent/fileExtension" type="event" />
+          <Content type="string">etl</Content>
+        </IndicatorItem>
+        <IndicatorItem id="9dabcfee-d338-4a8b-8f73-319c2be11b12" condition="ends-with" preserve-case="false" negate="true">
+          <Context document="fileWriteEvent" search="fileWriteEvent/filePath" type="event" />
+          <Content type="string">.tmp</Content>
+        </IndicatorItem>
+        <IndicatorItem id="59a15c74-ed60-4473-beb4-932d29ef38e7" condition="ends-with" preserve-case="false" negate="true">
+          <Context document="fileWriteEvent" search="fileWriteEvent/filePath" type="event" />
+          <Content type="string">\wcu\silverlight</Content>
+        </IndicatorItem>
+        <Indicator operator="OR" id="904cd6f3-481c-46ea-a31f-37f8f226d9bc">
+          <IndicatorItem id="28b0c9be-deba-4b41-9b04-7b52962d751b" condition="is" preserve-case="false" negate="false">
+            <Context document="fileWriteEvent" search="fileWriteEvent/md5" type="event" />
+            <Content type="md5">67d731b086011db4d87e680cf7514edb</Content>
+          </IndicatorItem>
+          <IndicatorItem id="effa9ec3-752e-4888-a536-aa3c3459a415" condition="is" preserve-case="false" negate="false">
+            <Context document="fileWriteEvent" search="fileWriteEvent/md5" type="event" />
+            <Content type="md5">1ae99f9d602355e1abf5cd7d98981835</Content>
+          </IndicatorItem>
+          <IndicatorItem id="a68a32e8-bf78-4553-9abe-06cc28826dd5" condition="is" preserve-case="false" negate="false">
+            <Context document="fileWriteEvent" search="fileWriteEvent/md5" type="event" />
+            <Content type="md5">dfdc5b09c4dea79eb7f5b9e4e76eecf9</Content>
+          </IndicatorItem>
+          <IndicatorItem id="50010a3b-1c02-40ac-8f07-c2ba96185bee" condition="is" preserve-case="false" negate="false">
+            <Context document="fileWriteEvent" search="fileWriteEvent/md5" type="event" />
+            <Content type="md5">053eeee1abae53f044f1e386e22ae525</Content>
+          </IndicatorItem>
+          <IndicatorItem id="53ff3b3d-6504-4059-abbb-d2339f1e0b1d" condition="is" preserve-case="false" negate="false">
+            <Context document="fileWriteEvent" search="fileWriteEvent/md5" type="event" />
+            <Content type="md5">0545a3eb959cfa4790d267bfb8c1aca4</Content>
+          </IndicatorItem>
+          <IndicatorItem id="dae5604e-b2fc-49d3-b5b2-6421878d2ee0" condition="is" preserve-case="false" negate="false">
+            <Context document="fileWriteEvent" search="fileWriteEvent/md5" type="event" />
+            <Content type="md5">506708142bc63daba64f2d3ad1dcd5bf</Content>
+          </IndicatorItem>
+          <IndicatorItem id="608b54cf-88f3-42bf-9ba4-808dc5062d22" condition="is" preserve-case="false" negate="false">
+            <Context document="fileWriteEvent" search="fileWriteEvent/md5" type="event" />
+            <Content type="md5">37e3cbc755187b3cf71b9b871e0ca3c5</Content>
+          </IndicatorItem>
+          <IndicatorItem id="0cec1db5-bdc4-4e73-99d8-d6fd02ec41c8" condition="is" preserve-case="false" negate="false">
+            <Context document="fileWriteEvent" search="fileWriteEvent/md5" type="event" />
+            <Content type="md5">884d46c01c762ad6ddd2759fd921bf71</Content>
+          </IndicatorItem>
+          <IndicatorItem id="6527f05f-e7fa-47a5-94b3-05fc4f7568df" condition="is" preserve-case="false" negate="false">
+            <Context document="fileWriteEvent" search="fileWriteEvent/md5" type="event" />
+            <Content type="md5">e8f06a6b962194d7aed699fe8039e6c9</Content>
+          </IndicatorItem>
+          <IndicatorItem id="6a6f27ac-b365-4e18-83ab-d289ae240811" condition="is" preserve-case="false" negate="false">
+            <Context document="fileWriteEvent" search="fileWriteEvent/md5" type="event" />
+            <Content type="md5">4e1e0b8b0673937415599bf2f24c44ad</Content>
+          </IndicatorItem>
+          <IndicatorItem id="307b446c-146d-4600-947f-b6d7985b8e61" condition="is" preserve-case="false" negate="false">
+            <Context document="fileWriteEvent" search="fileWriteEvent/md5" type="event" />
+            <Content type="md5">4ab04583be97030cf2e672e3f15c66b4</Content>
+          </IndicatorItem>
+          <IndicatorItem id="2fb5597b-9a55-442b-a4f9-539511da1db6" condition="is" preserve-case="false" negate="false">
+            <Context document="fileWriteEvent" search="fileWriteEvent/md5" type="event" />
+            <Content type="md5">97e49353a25c3f1d81a6139735697940</Content>
+          </IndicatorItem>
+          <IndicatorItem id="2bc3870a-c5cc-4491-b8ce-c8516e32aaf8" condition="is" preserve-case="false" negate="false">
+            <Context document="fileWriteEvent" search="fileWriteEvent/md5" type="event" />
+            <Content type="md5">b698c7b6b34085adaca4ce42b151bf0e</Content>
+          </IndicatorItem>
+          <IndicatorItem id="a5e88da8-42ef-4aae-98d6-0829bd7a3323" condition="is" preserve-case="false" negate="false">
+            <Context document="fileWriteEvent" search="fileWriteEvent/md5" type="event" />
+            <Content type="md5">235574bd973ec3eac38bbd870e9d5e01</Content>
+          </IndicatorItem>
+          <IndicatorItem id="15464d9c-63de-4109-8808-84ec21afac98" condition="is" preserve-case="false" negate="false">
+            <Context document="fileWriteEvent" search="fileWriteEvent/md5" type="event" />
+            <Content type="md5">805be4e20d9d04a6db31f6f31fa41460</Content>
+          </IndicatorItem>
+          <IndicatorItem id="52bf8209-4ce4-47ea-b638-76b8fc4dd36e" condition="is" preserve-case="false" negate="false">
+            <Context document="fileWriteEvent" search="fileWriteEvent/md5" type="event" />
+            <Content type="md5">cbe3bb7fd1ed8a245ece9a941a65b2b8</Content>
+          </IndicatorItem>
+          <IndicatorItem id="97b2352c-7fc2-490b-b907-3be3f6a4c7f6" condition="is" preserve-case="false" negate="false">
+            <Context document="fileWriteEvent" search="fileWriteEvent/md5" type="event" />
+            <Content type="md5">cbe3bb7fd1ed8a245ece9a941a65b2b8</Content>
+          </IndicatorItem>
+          <IndicatorItem id="8bab2fa5-05af-44ab-9a87-a43d5347b7a4" condition="is" preserve-case="false" negate="false">
+            <Context document="fileWriteEvent" search="fileWriteEvent/md5" type="event" />
+            <Content type="md5">89d0a9ad7eeece9a2ab3d8ab6722c9b3</Content>
+          </IndicatorItem>
+          <IndicatorItem id="f0a36bd8-48e5-4b79-b222-9b3cddec7d38" condition="is" preserve-case="false" negate="false">
+            <Context document="fileWriteEvent" search="fileWriteEvent/md5" type="event" />
+            <Content type="md5">33ea23ce6178419421a7ab7a45128210</Content>
+          </IndicatorItem>
+          <IndicatorItem id="2a87b05d-aba7-4879-b1e4-082a021850e9" condition="is" preserve-case="false" negate="false">
+            <Context document="fileWriteEvent" search="fileWriteEvent/md5" type="event" />
+            <Content type="md5">6b97b3cd2fcfb4b74985143230441463</Content>
+          </IndicatorItem>
+          <IndicatorItem id="cab2e2f3-48a6-4815-b779-53d863bc501c" condition="is" preserve-case="false" negate="false">
+            <Context document="fileWriteEvent" search="fileWriteEvent/md5" type="event" />
+            <Content type="md5">483b8abd80131e3c79976eb2f97e8b2b</Content>
+          </IndicatorItem>
+          <IndicatorItem id="693eb9e8-e105-4368-9fc2-afd148f63131" condition="is" preserve-case="false" negate="false">
+            <Context document="fileWriteEvent" search="fileWriteEvent/md5" type="event" />
+            <Content type="md5">2ac4ea37db0da7d2970e73d1a3c6648a</Content>
+          </IndicatorItem>
+          <IndicatorItem id="7f27a869-d0ac-445e-aaec-0a0b1d3c5222" condition="is" preserve-case="false" negate="false">
+            <Context document="fileWriteEvent" search="fileWriteEvent/md5" type="event" />
+            <Content type="md5">938c1e2b62a70e4ad6992c9e11caa394</Content>
+          </IndicatorItem>
+          <IndicatorItem id="13603cad-0bcf-4069-b3c6-a4d25d30e498" condition="is" preserve-case="false" negate="false">
+            <Context document="fileWriteEvent" search="fileWriteEvent/md5" type="event" />
+            <Content type="md5">928c3aba6d3cf6022189182f84233ee4</Content>
+          </IndicatorItem>
+          <IndicatorItem id="574db6ff-356e-4b15-81d7-991a19ac9d1f" condition="is" preserve-case="false" negate="false">
+            <Context document="fileWriteEvent" search="fileWriteEvent/md5" type="event" />
+            <Content type="md5">23a3f48df4b36e3d2e63cde4b85cf4fa</Content>
+          </IndicatorItem>
+          <IndicatorItem id="641e1564-c3fb-48e4-9ae5-c7d9f9ef0c3a" condition="is" preserve-case="false" negate="false">
+            <Context document="fileWriteEvent" search="fileWriteEvent/md5" type="event" />
+            <Content type="md5">6f3024f46325c426b640fe0c536f1c00</Content>
+          </IndicatorItem>
+        </Indicator>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

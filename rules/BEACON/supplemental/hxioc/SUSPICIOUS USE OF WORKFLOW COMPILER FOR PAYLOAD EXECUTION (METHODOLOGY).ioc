@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="839f533d-a5d5-4934-9ae6-b3589d067a25" last-modified="2020-12-02T12:42:04Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>SUSPICIOUS USE OF WORKFLOW COMPILER FOR PAYLOAD EXECUTION (METHODOLOGY)</short_description>
+    <description>This IOC detects indicators associated with suspicious execution of Microsoft WorkFlow Compiler. This is known to be used by Cobaltstrike for lateral movement with specially crafted XLM and OXLM files. This is associated with MITRE ATT&amp;CK (r) Tactic(s): Execution, Lateral Movement and Technique(s): T1047, T1072, T1059.003.</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2020-12-02T11:56:53Z</authored_date>
+    <links></links>
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="cf086a37-6904-4ae0-8519-48bb56dbb1c3">
+      <Indicator operator="AND" id="58bb4930-3810-4403-af61-489a92c1a036">
+        <IndicatorItem id="7a91092a-931c-4114-a3d3-81261cbcfbca" condition="is" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/parentProcess" type="event" />
+          <Content type="string">cmd.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="26debc24-8dfb-45b8-b646-cdaef95023a9" condition="is" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/parentProcess" type="event" />
+          <Content type="string">msbuild.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="9a161d1f-a5fe-4b23-a72e-ef6bb3abfb77" condition="matches" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/parentProcess" type="event" />
+          <Content type="string">.</Content>
+        </IndicatorItem>
+        <IndicatorItem id="a7d18cdf-7ef6-4e69-8f2e-63293745d302" condition="contains" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+          <Content type="string">Invoke-WmiMethod -ComputerName </Content>
+        </IndicatorItem>
+        <IndicatorItem id="4e070ad1-ae25-4ba0-9eac-f02e2136aa9a" condition="contains" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+          <Content type="string"> -path win32_process -name create -argumentlist C:\Windows\Microsoft.NET\Framework64\v4.0.30319\Microsoft.Workflow.Compiler.exe C:\Windows\Microsoft.NET\Framework64\v4.0.30319\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="872030d8-a1ef-4fbe-a64d-e49ef79a0f43" condition="ends-with" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+          <Content type="string">.xml C:\Windows\Microsoft.NET\Framework64\v4.0.30319\results.txt</Content>
+        </IndicatorItem>
+      </Indicator>
+      <Indicator operator="AND" id="6e4e0d4c-24d3-4a6b-a59e-f083165b0a38">
+        <IndicatorItem id="417343df-e334-4413-ac9a-f843304a960c" condition="starts-with" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+          <Content type="string">cmd.exe /c C:\Windows\Microsoft.NET\Framework64\v4.0.30319\Microsoft.Workflow.Compiler.exe C:\ProgramData\MSUpdate\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="b8b96c1a-97af-4c9e-a1cd-a336cbb10ee7" condition="ends-with" preserve-case="true" negate="false">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+          <Content type="string">.xml C:\ProgramData\MSUpdate\results.txt</Content>
+        </IndicatorItem>
+        <IndicatorItem id="37fd396e-3a08-457c-a38b-63e8a7a53b1c" condition="contains" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/parentProcess" type="event" />
+          <Content type="string">wmic</Content>
+        </IndicatorItem>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

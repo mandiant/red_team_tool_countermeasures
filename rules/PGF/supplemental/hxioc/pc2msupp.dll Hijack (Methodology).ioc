@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="101a29b9-9e3f-4f23-8289-6dc156045659" last-modified="2020-12-02T00:14:23Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>pc2msupp.dll Hijack (Methodology)</short_description>
+    <description>Identifies possible DLL search order hijacking of pc2msupp.dll based on image loads from unexpected locations.
+MITRE ATT&amp;CK
+Tactic: Persistence, Privilege Escalation, Defense Evasion
+Technique: T1574.001</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2020-11-29T20:53:58Z</authored_date>
+    <links />
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="f03319d3-6c4a-4800-b667-b0a052bf392d">
+      <Indicator operator="AND" id="3637ae9c-6ff4-4de6-bbc3-56b20898e433">
+        <IndicatorItem id="2135ec13-4c09-4045-9df3-a04869be518b" condition="is" preserve-case="false" negate="false">
+          <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+          <Content type="string">pc2msupp.dll</Content>
+        </IndicatorItem>
+        <IndicatorItem id="638c8089-cef6-4eff-b2d5-4dd615cb8a49" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Program Files\Quick Heal\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="8d9ee9ac-39b3-4ee6-8742-a1210fcab1c7" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Program Files (x86)\Quick Heal\</Content>
+        </IndicatorItem>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

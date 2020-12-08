@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="1205364c-1b66-4459-945b-c23aadcbe5e5" last-modified="2020-12-04T22:30:48Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>INSTALLUTIL CHILD PROCESS (METHODOLOGY)</short_description>
+    <description>InstallUtil can be used to proxy execution of another binary. This is associated with MITRE ATT&amp;CK (r) Tactic(s): Defense Evasion and Technique(s): T1218.004.</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2020-11-24T22:22:35Z</authored_date>
+    <links></links>
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="ab913245-e00c-4b5b-848e-cf8ec71bce01">
+      <Indicator operator="AND" id="0289f31d-d2be-4378-a46e-61221eae485a">
+        <IndicatorItem id="b86d37b0-8f51-411a-8025-055b22ccd313" condition="is" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/parentProcess" type="event" />
+          <Content type="string">installutil.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="60d1dd5d-ecdf-4ee3-adf0-057a94044318" condition="is" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/eventType" type="event" />
+          <Content type="string">start</Content>
+        </IndicatorItem>
+        <IndicatorItem id="91f9c94f-e9cd-4a85-8a7e-d7a05e4c6e6d" condition="matches" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/processPath" type="event" />
+          <Content type="string">.:\\Windows\\(System32|SysWow64)\\WerFault\.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="92b58757-03b7-4168-90a3-f0af500a5764" condition="is" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/process" type="event" />
+          <Content type="string">conhost.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="e80b0db1-85ad-4a20-9660-13de51901a43" condition="is" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/process" type="event" />
+          <Content type="string">mofcomp.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="c429e7a1-baa0-49b3-a1fa-553a2d2e96f9" condition="is" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/process" type="event" />
+          <Content type="string">lodctr.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="1fcd8095-53c7-4a2b-949e-79a3b3078f5a" condition="is" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/process" type="event" />
+          <Content type="string">unlodctr.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="765b7f2d-689f-44ad-a165-68a4b0805e05" condition="is" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/process" type="event" />
+          <Content type="string">sc.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="d5319b20-3fa8-4785-878b-b95275174648" condition="is" preserve-case="false" negate="true">
+          <Context document="processEvent" search="processEvent/process" type="event" />
+          <Content type="string">netsh.exe</Content>
+        </IndicatorItem>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

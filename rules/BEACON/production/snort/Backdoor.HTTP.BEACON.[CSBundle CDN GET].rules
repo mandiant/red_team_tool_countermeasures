@@ -1,0 +1,1 @@
+alert tcp any any -> any $HTTP_PORTS (msg:"Backdoor.HTTP.BEACON.[CSBundle CDN GET]"; content:"GET"; depth:3; content:"Accept: */*"; content:"Accept-Encoding: gzip, deflate, br"; content:"Accept-Language: en-US|0d 0a|"; content:"client-="; content:"\;auth=1}"; content:"Cookie:"; pcre:"/^GET\s(?:\/v1\/queue|\/v1\/profile|\/v1\/docs\/wsdl|\/v1\/pull)/"; sid:25890; rev:1;)

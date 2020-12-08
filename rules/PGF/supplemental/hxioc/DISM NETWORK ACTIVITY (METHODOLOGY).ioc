@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="a366d915-018b-46bb-a380-b186c5bc7ce7" last-modified="2020-11-27T13:00:04Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>DISM NETWORK ACTIVITY (METHODOLOGY)</short_description>
+    <description>Deployment Image Servicing and Management (DISM.exe) is a command-line tool that can be used to service and prepare Windows images. This IOC detects unusual network activity coming from DISM.exe. This is associated with MITRE ATT&amp;CK (r) Tactic(s): Defense Evasion, Privilege Escalation and Technique(s): T1036.005, T1055.</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2020-11-27T12:57:10Z</authored_date>
+    <links></links>
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="ab19b3e2-9b68-480f-8474-09ecec653e8f">
+      <IndicatorItem id="fe28106d-22e2-4312-86fc-4bd5f6396669" condition="is" preserve-case="false" negate="false">
+        <Context document="ipv4NetworkEvent" search="ipv4NetworkEvent/process" type="event" />
+        <Content type="string">Dism.exe</Content>
+      </IndicatorItem>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

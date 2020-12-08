@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="7d8409ef-f8c2-4b1a-bbfd-ec2b8d4fa9bd" last-modified="2020-12-02T00:14:20Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>dismcore.dll Hijack (Methodology)</short_description>
+    <description>Identifies possible DLL search order hijacking of DismCore.dll based on image loads from unexpected locations.
+
+MITRE ATT&amp;CK
+Tactic: Persistence, Privilege Escalation, Defense Evasion
+Technique: T1574.001</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2020-11-25T15:37:05Z</authored_date>
+    <links></links>
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="1e2e390d-8525-4b9d-acf8-14296f24f97d">
+      <Indicator operator="AND" id="caa93cc6-c7e1-4da0-8daa-97ff5c284efb">
+        <IndicatorItem id="48456c81-5310-488f-a19c-a57605cc2ce6" condition="is" preserve-case="false" negate="false">
+          <Context document="fileWriteEvent" search="fileWriteEvent/filePath" type="event" />
+          <Content type="string">windows\system32</Content>
+        </IndicatorItem>
+        <IndicatorItem id="449605b8-1cbc-4bb4-bc36-2009343e393a" condition="is" preserve-case="false" negate="false">
+          <Context document="fileWriteEvent" search="fileWriteEvent/fileName" type="event" />
+          <Content type="string">dismcore.dll</Content>
+        </IndicatorItem>
+      </Indicator>
+      <Indicator operator="AND" id="87e45d6f-9f7c-49af-9fe4-8d3f43d677f7">
+        <IndicatorItem id="1e5f2f39-467e-4800-a829-6ac1f32fd62d" condition="is" preserve-case="false" negate="false">
+          <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+          <Content type="string">dismcore.dll</Content>
+        </IndicatorItem>
+        <IndicatorItem id="8e328058-b309-4f8e-a54a-0e4c21d54802" condition="is" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">windows\system32\dism</Content>
+        </IndicatorItem>
+        <IndicatorItem id="d0f9f92c-6799-4547-8daa-a5312393ecec" condition="is" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">windows\system32</Content>
+        </IndicatorItem>
+        <IndicatorItem id="03244410-df53-4827-a7b5-ed05b551c84a" condition="is" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">windows\syswow64\dism</Content>
+        </IndicatorItem>
+        <IndicatorItem id="7721f90a-60de-4e22-b8de-163d1df2dc19" condition="is" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">winnt\system32\dism</Content>
+        </IndicatorItem>
+        <IndicatorItem id="48916ada-65d6-4c47-8c19-97c9439bde91" condition="is" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">winnt\syswow64\dism</Content>
+        </IndicatorItem>
+        <IndicatorItem id="0fd08125-2386-48f0-9fe4-bc1680e176f2" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">$WINDOWS.~BT\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="88bc69c2-88cb-428a-8fc4-b244ef53a74a" condition="matches" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">temp\\[0-9]*\\?[A-F0-9]{8}-[A-F0-9]{4}-[A-F0-9]{4}-[A-F0-9]{4}-[A-F0-9]{12}$</Content>
+        </IndicatorItem>
+        <IndicatorItem id="941e4d00-acb3-4aae-97e9-dfb3e08daa44" condition="is" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Windows\System32\CompatTel</Content>
+        </IndicatorItem>
+        <IndicatorItem id="ecd2f941-ce39-4363-8da2-715405056ba8" condition="is" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Program Files (x86)\Quest\KACE</Content>
+        </IndicatorItem>
+        <IndicatorItem id="57c842ca-c4b2-401b-8291-9b1bf6fa5297" condition="is" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Program Files\Quest\KACE</Content>
+        </IndicatorItem>
+        <IndicatorItem id="79c9d0bb-579c-416d-ae71-0b85e5af1e0c" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">ProgramData\docker\windowsfilter\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="6b52f7f1-e53c-4f45-9b46-85ae436df5a1" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/fullPath" type="event" />
+          <Content type="string">docker\windowsfilter\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="86c80fa5-fc62-4f3e-ad3d-e0d25a75b398" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/fullPath" type="event" />
+          <Content type="string">windows\winsxs</Content>
+        </IndicatorItem>
+        <IndicatorItem id="5f441bdd-2213-4565-85cd-ec9f2501c0a9" condition="matches" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/fullPath" type="event" />
+          <Content type="string">^[a-z]:\d*\\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="12a8472c-8967-47b2-bef0-2958922b3fd0" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">\Device\HarddiskVolume</Content>
+        </IndicatorItem>
+      </Indicator>
+      <Indicator operator="AND" id="6fa4fb93-2c05-47f5-a881-d3f56c94655b">
+        <IndicatorItem id="199917df-b87c-495d-a945-3b26d13a1d5d" condition="is" preserve-case="false" negate="false">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">windows\system32</Content>
+        </IndicatorItem>
+        <IndicatorItem id="21001563-56c9-4311-beff-acb935e7dc13" condition="is" preserve-case="false" negate="false">
+          <Context document="eventItem" search="eventItem/imageLoadEvent/fileName" type="event" />
+          <Content type="string">dismcore.dll</Content>
+        </IndicatorItem>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

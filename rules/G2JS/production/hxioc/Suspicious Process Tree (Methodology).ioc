@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="908bc8b7-ebcb-4131-8bdd-4eb2f284d473" last-modified="2020-12-02T19:30:39Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>Suspicious Process Tree (Methodology)</short_description>
+    <description>The process cscript.exe spawned suspicious processes colorcpl.exe or userinit.exe. This is a default used by the payload generation tool GadgetToJScript.
+
+MITRE ATT&amp;CK
+Tactic: Defense Evasion, Execution
+Technique: T1218.005, T1059</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2020-11-26T20:32:23Z</authored_date>
+    <links />
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="816caf7c-7af1-4609-98d9-5bec0e85becc">
+      <Indicator operator="AND" id="ad68bfea-a7fa-4f4d-9021-a730ca47d46e">
+        <Indicator operator="OR" id="fdd649af-0ca2-4b5a-a70f-3f691c6e0533">
+          <IndicatorItem id="1cea14dc-24ef-4bef-b478-f49e506e1f63" condition="is" preserve-case="false" negate="false">
+            <Context document="eventItem" search="eventItem/processEvent/process" type="event" />
+            <Content type="string">userinit.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="0f3e3460-de56-4d01-bab6-f2fa8ef94acc" condition="is" preserve-case="false" negate="false">
+            <Context document="eventItem" search="eventItem/processEvent/process" type="event" />
+            <Content type="string">colorcpl.exe</Content>
+          </IndicatorItem>
+        </Indicator>
+        <Indicator operator="OR" id="392674ad-9792-49cf-8c95-c12d96b3bf42">
+          <IndicatorItem id="e49441b1-eeaf-4a54-bf77-6bb9796ba6c2" condition="is" preserve-case="false" negate="false">
+            <Context document="eventItem" search="eventItem/processEvent/parentProcess" type="event" />
+            <Content type="string">wscript.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="b2371940-4e0c-477d-9804-8e4840cfde3d" condition="is" preserve-case="false" negate="false">
+            <Context document="eventItem" search="eventItem/processEvent/parentProcess" type="event" />
+            <Content type="string">cscript.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="331154b5-5693-438c-973f-886299aaa746" condition="is" preserve-case="false" negate="false">
+            <Context document="eventItem" search="eventItem/processEvent/parentProcess" type="event" />
+            <Content type="string">mshta.exe</Content>
+          </IndicatorItem>
+        </Indicator>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

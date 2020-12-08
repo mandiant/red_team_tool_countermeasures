@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="3023f056-776e-4e0d-aa0b-d0548c3051ad" last-modified="2020-11-27T13:18:26Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>CONTROL PANEL ITEMS (METHODOLOGY)</short_description>
+    <description>Windows Control Panel items are utilities that allow users to view and adjust computer settings. Control Panel items are registered executable (.exe) or Control Panel (.cpl) files, the latter are actually renamed dynamic-link library (.dll) files that export a CPlApplet function. This is associated with MITRE ATT&amp;CK (r) Tactic(s): Defense Evasion and Technique(s): T1218.002.</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2020-06-04T07:57:34Z</authored_date>
+    <links></links>
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="cc158ed6-9b6e-4d03-bffb-b69a62e3f166">
+      <Indicator operator="AND" id="1aa9a7d0-6678-4923-a57a-5ded08c8e955">
+        <IndicatorItem id="48750d14-15c9-4519-9c26-edabf7561adb" condition="contains" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/process" type="event" />
+          <Content type="string">control.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="0c5431be-3b0e-4462-b8a4-e80041b4a60c" condition="matches" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+          <Content type="string">[^\\]+?\.cpl</Content>
+        </IndicatorItem>
+      </Indicator>
+      <Indicator operator="AND" id="d4a85b5a-1068-4f2d-b1c0-2782101c89ad">
+        <IndicatorItem id="46e63a1b-21c5-4641-9238-c2db1a147d52" condition="contains" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+          <Content type="string">shell32.dll</Content>
+        </IndicatorItem>
+        <Indicator operator="OR" id="93c37e89-1590-4440-b9e5-dfdc529d219e">
+          <IndicatorItem id="ef7b0ed4-b896-4253-bee0-a3d37623094d" condition="contains" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+            <Content type="string">Control_RunDLLAsUser</Content>
+          </IndicatorItem>
+          <IndicatorItem id="64f5202c-60e4-44d1-a229-5666c7eb2463" condition="contains" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+            <Content type="string">Control_RunDLL</Content>
+          </IndicatorItem>
+        </Indicator>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

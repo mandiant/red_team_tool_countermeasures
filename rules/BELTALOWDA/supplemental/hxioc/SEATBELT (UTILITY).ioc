@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="1f9994a0-8109-403c-88c4-98e7f1ed8d7b" last-modified="2020-11-30T17:48:13Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>SEATBELT (UTILITY)</short_description>
+    <description>Seatbelt is an open source C# project that performs a number of security oriented host-survey "safety checks" relevant from both offensive and defensive security perspectives. This IOC also detects some variations of this project namely Beltalowda and Shamwow. </description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2020-11-30T17:31:46Z</authored_date>
+    <links></links>
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="2619336d-1351-4809-8bc1-420316b21621">
+      <IndicatorItem id="ee9c60b6-2ab9-44e3-a618-427755c0d350" condition="is" preserve-case="false" negate="false">
+        <Context document="fileWriteEvent" search="fileWriteEvent/fileName" type="event" />
+        <Content type="string">Shamwow.exe</Content>
+      </IndicatorItem>
+      <IndicatorItem id="003a65de-f00b-483d-8d14-ba777b0005bb" condition="is" preserve-case="false" negate="false">
+        <Context document="fileWriteEvent" search="fileWriteEvent/fileName" type="event" />
+        <Content type="string">Seatbelt.exe</Content>
+      </IndicatorItem>
+      <IndicatorItem id="1cb2e78f-6ed9-436f-8c97-bbf61e461e19" condition="is" preserve-case="false" negate="false">
+        <Context document="fileWriteEvent" search="fileWriteEvent/fileName" type="event" />
+        <Content type="string">Beltalowda.exe</Content>
+      </IndicatorItem>
+      <Indicator operator="AND" id="47707aa9-72c4-4345-84e3-c2ce3c6e9bd9">
+        <IndicatorItem id="ec67c8bf-bf92-41b7-bd60-cbc242eb686c" condition="is" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/eventType" type="event" />
+          <Content type="string">start</Content>
+        </IndicatorItem>
+        <Indicator operator="OR" id="f364abe2-7b7c-49b2-9e5c-154faaee03da">
+          <IndicatorItem id="78e5e7f1-0731-4c8c-8ab2-2c3afa8eb814" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">Shamwow.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="417f642e-d68c-46a0-b826-b528f96120f9" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">Seatbelt.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="aaa14e7c-a71f-4305-b445-2539189dfaa1" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">Beltalowda.exe</Content>
+          </IndicatorItem>
+          <Indicator operator="AND" id="e6bb3866-2827-4f08-9581-ac941e53b782">
+            <Indicator operator="OR" id="f06f1507-75ae-47a9-a488-6f619027ef05">
+              <IndicatorItem id="6f32bd6b-ff65-4911-9571-34a0207955db" condition="matches" preserve-case="false" negate="false">
+                <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+                <Content type="string">(\s|")(AMSIProviders|AntiVirus|AppLocker|ARPTable|AuditPolicies|AuditPolicyRegistry|AutoRuns|ChromiumBookmarks|ChromiumHistory|ChromiumPresence)</Content>
+              </IndicatorItem>
+              <IndicatorItem id="2abe59f7-7ec2-406b-b977-519dc835f107" condition="matches" preserve-case="false" negate="false">
+                <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+                <Content type="string">(\s|")(IEFavorites|IETabs|IEUrls|InstalledProducts|InterestingFiles|InterestingProcesses|InternetSettings|LAPS|LastShutdown|LocalGPOs|LocalGroups|LocalUsers|LogonEvents|LogonSessions|LOLBAS|LSASettings|MappedDrives|McAfeeConfigs|McAfeeSiteList)</Content>
+              </IndicatorItem>
+              <IndicatorItem id="2458c34b-ca72-4966-99c9-5c1101eec239" condition="matches" preserve-case="false" negate="false">
+                <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+                <Content type="string">(\s|")(CloudCredentials|CredEnum|CredGuard|dir|DNSCache|DotNet|DpapiMasterKeys|EnvironmentPath|EnvironmentVariables|ExplicitLogonEvents|ExplorerMRUs|ExplorerRunCommands|FileInfo|FileZilla|FirefoxHistory|FirefoxPresence|Hotfixes|IdleTime)</Content>
+              </IndicatorItem>
+              <IndicatorItem id="f879ced2-947c-4589-a27a-d31aa6933bd9" condition="matches" preserve-case="false" negate="false">
+                <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+                <Content type="string">(\s|")(MicrosoftUpdates|NamedPipes|NetworkProfiles|NetworkShares|NTLMSettings|OfficeMRUs|OracleSQLDeveloper|OSInfo|OutlookDownloads|PoweredOnEvents|PowerShell|PowerShellEvents|PowerShellHistory|Printers|ProcessCreationEvents|Processes)</Content>
+              </IndicatorItem>
+              <IndicatorItem id="e8e8e66e-ecb9-496e-bbaa-897f01bc9c37" condition="matches" preserve-case="false" negate="false">
+                <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+                <Content type="string">(\s|")(ProcessOwners|PSSessionSettings|PuttyHostKeys|PuttySessions|RDCManFiles|RDPSavedConnections|RDPSessions|RDPsettings|RecycleBin|reg|RPCMappedEndpoints|SCCM|ScheduledTasks|SearchIndex|SecPackageCreds|SecurityPackages|Services|SlackDownloads)</Content>
+              </IndicatorItem>
+              <IndicatorItem id="e9ac2b5e-5bc2-415c-ab51-c5e0925e879a" condition="matches" preserve-case="false" negate="false">
+                <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+                <Content type="string">(\s|")(SlackPresence|SlackWorkspaces|SuperPutty|Sysmon|SysmonEvents|TcpConnections|TokenGroups|TokenPrivileges|UAC|UdpConnections|UserRightAssignments|WindowsAutoLogon|WindowsCredentialFiles|WindowsDefender|WindowsEventForwarding)</Content>
+              </IndicatorItem>
+              <IndicatorItem id="f174330e-fd69-48a9-957b-85abcefef16e" condition="matches" preserve-case="false" negate="false">
+                <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+                <Content type="string">(\s|")(WindowsFirewall|WindowsVault|WMIEventConsumer|WMIEventFilter|WMIFilterBinding|WSUS)</Content>
+              </IndicatorItem>
+              <IndicatorItem id="ff65b290-8df7-456d-9947-5e6d5bcfa78b" condition="matches" preserve-case="false" negate="false">
+                <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+                <Content type="string">-group=(all|system|user|misc|Slack|Chrome|Remote)</Content>
+              </IndicatorItem>
+            </Indicator>
+            <Indicator operator="OR" id="b34e9bfa-b44e-4493-94d3-d1855e3df41e">
+              <IndicatorItem id="975ab788-3b39-497c-bb4a-74f8eef30167" condition="contains" preserve-case="false" negate="false">
+                <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+                <Content type="string">-outputfile=</Content>
+              </IndicatorItem>
+              <IndicatorItem id="e02f2c4f-539a-414d-8a69-b77bbae812f4" condition="contains" preserve-case="false" negate="false">
+                <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+                <Content type="string">-computername=</Content>
+              </IndicatorItem>
+              <IndicatorItem id="78f40402-affc-49dd-9394-5acf1347830f" condition="contains" preserve-case="false" negate="false">
+                <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+                <Content type="string">-full</Content>
+              </IndicatorItem>
+            </Indicator>
+          </Indicator>
+        </Indicator>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

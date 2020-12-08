@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="b620a639-e591-4459-86d9-43e736305dfb" last-modified="2020-11-29T22:57:00Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>WERFAULT.EXE SUSPICIOUS CHILD PROCESSES (METHODOLOGY)</short_description>
+    <description>This alert looks for suspicious child processes of werfault.exe, a known process used by malicious actors for process injection. </description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2020-11-25T05:48:24Z</authored_date>
+    <links></links>
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="0fe60c41-f5de-40bd-8f43-ef5ec91b8c7b">
+      <Indicator operator="AND" id="88427a8a-2fe3-4c29-97c8-889c270c6ca9">
+        <IndicatorItem id="abcafac5-bb05-4a15-af40-b904f19908ba" condition="is" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/parentProcess" type="event" />
+          <Content type="string">werfault.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="2beda5d2-6918-4d16-8672-fda66ad06e65" condition="is" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/eventType" type="event" />
+          <Content type="string">start</Content>
+        </IndicatorItem>
+        <Indicator operator="OR" id="66f15a12-50f9-4105-84d8-3181b9a0a00e">
+          <IndicatorItem id="25d34328-73a0-4ec5-aa5e-8c3b73a9f120" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">cmd.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="589587c1-9548-4875-99c9-f6ea3ec2ddca" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">powershell.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="6b83ac1c-773f-43f3-a8cf-9b0a5ce31c68" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">hostname.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="04dcf92f-5b58-4093-bcbc-93448fc79686" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">ipconfig.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="f1c49d89-619a-479d-888c-f0ab08a9f2f2" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">nslookup.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="fc3ebfd3-815c-44ed-aa66-115bdd45eec9" condition="is" preserve-case="false" negate="false">
+            <Context document="processEvent" search="processEvent/process" type="event" />
+            <Content type="string">net.exe</Content>
+          </IndicatorItem>
+        </Indicator>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

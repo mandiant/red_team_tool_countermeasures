@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="5fb812a1-e952-46e7-bcbb-fb1a42189a30" last-modified="2020-12-01T23:27:19Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>LNKSmasher Commands (Utility)</short_description>
+    <description>LNKSmasher embeds an arbitrary payload in an LNK that can be executed by the embedded command. This IOC will detect the commands executed by both the new and old version of LNKSmasher. </description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2020-11-25T17:34:01Z</authored_date>
+    <links></links>
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="b7d00ca6-9d6d-4fc4-a61c-1f666712ea73">
+      <IndicatorItem id="2c0cd4f8-4892-4769-a74f-ffa590a42996" condition="contains" preserve-case="false" negate="false">
+        <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+        <Content type="string">dir *si.lnk /b /a-d</Content>
+      </IndicatorItem>
+      <Indicator operator="AND" id="5f3ba17c-1c5e-47fe-81eb-d0b77b3ddf74">
+        <IndicatorItem id="772e9d9f-f691-43ec-b8ae-2dab07594197" condition="contains" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+          <Content type="string">tokens=1 delims=[]</Content>
+        </IndicatorItem>
+        <IndicatorItem id="3cc533d8-d9ac-4130-abf5-b82403a708eb" condition="contains" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+          <Content type="string">lnk /b /a-d</Content>
+        </IndicatorItem>
+        <IndicatorItem id="19cf47b1-2f05-4fc2-99f0-57126e4d34cd" condition="contains" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+          <Content type="string">findstr /r /c</Content>
+        </IndicatorItem>
+        <IndicatorItem id="3759bc56-189c-4da7-b3bc-ea70f8ce847c" condition="ends-with" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+          <Content type="string">DO cmd /c %D</Content>
+        </IndicatorItem>
+        <IndicatorItem id="bf2a14d9-658d-42bc-82b6-9add6dcc2142" condition="contains" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+          <Content type="string">SHELL32.DLL,ShellExec_RunDLL</Content>
+        </IndicatorItem>
+        <IndicatorItem id="8d5b3c45-a6ff-44ec-afb1-bebd70f18293" condition="contains" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+          <Content type="string">%H IN ('dir *</Content>
+        </IndicatorItem>
+      </Indicator>
+      <Indicator operator="AND" id="dafe257e-f9f3-4623-8eb2-05494bb92252">
+        <IndicatorItem id="71e550bf-945a-4332-9327-8af354a0d316" condition="contains" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+          <Content type="string">/c copy /b /y *</Content>
+        </IndicatorItem>
+        <IndicatorItem id="c35b3017-7734-440c-ba6b-c1d02da6c984" condition="contains" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+          <Content type="string">System32\*rtutil.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="e759e7ef-3c73-4c1a-b986-da0ef52bc449" condition="contains" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+          <Content type="string">&amp;&amp;echo 00&gt;&gt;</Content>
+        </IndicatorItem>
+        <IndicatorItem id="4ff5f382-1155-471f-991f-b74658fdebb0" condition="contains" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+          <Content type="string">-f -enc""odehex</Content>
+        </IndicatorItem>
+        <IndicatorItem id="cb2e9f14-8167-45d6-b5e1-9d4b83d4a34d" condition="contains" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+          <Content type="string">more +69</Content>
+        </IndicatorItem>
+        <IndicatorItem id="ca89901d-ee5d-4890-a455-b73386c43d6f" condition="contains" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+          <Content type="string">-f -decod""ehex</Content>
+        </IndicatorItem>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

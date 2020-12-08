@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="4f228f48-10d8-4079-a5f0-0cb69cf4196b" last-modified="2020-12-02T00:14:25Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>ui.dll Hijack (Methodology)</short_description>
+    <description>Identifies possible DLL search order hijacking of ui.dll based on image loads from unexpected locations.
+MITRE ATT&amp;CK
+Tactic: Persistence, Privilege Escalation, Defense Evasion
+Technique: T1574.001</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2020-11-29T20:58:35Z</authored_date>
+    <links />
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="f6ffd064-54ed-4572-8fb3-35d84a5b41b1">
+      <Indicator operator="AND" id="45ea1bee-2d9a-4d9b-8cb3-b98482f31825">
+        <IndicatorItem id="d1aed47a-a683-4665-9f1e-be5b518edb94" condition="is" preserve-case="false" negate="false">
+          <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+          <Content type="string">ui.dll</Content>
+        </IndicatorItem>
+        <IndicatorItem id="5ff47d79-a402-42db-b358-910df98211ea" condition="contains" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">\YoudaoNotePortable\App\YoudaoNote\UI.dll</Content>
+        </IndicatorItem>
+        <IndicatorItem id="0eed1ea2-26f0-44b3-be14-dd49cb47180d" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">ProgramData\Citrix\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="f3fc99d4-ddca-4930-b1e3-3354e98a2198" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Program Files\PDF Architect</Content>
+        </IndicatorItem>
+        <IndicatorItem id="a9147fdc-1caf-4ef9-9b1c-65a87a2f4314" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Program Files\Soda PDF Desktop</Content>
+        </IndicatorItem>
+        <IndicatorItem id="f02c2691-3a32-41e8-a032-01ff5441be6e" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Program Files (x86)\Intuit\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="0f89a5eb-2fd8-493b-87a0-838f1778ca09" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Program Files\Intuit\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="f7bb5a06-4c34-4899-891f-8099977c1a3b" condition="ends-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/fullPath" type="event" />
+          <Content type="string">\Endpoint Agent\UI.dll</Content>
+        </IndicatorItem>
+        <IndicatorItem id="1a8b628e-c374-410c-81ba-8270f979695a" condition="contains" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Program Files (x86)\ABB\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="3888d23e-8ef8-4eb8-9dd2-909ee81e64bd" condition="contains" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Program Files\ABB\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="2500dd46-9fd8-4a2d-ab07-a1a01f71ad5e" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Program Files\Adobe\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="611f6d4b-84c2-4ec2-a1bc-02b7b33fb148" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Program Files (x86)\Adobe\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="348a37b9-2d4d-4c74-a7f0-971545fb8eee" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Program Files\Autodesk</Content>
+        </IndicatorItem>
+        <IndicatorItem id="5f3e62f5-938e-4467-a4f2-1327d5326ee7" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Program Files (x86)\Autodesk</Content>
+        </IndicatorItem>
+        <IndicatorItem id="f41e2c16-7083-4f92-989f-7321e6758236" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Program Files\Common Files\Autodesk Shared\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="a0618eb3-1139-4a14-982b-38ef0ce7c311" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Program Files (x86)\Common Files\Autodesk Shared\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="2da5e447-304c-44cc-9879-0cfb13d76d5d" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Program Files\MTS Systems\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="6e3b0687-77d4-4302-ad86-1e1634eba14b" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Program Files (x86)\MTS Systems\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="0b342ae3-9375-4c93-afe5-84fd972d3e46" condition="ends-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">\plugins\net\v4</Content>
+        </IndicatorItem>
+        <IndicatorItem id="df561661-2d40-4ebe-ac5d-f19c46f565a6" condition="is" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Windows\twain_32\Plustek OpticSlim 550 Plus</Content>
+        </IndicatorItem>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

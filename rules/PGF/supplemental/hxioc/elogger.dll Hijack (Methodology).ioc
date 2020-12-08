@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="8328219b-e134-4efa-bb30-e233c4fae818" last-modified="2020-12-02T00:14:21Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>elogger.dll Hijack (Methodology)</short_description>
+    <description>Identifies possible DLL search order hijacking of elogger.dll based on image loads from unexpected locations.
+MITRE ATT&amp;CK
+Tactic: Persistence, Privilege Escalation, Defense Evasion
+Technique: T1574.001</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2020-11-29T21:25:53Z</authored_date>
+    <links />
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="21c1b4a4-0a3e-4bf2-9a84-da497feb3cb5">
+      <Indicator operator="AND" id="cd2da9ec-3198-444d-b3e5-a6d78b0252ee">
+        <IndicatorItem id="77a6755d-cfa2-4ff3-8374-319aeef5e6c3" condition="is" preserve-case="false" negate="false">
+          <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+          <Content type="string">elogger.dll</Content>
+        </IndicatorItem>
+        <IndicatorItem id="c679fc51-4ff1-4db9-be90-96aa7b18e285" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Program Files\Leica Microsystems CMS GmbH</Content>
+        </IndicatorItem>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

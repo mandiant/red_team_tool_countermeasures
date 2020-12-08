@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="734f67e7-b3b1-4b78-9d02-1ac053f58e2e" last-modified="2020-12-02T01:06:38Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>WildChild Filewrite (Utility)</short_description>
+    <description>Identifies creation of default WildChild HTA files.
+
+MITRE ATT&amp;CK
+Tactic: Defense Evasion
+Technique: T1218.005</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2020-11-28T02:03:53Z</authored_date>
+    <links />
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="2212c1b2-d54f-4881-9882-f10031b7034e">
+      <IndicatorItem id="c95c1e10-4894-4690-a2ed-dc6d6137efbc" condition="is" preserve-case="false" negate="false">
+        <Context document="fileWriteEvent" search="fileWriteEvent/textAtLowestOffset" type="event" />
+        <Content type="string">&lt;script language="VBScript"&gt;..Dim processpath : processpath = "c</Content>
+      </IndicatorItem>
+      <IndicatorItem id="70cf63ab-5f19-4b04-9218-a9b970268081" condition="is" preserve-case="false" negate="false">
+        <Context document="fileWriteEvent" search="fileWriteEvent/textAtLowestOffset" type="event" />
+        <Content type="string">&lt;script language="JScript"&gt;..var processpath = "c:\\windows\\sys</Content>
+      </IndicatorItem>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

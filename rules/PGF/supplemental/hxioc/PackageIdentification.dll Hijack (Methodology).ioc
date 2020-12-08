@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="8ab754fe-af15-4cc5-a84f-165db65bd9b8" last-modified="2020-12-02T00:14:23Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>PackageIdentification.dll Hijack (Methodology)</short_description>
+    <description>Identifies possible DLL search order hijacking of PackageIdentification.dll based on image loads from unexpected locations.
+MITRE ATT&amp;CK
+Tactic: Persistence, Privilege Escalation, Defense Evasion
+Technique: T1574.001</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2020-11-25T15:48:53Z</authored_date>
+    <links />
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="f6411e86-e035-4c81-b31c-8964e202fb1b">
+      <Indicator operator="AND" id="6c31f47e-0e1f-409e-b3d1-2124d4e97900">
+        <IndicatorItem id="815e8961-92bc-418b-b50d-504c62c65cbf" condition="is" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Program Files (x86)\Citrix\ICA Client\Receiver</Content>
+        </IndicatorItem>
+        <IndicatorItem id="df612db5-db2f-40a4-90e8-2ada5bf0a79e" condition="is" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Program Files\Citrix\ICA Client</Content>
+        </IndicatorItem>
+        <IndicatorItem id="1c168aa6-f224-4465-b6bf-680f45fe9f55" condition="is" preserve-case="false" negate="false">
+          <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+          <Content type="string">PackageIdentification.dll</Content>
+        </IndicatorItem>
+        <IndicatorItem id="20d5c333-d5f5-4288-849d-b216d9d5401e" condition="ends-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">\AppData\Local\Citrix\ICA Client\Receiver</Content>
+        </IndicatorItem>
+        <IndicatorItem id="8e701e3b-a16f-45b5-becd-557c809d8e36" condition="ends-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">\ICA Client\Receiver</Content>
+        </IndicatorItem>
+        <IndicatorItem id="ad610006-d0a0-4091-ab36-394b294bb0b0" condition="is" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Program Files (x86)\Citrix\Online Plugin\Receiver</Content>
+        </IndicatorItem>
+        <IndicatorItem id="336d5904-6d98-4aae-860e-3e295d415b51" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">PROGRA~</Content>
+        </IndicatorItem>
+        <IndicatorItem id="eb118e3f-1853-454d-a020-f035eef3023f" condition="is" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">ICA Client\Receiver</Content>
+        </IndicatorItem>
+        <IndicatorItem id="e504e758-34ba-4b2b-aaac-4206329f51ab" condition="is" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Program Files (x86)\Citrix\Receiver\Receiver</Content>
+        </IndicatorItem>
+        <IndicatorItem id="a30ee221-bf4a-474d-9eb1-49c0b107cd44" condition="ends-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">c$\Program Files (x86)\Citrix\Online Plugin\Receiver</Content>
+        </IndicatorItem>
+        <IndicatorItem id="3869df19-13bb-47f9-8667-4a1b96f95fca" condition="ends-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">c$\Program Files\Citrix\Online Plugin\Receiver</Content>
+        </IndicatorItem>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

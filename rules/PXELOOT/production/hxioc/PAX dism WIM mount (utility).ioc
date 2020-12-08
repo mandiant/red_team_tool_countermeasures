@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="6ef12a30-73ea-4f40-94fe-d4a6cbc8a286" last-modified="2020-12-02T00:49:05Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>PAX dism WIM mount (utility)</short_description>
+    <description>Identifies dism processes consistent with the arguments used by the tool PXE and Loot (PAX).
+
+MITRE ATT&amp;CK
+Tactic: Credential Access
+Technique: T1552.001</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2020-11-30T16:29:01Z</authored_date>
+    <links />
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="d29eb51b-7140-4378-98b9-b2773a51125b">
+      <Indicator operator="AND" id="db682fa7-3230-4871-b32a-f9b262504fe1">
+        <IndicatorItem id="e414bfd1-448e-4d85-a6e3-8c6020dc886c" condition="is" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/process" type="event" />
+          <Content type="string">dism.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="be9eb3dd-4fe9-49b9-946d-1d385e3f6f1a" condition="contains" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+          <Content type="string">/Mount-Wim</Content>
+        </IndicatorItem>
+        <IndicatorItem id="4d1ce2a4-1d77-44b2-9235-ec0c681b9e78" condition="contains" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+          <Content type="string">/WimFile:</Content>
+        </IndicatorItem>
+        <IndicatorItem id="0cc2f335-d16d-4540-8329-55b8db32afc6" condition="contains" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+          <Content type="string">/MountDir:</Content>
+        </IndicatorItem>
+        <IndicatorItem id="db6d2109-9fe6-4c46-96f6-99543d85c8a6" condition="contains" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+          <Content type="string">/LogPath:NUL</Content>
+        </IndicatorItem>
+        <IndicatorItem id="578626af-e857-4518-8a57-998b62361ee2" condition="contains" preserve-case="false" negate="false">
+          <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
+          <Content type="string">/index:1</Content>
+        </IndicatorItem>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>

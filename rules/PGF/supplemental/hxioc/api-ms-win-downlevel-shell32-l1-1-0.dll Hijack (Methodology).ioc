@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="a1a64f6d-9aaf-4041-86ff-f8aea47d16dc" last-modified="2020-12-02T00:14:18Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
+  <metadata>
+    <short_description>api-ms-win-downlevel-shell32-l1-1-0.dll Hijack (Methodology)</short_description>
+    <description>Identifies possible DLL search order hijacking of api-ms-win-downlevel-shell32-l1-1-0.dll based on image loads from unexpected locations.
+MITRE ATT&amp;CK
+Tactic: Persistence, Privilege Escalation, Defense Evasion
+Technique: T1574.001</description>
+    <authored_by>FireEye</authored_by>
+    <authored_date>2020-11-25T15:59:14Z</authored_date>
+    <links />
+  </metadata>
+  <criteria>
+    <Indicator operator="OR" id="f4b90b9b-2d1f-4a69-92f5-e72fcc092c9b">
+      <Indicator operator="AND" id="5b206b51-1d55-476b-89a7-ebff4877105e">
+        <IndicatorItem id="bc666fe9-e91a-402d-bd9a-a225c96752c9" condition="is" preserve-case="false" negate="false">
+          <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+          <Content type="string">api-ms-win-downlevel-shell32-l1-1-0.dll</Content>
+        </IndicatorItem>
+        <IndicatorItem id="52f4ca62-d86e-413e-bdf6-75bedf20f737" condition="is" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">windows\system32</Content>
+        </IndicatorItem>
+        <IndicatorItem id="72287f5a-6843-4119-a1a3-11b25ca5eeec" condition="is" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">windows\syswow64</Content>
+        </IndicatorItem>
+        <IndicatorItem id="2738aa74-6677-4f4c-9110-284ccb87be8c" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Windows\winsxs\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="84320d8e-98ce-401b-8d3f-5fab8c501ba1" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Program Files\Softing\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="346e384a-7d0c-4d62-a069-ffadd44d537c" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/fullPath" type="event" />
+          <Content type="string">/</Content>
+        </IndicatorItem>
+        <IndicatorItem id="caaebece-02a4-48a2-8755-deb471dd3d0c" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">\Device\HarddiskVolume</Content>
+        </IndicatorItem>
+        <IndicatorItem id="439c0f72-ce8c-428f-a7a2-359d16729c26" condition="is" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">C:\Windows\System32</Content>
+        </IndicatorItem>
+        <IndicatorItem id="6e46fe8b-0b57-4baa-88ed-82eb688814dd" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Windows\SoftwareDistribution\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="33cf16e2-199a-408a-b1c8-baf4d490cca3" condition="matches" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">\\Temp\\[A-F0-9]{8}-[A-F0-9]{4}-[A-F0-9]{4}-[A-F0-9]{4}-[A-F0-9]{12}\\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="bdc5df15-35be-405d-8d52-9f62c620745a" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Program Files (x86)\Trend Micro\OfficeScan Client\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="dd25ca90-3b35-444c-90da-2234f90e4b56" condition="ends-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/fullPath" type="event" />
+          <Content type="string">\sources\api-ms-win-downlevel-shell32-l1-1-0.dll</Content>
+        </IndicatorItem>
+        <IndicatorItem id="baef72e5-a823-41d8-b7a4-62ea01a7e576" condition="is" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">C:\Windows\SysWOW64</Content>
+        </IndicatorItem>
+        <IndicatorItem id="1b72d50f-21a5-43a0-b735-16411c0daea6" condition="matches" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/fullPath" type="event" />
+          <Content type="string">^[a-z]:\d*\\</Content>
+        </IndicatorItem>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>
