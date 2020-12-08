@@ -1,1 +1,1 @@
-alert tcp any any -> any any (msg:"HackTool.TCP.Rubeus.[User32LogonProcesss]"; flow:to_server; content:"User32LogonProcesss"; sid:sid:100001; rev:1;)
+alert tcp any any -> any any (msg:"HackTool.TCP.Rubeus.[User32LogonProcesss]"; flow:to_server; content:"User32LogonProcesss"; sid:100001; rev:1;)
