@@ -1,4 +1,4 @@
-# red_team_tool_countermeasures
+# FireEye Red Team Tool Countermeasures
 
 These rules are provided freely to the community without warranty.
 
