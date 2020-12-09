@@ -404,4 +404,298 @@
             <Content type="string">dbgeng.dll</Content>
           </IndicatorItem>
           <IndicatorItem id="ecfc2c97-358e-4cc7-a68c-4c1b2951a4c1" condition="is" preserve-case="false" negate="false">
-            <Context document="imageLoadEvent" sear
+            <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+            <Content type="string">duser.dll</Content>
+          </IndicatorItem>
+          <IndicatorItem id="bfddba26-3192-40ec-9577-8cbfd70bf809" condition="is" preserve-case="false" negate="false">
+            <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+            <Content type="string">FaultRep.dll</Content>
+          </IndicatorItem>
+          <IndicatorItem id="a56b2edf-e940-41cd-bc7a-f542dba528c2" condition="is" preserve-case="false" negate="false">
+            <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+            <Content type="string">fxsst.dll</Content>
+          </IndicatorItem>
+          <IndicatorItem id="5ddebf49-a82d-49ea-a709-21f76b882cf9" condition="is" preserve-case="false" negate="false">
+            <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+            <Content type="string">GdiPlus.dll</Content>
+          </IndicatorItem>
+          <IndicatorItem id="8253522e-7ee5-4910-a89f-98e85a74f9b8" condition="is" preserve-case="false" negate="false">
+            <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+            <Content type="string">mpr.dll</Content>
+          </IndicatorItem>
+          <IndicatorItem id="7381635b-6811-4dfe-a458-0d737531723e" condition="is" preserve-case="false" negate="false">
+            <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+            <Content type="string">MsCoree.dll</Content>
+          </IndicatorItem>
+          <IndicatorItem id="777284b8-589b-467a-bf33-e17539ac71ee" condition="is" preserve-case="false" negate="false">
+            <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+            <Content type="string">msi.dll</Content>
+          </IndicatorItem>
+          <IndicatorItem id="761189c0-2150-4d46-bf6a-b8b3ae2ff478" condition="is" preserve-case="false" negate="false">
+            <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+            <Content type="string">msvcp110.dll</Content>
+          </IndicatorItem>
+          <IndicatorItem id="11edc36d-6b67-4a9f-983f-d23b912b1c52" condition="is" preserve-case="false" negate="false">
+            <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+            <Content type="string">msvcp80.dll</Content>
+          </IndicatorItem>
+          <IndicatorItem id="29c077a9-e848-485a-805b-a32f8dcacf1f" condition="is" preserve-case="false" negate="false">
+            <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+            <Content type="string">msvcr100.dll</Content>
+          </IndicatorItem>
+          <IndicatorItem id="c5f0e279-b6fa-4ebc-85cb-41a3dc27ef67" condition="is" preserve-case="false" negate="false">
+            <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+            <Content type="string">msvcr110.dll</Content>
+          </IndicatorItem>
+          <IndicatorItem id="4e42d829-dd91-4d0f-bff1-3eac3ed0ab3a" condition="is" preserve-case="false" negate="false">
+            <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+            <Content type="string">msvcr80.dll</Content>
+          </IndicatorItem>
+          <IndicatorItem id="370b2048-f773-4efc-9672-a6a56fa0e53d" condition="is" preserve-case="false" negate="false">
+            <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+            <Content type="string">NCObjAPI.DLL</Content>
+          </IndicatorItem>
+          <IndicatorItem id="e6056c16-ae86-4b4b-ad28-242289c016f3" condition="is" preserve-case="false" negate="false">
+            <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+            <Content type="string">netutils.dll</Content>
+          </IndicatorItem>
+          <IndicatorItem id="4531bfc0-b49a-46cd-9e57-11f2c1b648f0" condition="is" preserve-case="false" negate="false">
+            <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+            <Content type="string">ntshrui.dll</Content>
+          </IndicatorItem>
+          <IndicatorItem id="b25008e5-7039-484f-861c-ca446ed08513" condition="is" preserve-case="false" negate="false">
+            <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+            <Content type="string">osksupport.dll</Content>
+          </IndicatorItem>
+          <IndicatorItem id="b248b462-b35b-4170-8eae-5d4fbbcc4157" condition="is" preserve-case="false" negate="false">
+            <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+            <Content type="string">RasTls.dll</Content>
+          </IndicatorItem>
+          <IndicatorItem id="6b666c6c-abc1-4f86-8ead-f73ff307fcae" condition="is" preserve-case="false" negate="false">
+            <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+            <Content type="string">ShCore.dll</Content>
+          </IndicatorItem>
+          <IndicatorItem id="e476885d-d6e5-42fb-a8b7-cd71a4cbade0" condition="is" preserve-case="false" negate="false">
+            <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+            <Content type="string">SLC.dll</Content>
+          </IndicatorItem>
+          <IndicatorItem id="f4d4f2f2-7b33-402b-966a-554255561f04" condition="is" preserve-case="false" negate="false">
+            <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+            <Content type="string">srrstr.dll</Content>
+          </IndicatorItem>
+          <IndicatorItem id="d2549efc-217b-485d-826e-04b422829f74" condition="is" preserve-case="false" negate="false">
+            <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+            <Content type="string">sspisrv.dll</Content>
+          </IndicatorItem>
+          <IndicatorItem id="8213662d-8ecb-48cf-b7b4-fdb7f91f7663" condition="is" preserve-case="false" negate="false">
+            <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+            <Content type="string">unattend.dll</Content>
+          </IndicatorItem>
+          <IndicatorItem id="5d37f3c6-1eac-4737-8611-88d7547e236e" condition="is" preserve-case="false" negate="false">
+            <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+            <Content type="string">uxtheme.dll</Content>
+          </IndicatorItem>
+          <IndicatorItem id="7e0ae1ed-154d-4f31-bbad-d8eadf6f316a" condition="is" preserve-case="false" negate="false">
+            <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+            <Content type="string">wbemcomn.dll</Content>
+          </IndicatorItem>
+          <IndicatorItem id="7be91c15-bf01-474c-9d85-13ffd7e26d99" condition="is" preserve-case="false" negate="false">
+            <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+            <Content type="string">WdsCore.dll</Content>
+          </IndicatorItem>
+          <IndicatorItem id="9d9a33e9-3c61-4807-9951-60d598769468" condition="is" preserve-case="false" negate="false">
+            <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+            <Content type="string">winbio.dll</Content>
+          </IndicatorItem>
+          <IndicatorItem id="9a26f8da-ef8f-4275-896a-8c77b720ddc5" condition="is" preserve-case="false" negate="false">
+            <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+            <Content type="string">winmm.dll</Content>
+          </IndicatorItem>
+          <IndicatorItem id="57769063-a4af-422f-8d5f-f72cb7d29aeb" condition="is" preserve-case="false" negate="false">
+            <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+            <Content type="string">wtsapi32.dll</Content>
+          </IndicatorItem>
+          <Indicator operator="AND" id="98ebfc7b-71b7-4a8b-acaa-6523760eb402">
+            <IndicatorItem id="547db1b3-d39a-4a19-bb74-877900eb8548" condition="starts-with" preserve-case="false" negate="true">
+              <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+              <Content type="string">Program Files</Content>
+            </IndicatorItem>
+            <IndicatorItem id="7c8620b1-c565-4b9b-93ac-e8901fe0e7d2" condition="is" preserve-case="false" negate="false">
+              <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+              <Content type="string">dbgcore.DLL</Content>
+            </IndicatorItem>
+            <IndicatorItem id="c7796660-a2f8-4557-94f6-54c7f8a9376a" condition="starts-with" preserve-case="false" negate="true">
+              <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+              <Content type="string">Progra~1\</Content>
+            </IndicatorItem>
+            <IndicatorItem id="52054a68-9f86-4821-949f-b2de407416d6" condition="starts-with" preserve-case="false" negate="true">
+              <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+              <Content type="string">Progra~2\</Content>
+            </IndicatorItem>
+          </Indicator>
+          <Indicator operator="AND" id="c55bc6da-2536-4ef8-8234-836d9ffe82d9">
+            <IndicatorItem id="8d4a1eac-3b47-4304-ac3a-2005d8e0d535" condition="is" preserve-case="false" negate="false">
+              <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+              <Content type="string">dwmapi.dll</Content>
+            </IndicatorItem>
+            <IndicatorItem id="03f9282a-a88d-410b-9d74-3f6dbc606fb8" condition="is" preserve-case="false" negate="true">
+              <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+              <Content type="string">Program Files\Windows Sidebar</Content>
+            </IndicatorItem>
+          </Indicator>
+        </Indicator>
+      </Indicator>
+      <Indicator operator="AND" id="81fff85f-4e04-4b65-bff8-88f6ef521669">
+        <IndicatorItem id="bc5afac8-ea5b-4b26-86b4-d2ce5b55d509" condition="is" preserve-case="false" negate="false">
+          <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+          <Content type="string">tv_x64.dll</Content>
+        </IndicatorItem>
+        <IndicatorItem id="dac35d9a-5f8c-4d67-8414-3e581fce9305" condition="contains" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">\AppData\Local\Temp\TeamViewer\Version</Content>
+        </IndicatorItem>
+        <IndicatorItem id="e19e73b4-74a2-4ce7-acc6-3d439ef11e7e" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">TeamViewer</Content>
+        </IndicatorItem>
+        <IndicatorItem id="093aee5e-f765-45c0-82df-4209a448f089" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Program Files</Content>
+        </IndicatorItem>
+        <IndicatorItem id="5b82fbf5-763f-4258-9304-97da107b0876" condition="contains" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">\teamviewer</Content>
+        </IndicatorItem>
+      </Indicator>
+      <Indicator operator="AND" id="1e236380-e0fc-4ee3-8f21-f68e96dfbdf0">
+        <IndicatorItem id="d9b52b22-a047-4bed-8ad3-37e7b6ceacc3" condition="is" preserve-case="false" negate="false">
+          <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+          <Content type="string">DismCore.dll</Content>
+        </IndicatorItem>
+        <IndicatorItem id="505df254-a121-40f7-9898-ce81ca20e98f" condition="is" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">windows\system32\dism</Content>
+        </IndicatorItem>
+        <IndicatorItem id="b4ba183c-2fbc-4e06-b130-ab0b890482d7" condition="is" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Windows\System32\CompatTel</Content>
+        </IndicatorItem>
+      </Indicator>
+      <Indicator operator="AND" id="9a9aa4cd-8173-4ae0-87a0-63fe021a5fc4">
+        <IndicatorItem id="514a909f-e3e0-42a3-b6ec-483bdaaf6298" condition="is" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">program files\windows defender</Content>
+        </IndicatorItem>
+        <IndicatorItem id="fbc73195-b161-41a0-9937-cfbeae43798a" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Windows\WinSxS\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="bb0356e7-ddbd-4c06-ace8-e897f8e841f8" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">ProgramData\Microsoft\Windows Defender\Platform\</Content>
+        </IndicatorItem>
+        <Indicator operator="OR" id="a355048c-6919-4126-a4d3-7ff22d668ec1">
+          <IndicatorItem id="04d43ed1-123d-4e2d-9ef7-92fd2d0857a8" condition="is" preserve-case="false" negate="false">
+            <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+            <Content type="string">mPclient.dll</Content>
+          </IndicatorItem>
+          <IndicatorItem id="3db0b779-e3eb-4211-b421-e11e9b5593c9" condition="is" preserve-case="false" negate="false">
+            <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+            <Content type="string">Mpsvc.dll</Content>
+          </IndicatorItem>
+        </Indicator>
+      </Indicator>
+      <Indicator operator="AND" id="cd25bdf4-acd5-4196-83a9-7d4b585e54ad">
+        <IndicatorItem id="bcae53e3-e5bb-4b36-9404-0a4b0a25e948" condition="is" preserve-case="false" negate="false">
+          <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+          <Content type="string">NvSmartMax.dll</Content>
+        </IndicatorItem>
+        <IndicatorItem id="34f7386c-e020-4fc8-84fb-5ed591afce8a" condition="is" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">program files\nvidia corporation</Content>
+        </IndicatorItem>
+      </Indicator>
+      <Indicator operator="AND" id="f96b6f3e-594b-4e31-b7dd-1bb2b5196be8">
+        <IndicatorItem id="8e2b2e09-ca3b-4cef-ae62-627ded0e5d33" condition="is" preserve-case="false" negate="false">
+          <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+          <Content type="string">unbcl.dll</Content>
+        </IndicatorItem>
+        <IndicatorItem id="177634da-7cf4-4115-99b3-7fb0a622f3ce" condition="is" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">windows\system32\migwiz</Content>
+        </IndicatorItem>
+        <IndicatorItem id="a2cbe4ea-f0fa-4124-b7d2-fe4783f30d5f" condition="is" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">windows\syswow64\migwiz</Content>
+        </IndicatorItem>
+        <IndicatorItem id="f255b884-69bb-4869-af41-9091d66500fd" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">windows\system32\oobe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="fc62fb28-b142-4825-b2f7-16fa2a4024bd" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">windows\syswow64\oobe</Content>
+        </IndicatorItem>
+      </Indicator>
+      <Indicator operator="AND" id="2838276e-983d-4aa0-beab-ccf1590ba654">
+        <IndicatorItem id="814f7d96-f10b-47c5-93a4-d976d8975e24" condition="is" preserve-case="false" negate="false">
+          <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+          <Content type="string">wwlib.dll</Content>
+        </IndicatorItem>
+        <IndicatorItem id="60cc7b15-0b7c-4123-b9da-a8109572e831" condition="matches" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">^program files( \(x86\))?\\microsoft office\\office\d+$</Content>
+        </IndicatorItem>
+      </Indicator>
+      <Indicator operator="AND" id="9940b949-ee1a-4b14-8b91-3396257a9bb4">
+        <IndicatorItem id="ae219d74-1fa7-48a2-b228-8ea1dbae6787" condition="is" preserve-case="false" negate="false">
+          <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+          <Content type="string">goopdate.dll</Content>
+        </IndicatorItem>
+        <IndicatorItem id="e4308e69-1eb4-46fc-9c73-31c08345b6ec" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Program Files (x86)\Google\Update\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="495668ab-c47b-4d14-a3b9-9fe18cc76ffa" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Program Files (x86)\Google\Temp\</Content>
+        </IndicatorItem>
+      </Indicator>
+      <Indicator operator="AND" id="178d1503-b114-433c-8845-59ba9a00a8aa">
+        <IndicatorItem id="f54ae04b-a89d-49bc-960d-204fbcc1759f" condition="is" preserve-case="false" negate="false">
+          <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+          <Content type="string">chrome_elf.dll</Content>
+        </IndicatorItem>
+        <IndicatorItem id="ce2a4e21-d2b2-445c-a8c1-846908ab2476" condition="is" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">program files (x86)\google\chrome\application</Content>
+        </IndicatorItem>
+        <IndicatorItem id="bb49f3fd-c3c9-48ae-8d96-cbb6ca2cb9c3" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">	Program Files (x86)\Google\Chrome\Application\</Content>
+        </IndicatorItem>
+      </Indicator>
+      <Indicator operator="AND" id="92b86c69-433a-4637-93b7-978269453865">
+        <IndicatorItem id="11ce31c7-4dad-4f38-9d1a-ec8e5460d458" condition="is" preserve-case="false" negate="false">
+          <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+          <Content type="string">iviewers.dll</Content>
+        </IndicatorItem>
+        <IndicatorItem id="b7a3c2d5-b940-4c37-b4bb-1c6eab9eb083" condition="starts-with" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">program files (x86)\windows kits\</Content>
+        </IndicatorItem>
+      </Indicator>
+      <Indicator operator="AND" id="6cf60709-82b4-4c95-8d80-f827a21dd1d7">
+        <IndicatorItem id="221db455-e655-4096-a31e-62722763b347" condition="is" preserve-case="false" negate="true">
+          <Context document="imageLoadEvent" search="imageLoadEvent/filePath" type="event" />
+          <Content type="string">Program Files\VMware\VMware Tools</Content>
+        </IndicatorItem>
+        <IndicatorItem id="ff6345ed-aa28-4079-9241-46293ec0c618" condition="is" preserve-case="false" negate="false">
+          <Context document="imageLoadEvent" search="imageLoadEvent/fileName" type="event" />
+          <Content type="string">vmtools.dll</Content>
+        </IndicatorItem>
+      </Indicator>
+    </Indicator>
+  </criteria>
+  <parameters />
+</OpenIOC>
