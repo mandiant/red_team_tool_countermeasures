@@ -1,4 +1,4 @@
-Prioritized list of CVEs that should be addressed to limit the effectiveness of the Red Team tools: 
+Prioritized list of CVEs that should be addressed to limit the effectiveness of the Red Team tools. This is a recommended order and customers may make their own priorities based on their unique environments. 
 
   1. [CVE-2019-11510](https://nvd.nist.gov/vuln/detail/CVE-2019-11510) – pre-auth arbitrary file reading from Pulse Secure SSL VPNs - CVSS 10.0
   2. [CVE-2020-1472](https://nvd.nist.gov/vuln/detail/CVE-2020-1472) – Microsoft Active Directory escalation of privileges - CVSS 10.0
