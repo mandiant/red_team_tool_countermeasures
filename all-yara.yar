@@ -2651,7 +2651,7 @@ rule APT_Builder_PY_MATRYOSHKA_1
     condition:
         all of them
 }
-rule Loader_MSIL_RuralBishop_1
+rule Loader_MSIL_RuralBishop_3
 {
     meta:
         description = "The TypeLibGUID present in a .NET binary maps directly to the ProjectGuid found in the '.csproj' file of a .NET project. This rule looks for .NET PE files that contain the ProjectGuid found in the public RuralBishop project."
