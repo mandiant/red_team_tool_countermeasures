@@ -1,3 +1,6 @@
+// Copyright 2020 by FireEye, Inc.
+// You may not use this file except in compliance with the license. The license should have been received with this file. You may obtain a copy of the license at:
+// https://github.com/fireeye/red_team_tool_countermeasures/blob/master/LICENSE.txt
 rule APT_HackTool_MSIL_SHARPSACK_1
 {
     meta:
