@@ -23,10 +23,9 @@ rule HackTool_MSIL_SharPivot_3
         $str11 = "SCShell" ascii wide
         $str12 = "SchtaskMod" ascii wide
         $str13 = "ServiceHijack" ascii wide
-        $str14 = "ServiceHijack" ascii wide
-        $str15 = "commandArg" ascii wide
-        $str16 = "payloadPath" ascii wide
-        $str17 = "Schtask" ascii wide
+        $str14 = "commandArg" ascii wide
+        $str15 = "payloadPath" ascii wide
+        $str16 = "Schtask" ascii wide
     condition:
         (uint16(0) == 0x5A4D and uint32(uint32(0x3C)) == 0x00004550) and $msil and all of ($str*)
 }
