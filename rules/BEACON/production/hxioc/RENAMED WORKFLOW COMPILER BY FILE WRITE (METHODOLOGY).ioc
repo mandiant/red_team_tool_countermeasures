@@ -1,4 +1,8 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2020 by FireEye, Inc.
+     You may not use this file except in compliance with the license. The license should have been received with this file. You may obtain a copy of the license at:
+     https://github.com/fireeye/red_team_tool_countermeasures/blob/master/LICENSE.txt
+  -->
 <OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://openioc.org/schemas/OpenIOC_1.1" id="74f3e2e9-5a92-4a0d-bfa3-7483dd8628a3" last-modified="2020-11-04T01:09:55Z" published-date="0001-01-01T00:00:00">
   <metadata>
     <short_description>RENAMED WORKFLOW COMPILER BY FILE WRITE (METHODOLOGY)</short_description>

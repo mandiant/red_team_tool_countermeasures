@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2020 by FireEye, Inc.
+     You may not use this file except in compliance with the license. The license should have been received with this file. You may obtain a copy of the license at:
+     https://github.com/fireeye/red_team_tool_countermeasures/blob/master/LICENSE.txt
+  -->
 <OpenIOC xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="7d8409ef-f8c2-4b1a-bbfd-ec2b8d4fa9bd" last-modified="2020-12-02T00:14:20Z" published-date="0001-01-01T00:00:00" xmlns="http://openioc.org/schemas/OpenIOC_1.1">
   <metadata>
     <short_description>dismcore.dll Hijack (Methodology)</short_description>
