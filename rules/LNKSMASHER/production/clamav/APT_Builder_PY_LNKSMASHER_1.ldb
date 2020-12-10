@@ -1,1 +1,4 @@
+# Copyright 2020 by FireEye, Inc.
+# You may not use this file except in compliance with the license. The license should have been received with this file. You may obtain a copy of the license at:
+# https://github.com/fireeye/red_team_tool_countermeasures/blob/master/LICENSE.txt
 APT_Builder_PY_LNKSMASHER_1;Engine:81-255,Target:7;0&1&2;696d706f7274206f73;696d706f7274206172677061727365;72616e646f6d2e63686f69636528*62696e61736369692e6865786c69667928*223463303030303030303131343032303030303030303030306330303030303030303030303030*2e7772697465

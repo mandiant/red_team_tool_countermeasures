@@ -1,1 +1,4 @@
+# Copyright 2020 by FireEye, Inc.
+# You may not use this file except in compliance with the license. The license should have been received with this file. You may obtain a copy of the license at:
+# https://github.com/fireeye/red_team_tool_countermeasures/blob/master/LICENSE.txt
 Dropper_HTA_Generic_1;Engine:81-255,Target:7;0&1&2&3;4765745370656369616C466F6C646572::i;0/&"" & \w{1,64}\.gettempname\(\)/;0&1/\.write chr\(clng\("&h" & mid\(\w{1,64},\w{1,64},2\)\)\)/;0&1&2/\.deletefile\(/

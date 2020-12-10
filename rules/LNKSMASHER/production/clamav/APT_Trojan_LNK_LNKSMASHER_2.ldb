@@ -1,1 +1,4 @@
+# Copyright 2020 by FireEye, Inc.
+# You may not use this file except in compliance with the license. The license should have been received with this file. You may obtain a copy of the license at:
+# https://github.com/fireeye/red_team_tool_countermeasures/blob/master/LICENSE.txt
 APT_Trojan_LNK_LNKSMASHER_2;Engine:81-255,Target:0;0&1;0:4C0000000114020000000000C0000000;5368656c6c457865635f52756e444c4c{-64}436d64{-64}464f52{-64}746f6b656e733d{-256}66696e64737472{-64}2e6c6e6b::wi

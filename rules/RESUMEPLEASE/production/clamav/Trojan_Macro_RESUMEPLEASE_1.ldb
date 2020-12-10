@@ -1,1 +1,4 @@
+# Copyright 2020 by FireEye, Inc.
+# You may not use this file except in compliance with the license. The license should have been received with this file. You may obtain a copy of the license at:
+# https://github.com/fireeye/red_team_tool_countermeasures/blob/master/LICENSE.txt
 Trojan_Macro_RESUMEPLEASE_1;Engine:81-255,Target:0;0&1&2&3&4&5;466f722042696e617279204173;52616e67652e54657874;456e7669726f6e28;434279746528;2e537061776e496e7374616e63655f;2e43726561746528

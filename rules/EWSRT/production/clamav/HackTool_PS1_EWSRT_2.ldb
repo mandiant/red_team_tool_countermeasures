@@ -1,1 +1,4 @@
+# Copyright 2020 by FireEye, Inc.
+# You may not use this file except in compliance with the license. The license should have been received with this file. You may obtain a copy of the license at:
+# https://github.com/fireeye/red_team_tool_countermeasures/blob/master/LICENSE.txt
 HackTool_PS1_EWSRT_2;Engine:81-255,Target:7;0&1;62356431323638302d393634372d313165382d396562362d353239323639666231343539;276765742d6d61696c696e666f272c20276765742d676c6f62616c616464726573736c697374272c2027696e766f6b652d696d706572736f6e6174656461757468272c2027696e766f6b652d6d61696c656e756d272c2027696e766f6b652d67656e6572617465686f6d6570616765272c20277365742d686f6d657061676527

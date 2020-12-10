@@ -1,1 +1,4 @@
+# Copyright 2020 by FireEye, Inc.
+# You may not use this file except in compliance with the license. The license should have been received with this file. You may obtain a copy of the license at:
+# https://github.com/fireeye/red_team_tool_countermeasures/blob/master/LICENSE.txt
 Trojan_PY_Generic_1;Engine:81-255,Target:7;0&1&2&3&4&5&6;706C6174666F726D2E6172636869746563747572652829;6374797065732E77696E646C6C2E;6B65726E656C33322E7669727475616C616C6C6F63;6372656174655F737472696E675F627566666572;637265617465746872656164;77616974666F7273696E676C656F626A656374;203D3D2022????626974223A

@@ -1,1 +1,4 @@
+# Copyright 2020 by FireEye, Inc.
+# You may not use this file except in compliance with the license. The license should have been received with this file. You may obtain a copy of the license at:
+# https://github.com/fireeye/red_team_tool_countermeasures/blob/master/LICENSE.txt
 Trojan_PS1_Generic_4;Engine:81-255,Target:7;0&1&2&3;203D205B747970655D2822;0/ = \[type\]\("(?:\{[0-5]\}){1,6}" -f[convert',]{6,36}\)/;0&1/\)\.value::\("(?:\{1?[0-9]\}){1,16}" -f[frombase64ting',]{16,96}\)\.invoke/;28206765742D7661726961626C65202822{1-32}222B22{1-32}2D76616C75656F6E6C792029

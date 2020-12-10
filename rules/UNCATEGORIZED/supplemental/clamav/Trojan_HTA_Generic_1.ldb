@@ -1,1 +1,4 @@
+# Copyright 2020 by FireEye, Inc.
+# You may not use this file except in compliance with the license. The license should have been received with this file. You may obtain a copy of the license at:
+# https://github.com/fireeye/red_team_tool_countermeasures/blob/master/LICENSE.txt
 Trojan_HTA_Generic_1;Engine:81-255,Target:7;0&1;66756E6374696F6E20{16-96}777363726970742E7368656C6C{8-128}2E72756E;EOF-64,64:2C302C74727565{1-8}656E642066756E6374696F6E{1-64}73656C662E636C6F7365

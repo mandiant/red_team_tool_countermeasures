@@ -1,1 +1,4 @@
+# Copyright 2020 by FireEye, Inc.
+# You may not use this file except in compliance with the license. The license should have been received with this file. You may obtain a copy of the license at:
+# https://github.com/fireeye/red_team_tool_countermeasures/blob/master/LICENSE.txt
 APT_Builder_PY_PGF_1;Engine:51-255,Target:7;0&1&2&3;66726f6d206c69622e7061796c6f61642e746563686e697175657320696d706f727420;5f7368656c6c636f64655f696e6a6563745f626173652c;20696e207061796c6f616474656d706c6174652e737562636c617373657328293a;7061796c6f616474656d706c6174652e76617269616e7428617267732e746563686e697175652c20617267732e74656d706c61746529
