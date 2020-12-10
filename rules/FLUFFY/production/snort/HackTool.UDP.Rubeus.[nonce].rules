@@ -1,1 +1,4 @@
+# Copyright 2020 by FireEye, Inc.
+# You may not use this file except in compliance with the license. The license should have been received with this file. You may obtain a copy of the license at:
+# https://github.com/fireeye/red_team_tool_countermeasures/blob/master/LICENSE.txt
 alert udp any any -> any 88 (msg:"HackTool.UDP.Rubeus.[nonce]"; content:"|05|"; depth:30; content:"|0a|"; distance:4; within:1; content:"Z"; content:"|6C 69 6C 00|"; within:25; sid:25901; rev:1;)

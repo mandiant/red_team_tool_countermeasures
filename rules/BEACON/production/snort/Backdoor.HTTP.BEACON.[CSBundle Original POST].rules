@@ -1,1 +1,4 @@
+# Copyright 2020 by FireEye, Inc.
+# You may not use this file except in compliance with the license. The license should have been received with this file. You may obtain a copy of the license at:
+# https://github.com/fireeye/red_team_tool_countermeasures/blob/master/LICENSE.txt
 alert tcp any any -> any $HTTP_PORTS (msg:"Backdoor.HTTP.BEACON.[CSBundle Original POST]"; content:"POST"; depth:4; content:"Accept: */*|0d 0a|"; content:"Accept-Language: en-US|0d 0a|"; content:"Accept-Encoding: gzip, deflate|0d 0a|"; content:"{\"locale\":\"en\",\"channel\":\"prod\",\"addon\":\""; pcre:"/^POST\s(?:\/v4\/links\/check-activity\/check|\/v1\/stats|\/gql|\/api2\/json\/check\/ticket|\/1.5\/95648064\/storage\/history|\/1.5\/95648064\/storage\/tabs|\/u\/0\/_\/og\/botguard\/get|\/ev\/prd001001|\/ev\/ext001001|\/gp\/aw\/ybh\/handlers|\/v3\/links\/ping-beat\/check)/"; content:"ses-"; sid:25878; rev:1;)

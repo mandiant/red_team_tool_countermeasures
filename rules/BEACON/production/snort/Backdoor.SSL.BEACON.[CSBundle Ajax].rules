@@ -1,1 +1,4 @@
+# Copyright 2020 by FireEye, Inc.
+# You may not use this file except in compliance with the license. The license should have been received with this file. You may obtain a copy of the license at:
+# https://github.com/fireeye/red_team_tool_countermeasures/blob/master/LICENSE.txt
 alert tcp any any -> any 443 (msg:"Backdoor.SSL.BEACON.[CSBundle Ajax]"; content:"|16 03|"; depth:2; content:"US"; content:"US"; distance:0; content:"ajax.microsoft.com"; content:"ajax.microsoft.com"; distance:0; content:"Seattle"; content:"Seattle"; distance:0; content:"Microsoft"; content:"Microsoft"; distance:0; content:"Information Technologies"; content:"Information Technologies"; distance:0; content:"WA"; content:"WA"; distance:0; sid:25873; rev:1;)

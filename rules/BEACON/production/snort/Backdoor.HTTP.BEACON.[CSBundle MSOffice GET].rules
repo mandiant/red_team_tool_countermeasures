@@ -1,1 +1,4 @@
+# Copyright 2020 by FireEye, Inc.
+# You may not use this file except in compliance with the license. The license should have been received with this file. You may obtain a copy of the license at:
+# https://github.com/fireeye/red_team_tool_countermeasures/blob/master/LICENSE.txt
 alert tcp any any -> any $HTTP_PORTS (msg:"Backdoor.HTTP.BEACON.[CSBundle MSOffice GET]"; content:"GET"; depth:3; content:"Accept: */*"; content:"Accept-Encoding: gzip, deflate, br"; content:"Accept-Language: en-US|0d 0a|"; content:"sess-="; content:"auth=0\;loc=US}"; content:"Cookie:"; pcre:"/^GET\s(?:\/updates|\/license\/eula|\/docs\/office|\/software-activation)/"; sid:25886; rev:1;)

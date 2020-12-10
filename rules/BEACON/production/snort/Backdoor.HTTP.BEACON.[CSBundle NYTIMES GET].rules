@@ -1,1 +1,4 @@
+# Copyright 2020 by FireEye, Inc.
+# You may not use this file except in compliance with the license. The license should have been received with this file. You may obtain a copy of the license at:
+# https://github.com/fireeye/red_team_tool_countermeasures/blob/master/LICENSE.txt
 alert tcp any any -> any $HTTP_PORTS (msg:"Backdoor.HTTP.BEACON.[CSBundle NYTIMES GET]"; content:"GET"; depth:3; content:"Accept: */*"; content:"Accept-Encoding: gzip, deflate, br"; content:"Accept-Language: en-US,en\;q=0.5"; content:"nyt-a="; content:"nyt-gdpr=0\;nyt-purr=cfh\;nyt-geo=US}"; fast_pattern; content:"|0d 0a|Cookie:"; pcre:"/^GET\s(?:\/ads\/google|\/vi-assets\/static-assets|\/v1\/preferences|\/idcta\/translations|\/v2\/preferences)/"; sid:25881; rev:1;)

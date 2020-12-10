@@ -1,1 +1,4 @@
+# Copyright 2020 by FireEye, Inc.
+# You may not use this file except in compliance with the license. The license should have been received with this file. You may obtain a copy of the license at:
+# https://github.com/fireeye/red_team_tool_countermeasures/blob/master/LICENSE.txt
 alert tcp any any -> any any (msg:"Backdoor.HTTP.GORAT.[Build ID]"; content:"aqlKZ7wjzg0iKM00E1WB/jq9_RA46w91EKl9A02Dv/nbNdZiLsB1ci8Ph0fb64/9Ks1YxAE86iz9A0dUiDl"; sid:25850; rev:1;)

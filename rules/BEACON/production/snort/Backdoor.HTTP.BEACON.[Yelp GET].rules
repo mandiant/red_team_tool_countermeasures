@@ -1,1 +1,4 @@
+# Copyright 2020 by FireEye, Inc.
+# You may not use this file except in compliance with the license. The license should have been received with this file. You may obtain a copy of the license at:
+# https://github.com/fireeye/red_team_tool_countermeasures/blob/master/LICENSE.txt
 alert tcp $HOME_NET any -> any $HTTP_PORTS (msg:"Backdoor.HTTP.BEACON.[Yelp GET]"; flow:to_server; content:"GET "; depth:4; content:"&parent_request_id="; distance:0; within:256; fast_pattern; content:" HTTP/1"; distance:0; within:1024; content:"|0d 0a|Sec-Fetch-Dest: empty|0d 0a|"; distance:0; within:256; content:"request_origin=user"; offset:0; depth:256; pcre:"/^GET [^\r\n]{0,256}&parent_request_id=(?:[A-Za-z0-9_\/\+\-%]{128,1024})={0,2}[^\r\n]{0,256} HTTP\/1\.[01]/"; sid:33355045; rev:1;)

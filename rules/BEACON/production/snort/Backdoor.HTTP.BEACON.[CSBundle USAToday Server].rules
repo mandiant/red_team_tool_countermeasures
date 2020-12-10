@@ -1,1 +1,4 @@
+# Copyright 2020 by FireEye, Inc.
+# You may not use this file except in compliance with the license. The license should have been received with this file. You may obtain a copy of the license at:
+# https://github.com/fireeye/red_team_tool_countermeasures/blob/master/LICENSE.txt
 alert tcp any $HTTP_PORTS -> any any (msg:"Backdoor.HTTP.BEACON.[CSBundle USAToday Server]"; content:"HTTP/1."; depth:7; content:"Connection: close"; content:"Content-Type: application/json\; charset=utf-8"; content:"Content-Security-Policy: upgrade-insecure-requests"; content:"Strict-Transport-Security: max-age=10890000"; content:"Cache-Control: public, immutable, max-age=315360000"; content:"Accept-Ranges: bytes"; content:"X-Cache: HIT, HIT"; content:"X-Timer: S1593010188.776402,VS0,VE1"; content:"Vary: X-AbVariant, X-AltUrl, Accept-Encoding"; sid:25893; rev:1;)
