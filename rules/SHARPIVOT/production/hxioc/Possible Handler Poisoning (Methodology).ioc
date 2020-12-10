@@ -71,7 +71,7 @@
             </IndicatorItem>
             <IndicatorItem id="ba563ab1-2285-4dc3-b388-353cd4e01479" condition="matches" preserve-case="false" negate="false">
               <Context document="processEvent" search="processEvent/processCmdLine" type="event" />
-              <Content type="string">url.dll\s*FileProtocolHandler.*://</Content>
+              <Content type="string">url.dll.*FileProtocolHandler.*://</Content>
             </IndicatorItem>
           </Indicator>
         </Indicator>
