@@ -1,0 +1,351 @@
+{"name": "rule HackTool_MSIL_Rubeus_1","md5": "66e0681a500c726ed52e5ea9423d2654"},
+
+{"name": "rule Trojan_Raw_Generic_4","md5": "f41074be5b423afb02a74bc74222e35d"},
+
+{"name": "rule HackTool_Win32_AndrewSpecial_1","md5": "e89efa88e3fda86be48c0cc8f2ef7230"},
+
+{"name": "rule APT_Backdoor_Win_GORAT_3","md5": "995120b35db9d2f36d7d0ae0bfc9c10d"},
+
+{"name": "rule CredTheft_Win_EXCAVATOR_1","md5": "f7d9961463b5110a3d70ee2e97842ed3"},
+
+{"name": "rule APT_Loader_Win64_REDFLARE_1","md5": "f20824fa6e5c81e3804419f108445368"},
+
+{"name": "rule APT_Loader_Raw64_REDFLARE_1","md5": "5e14f77f85fd9a5be46e7f04b8a144f5"},
+
+{"name": "rule HackTool_MSIL_SHARPZEROLOGON_1","md5": "dd8805d0e470e59b829d98397507d8c2"},
+
+{"name": "rule HackTool_MSIL_CoreHound_1","md5": "dd8805d0e470e59b829d98397507d8c2"},
+
+{"name": "rule Loader_MSIL_NETAssemblyInject_1","md5": "dd8805d0e470e59b829d98397507d8c2"},
+
+{"name": "rule Hunting_GadgetToJScript_1","md5": "7af24305a409a2b8f83ece27bb0f7900"},
+
+{"name": "rule Trojan_MSIL_GORAT_Plugin_DOTNET_1","md5": "dd8805d0e470e59b829d98397507d8c2"},
+
+{"name": "rule APT_Trojan_Win_REDFLARE_1","md5": "100d73b35f23b2fe84bf7cd37140bf4d"},
+
+{"name": "rule APT_Trojan_Win_REDFLARE_2","md5": "4e7e90c7147ee8aa01275894734f4492"},
+
+{"name": "rule APT_Dropper_Win64_MATRYOSHKA_1","md5": "edcd58ba5b1b87705e95089002312281"},
+
+{"name": "rule APT_HackTool_MSIL_SHARPGOPHER_1","md5": "dd8805d0e470e59b829d98397507d8c2"},
+
+{"name": "rule HackTool_MSIL_KeeFarce_1","md5": "dd8805d0e470e59b829d98397507d8c2"},
+
+{"name": "rule APT_Backdoor_Win_GORAT_1","md5": "66cdaa156e4d372cfa3dea0137850d20"},
+
+{"name": "rule APT_Dropper_Win_MATRYOSHKA_1","md5": "edcd58ba5b1b87705e95089002312281"},
+
+{"name": "rule Loader_Win_Generic_20","md5": "5125979110847d35a338caac6bff2aa8"},
+
+{"name": "rule APT_Loader_Win32_PGF_2","md5": "04eb45f8546e052fe348fda2425b058c"},
+
+{"name": "rule APT_HackTool_MSIL_REDTEAMMATERIALS_1","md5": "dd8805d0e470e59b829d98397507d8c2"},
+
+{"name": "rule APT_Trojan_Win_REDFLARE_7","md5": "e7beece34bdf67cbb8297833c5953669"},
+
+{"name": "rule APT_Trojan_Win_REDFLARE_7b","md5": "8025bcbe3cc81fc19021ad0fbc11cf9b"},
+
+{"name": "rule APT_Trojan_Win_REDFLARE_8","md5": "9c8eb908b8c1cda46e844c24f65d9370"},
+
+{"name": "rule APT_Trojan_Win_REDFLARE_8b","md5": "9e85713d615bda23785faf660c1b872c"},
+
+{"name": "rule APT_Backdoor_Win_GORAT_5","md5": "cdf58a48757010d9891c62940c439adb"},
+
+{"name": "rule APT_Backdoor_Win_GORAT_5b","md5": "a107850eb20a4bb3cc59dbd6861eaf0f"},
+
+{"name": "rule APT_HackTool_MSIL_GPOHUNT_1","md5": "dd8805d0e470e59b829d98397507d8c2"},
+
+{"name": "rule APT_HackTool_MSIL_JUSTASK_1","md5": "dd8805d0e470e59b829d98397507d8c2"},
+
+{"name": "rule APT_Trojan_Win_REDFLARE_4","md5": "a8b5dcfea5e87bf0e95176daa243943d"},
+
+{"name": "rule APT_Trojan_Win_REDFLARE_4b","md5": "9dcb6424662941d746576e62712220aa"},
+
+{"name": "rule APT_HackTool_MSIL_TITOSPECIAL_1","md5": "4bf96a7040a683bd34c618431e571e26"},
+
+{"name": "rule Dropper_LNK_LNKSmasher_1","md5": "0a86d64c3b25aa45428e94b6e0be3e08"},
+
+{"name": "rule HackTool_MSIL_SharpSchtask_1","md5": "dd8805d0e470e59b829d98397507d8c2"},
+
+{"name": "rule APT_Controller_Linux_REDFLARE_1","md5": "79259451ff47b864d71fb3f94b1774f3"},
+
+{"name": "rule APT_Controller_Linux_REDFLARE_1b","md5": "82773afa0860d668d7fe40e3f22b0f3e"},
+
+{"name": "rule APT_HackTool_MSIL_WMISPY_2","md5": "3651f252d53d2f46040652788499d65a"},
+
+{"name": "rule HackTool_MSIL_SharPersist_2","md5": "98ecf58d48a3eae43899b45cec0fc6b7"},
+
+{"name": "rule APT_Loader_Win_MATRYOSHKA_1","md5": "44887551a47ae272d7873a354d24042d"},
+
+{"name": "rule Builder_MSIL_SinfulOffice_1","md5": "dd8805d0e470e59b829d98397507d8c2"},
+
+{"name": "rule Loader_MSIL_SharPy_1","md5": "dd8805d0e470e59b829d98397507d8c2"},
+
+{"name": "rule APT_Loader_MSIL_WILDCHILD_1","md5": "6f04a93753ae3ae043203437832363c4"},
+
+{"name": "rule Loader_Win_Generic_18","md5": "c74ebb6c238bbfaefd5b32d2bf7c7fcc"},
+
+{"name": "rule HackTool_MSIL_HOLSTER_1","md5": "a91bf61cc18705be2288a0f6f125068f"},
+
+{"name": "rule APT_Loader_MSIL_TRIMBISHOP_1","md5": "e91670423930cbbd3dbf5eac1f1a7cb6"},
+
+{"name": "rule APT_Loader_MSIL_TRIMBISHOP_2","md5": "c0598321d4ad4cf1219cc4f84bad4094"},
+
+{"name": "rule APT_Backdoor_Win_DShell_3","md5": "cf752e9cd2eccbda5b8e4c29ab5554b6"},
+
+{"name": "rule APT_HackTool_MSIL_SHARPSTOMP_1","md5": "83ed748cd94576700268d35666bf3e01"},
+
+{"name": "rule APT_HackTool_MSIL_SHARPPATCHCHECK_1","md5": "dd8805d0e470e59b829d98397507d8c2"},
+
+{"name": "rule HackTool_MSIL_SAFETYKATZ_4","md5": "45736deb14f3a68e88b038183c23e597"},
+
+{"name": "rule APT_Backdoor_MacOS_GORAT_1","md5": "68acf11f5e456744262ff31beae58526"},
+
+{"name": "rule CredTheft_MSIL_ADPassHunt_2","md5": "6efb58cf54d1bb45c057efcfbbd68a93"},
+
+{"name": "rule APT_Loader_Win64_PGF_4","md5": "3bb34ebd93b8ab5799f4843e8cc829fa"},
+
+{"name": "rule APT_Loader_Win32_PGF_4","md5": "4414953fa397a41156f6fa4f9462d207"},
+
+{"name": "rule CredTheft_MSIL_ADPassHunt_1","md5": "6efb58cf54d1bb45c057efcfbbd68a93"},
+
+{"name": "rule HackTool_MSIL_GETDOMAINPASSWORDPOLICY_1","md5": "dd8805d0e470e59b829d98397507d8c2"},
+
+{"name": "rule HackTool_MSIL_SharPivot_1","md5": "e4efa759d425e2f26fbc29943a30f5bd"},
+
+{"name": "rule APT_Loader_Win32_PGF_3","md5": "4414953fa397a41156f6fa4f9462d207"},
+
+{"name": "rule APT_Loader_Win32_REDFLARE_2","md5": "4e7e90c7147ee8aa01275894734f4492"},
+
+{"name": "rule APT_HackTool_MSIL_SHARPSTOMP_2","md5": "83ed748cd94576700268d35666bf3e01"},
+
+{"name": "rule Loader_MSIL_NetshShellCodeRunner_1","md5": "dd8805d0e470e59b829d98397507d8c2"},
+
+{"name": "rule HackTool_MSIL_SharPivot_4","md5": "e4efa759d425e2f26fbc29943a30f5bd"},
+
+{"name": "rule APT_Backdoor_Win_GoRat_Memory","md5": "3b926b5762e13ceec7ac3a61e85c93bb"},
+
+{"name": "rule Loader_MSIL_AllTheThings_1","md5": "dd8805d0e470e59b829d98397507d8c2"},
+
+{"name": "rule APT_Loader_Win64_PGF_1","md5": "2b686a8b83f8e1d8b455976ae70dab6e"},
+
+{"name": "rule APT_Trojan_Win_REDFLARE_5","md5": "dfbb1b988c239ade4c23856e42d4127b"},
+
+{"name": "rule APT_Trojan_Win_REDFLARE_5b","md5": "3322fba40c4de7e3de0fda1123b0bf5d"},
+
+{"name": "rule CredTheft_MSIL_TitoSpecial_1","md5": "4bf96a7040a683bd34c618431e571e26"},
+
+{"name": "rule Builder_MSIL_G2JS_1","md5": "fa255fdc88ab656ad9bc383f9b322a76"},
+
+{"name": "rule APT_Loader_Win32_DShell_2","md5": "590d98bb74879b52b97d8a158af912af"},
+
+{"name": "rule HackTool_MSIL_SharPivot_3","md5": "e4efa759d425e2f26fbc29943a30f5bd"},
+
+{"name": "rule APT_HackTool_MSIL_FLUFFY_2","md5": "11b5aceb428c3e8c61ed24a8ca50553e"},
+
+{"name": "rule APT_HackTool_MSIL_FLUFFY_1","md5": "11b5aceb428c3e8c61ed24a8ca50553e"},
+
+{"name": "rule HackTool_MSIL_SEATBELT_1","md5": "848837b83865f3854801be1f25cb9f4d"},
+
+{"name": "rule HackTool_MSIL_INVEIGHZERO_1","md5": "dd8805d0e470e59b829d98397507d8c2"},
+
+{"name": "rule Loader_MSIL_RURALBISHOP_1","md5": "e91670423930cbbd3dbf5eac1f1a7cb6"},
+
+{"name": "rule Loader_MSIL_RURALBISHOP_2","md5": "e91670423930cbbd3dbf5eac1f1a7cb6"},
+
+{"name": "rule HackTool_MSIL_PrepShellcode_1","md5": "dd8805d0e470e59b829d98397507d8c2"},
+
+{"name": "rule APT_Downloader_Win32_REDFLARE_1","md5": "05b99d438dac63a5a993cea37c036673"},
+
+{"name": "rule Loader_MSIL_WMIRunner_1","md5": "dd8805d0e470e59b829d98397507d8c2"},
+
+{"name": "rule HackTool_MSIL_SharpStomp_1","md5": "83ed748cd94576700268d35666bf3e01"},
+
+{"name": "rule Tool_MSIL_SharpGrep_1","md5": "dd8805d0e470e59b829d98397507d8c2"},
+
+{"name": "rule Dropper_HTA_WildChild_1","md5": "3e61ca5057633459e96897f79970a46d"},
+
+{"name": "rule APT_Builder_PY_REDFLARE_2","md5": "4410e95de247d7f1ab649aa640ee86fb"},
+
+{"name": "rule APT_Loader_Win32_DShell_3","md5": "12c3566761495b8353f67298f15b882c"},
+
+{"name": "rule APT_Trojan_Linux_REDFLARE_1","md5": "79259451ff47b864d71fb3f94b1774f3"},
+
+{"name": "rule APT_Trojan_Linux_REDFLARE_1b","md5": "82773afa0860d668d7fe40e3f22b0f3e"},
+
+{"name": "rule Loader_MSIL_WildChild_1","md5": "7e6bc0ed11c2532b2ae7060327457812"},
+
+{"name": "rule MSIL_Launcher_DUEDLLIGENCE_1","md5": "a91bf61cc18705be2288a0f6f125068f"},
+
+{"name": "rule APT_Backdoor_Win_GORAT_2","md5": "f59095f0ab15f26a1ead7eed8cdb4902"},
+
+{"name": "rule APT_Loader_Win64_REDFLARE_2","md5": "100d73b35f23b2fe84bf7cd37140bf4d"},
+
+{"name": "rule HackTool_MSIL_SharPersist_1","md5": "98ecf58d48a3eae43899b45cec0fc6b7"},
+
+{"name": "rule APT_Backdoor_Win_DShell_1","md5": "152fc2320790aa16ef9b6126f47c3cca"},
+
+{"name": "rule APT_Backdoor_Win_GORAT_4","md5": "f59095f0ab15f26a1ead7eed8cdb4902"},
+
+{"name": "rule APT_HackTool_MSIL_SHARPNFS_1","md5": "dd8805d0e470e59b829d98397507d8c2"},
+
+{"name": "rule CredTheft_MSIL_CredSnatcher_1","md5": "dd8805d0e470e59b829d98397507d8c2"},
+
+{"name": "rule HackTool_MSIL_SEATBELT_2","md5": "9f401176a9dd18fa2b5b90b4a2aa1356"},
+
+{"name": "rule APT_Loader_Win32_DShell_1","md5": "12c3566761495b8353f67298f15b882c"},
+
+{"name": "rule APT_Loader_Win32_PGF_1","md5": "383161e4deaf7eb2ebeda2c5e9c3204c"},
+
+{"name": "rule APT_HackTool_MSIL_SHARPDACL_1","md5": "dd8805d0e470e59b829d98397507d8c2"},
+
+{"name": "rule APT_HackTool_MSIL_SHARPZIPLIBZIPPER_1","md5": "dd8805d0e470e59b829d98397507d8c2"},
+
+{"name": "rule APT_Downloader_Win64_REDFLARE_1","md5": "9529c4c9773392893a8a0ab8ce8f8ce1"},
+
+{"name": "rule APT_Loader_Win64_MATRYOSHKA_1","md5": "44887551a47ae272d7873a354d24042d"},
+
+{"name": "rule HackTool_MSIL_WMIspy_1","md5": "dd8805d0e470e59b829d98397507d8c2"},
+
+{"name": "rule APT_Trojan_Win_REDFLARE_3","md5": "9ccda4d7511009d5572ef2f8597fba4e"},
+
+{"name": "rule APT_Trojan_Win_REDFLARE_3b","md5": "ece07daca53dd0a7c23dacabf50f56f1"},
+
+{"name": "rule APT_Loader_Win_PGF_1","md5": "013c7708f1343d684e3571453261b586"},
+
+{"name": "rule APT_HackTool_MSIL_SHARPDNS_1","md5": "dd8805d0e470e59b829d98397507d8c2"},
+
+{"name": "rule Loader_MSIL_TrimBishop_1","md5": "09bdbad8358b04994e2c04bb26a160ef"},
+
+{"name": "rule Loader_Win_Generic_17","md5": "562ecbba043552d59a0f23f61cea0983"},
+
+{"name": "rule APT_Loader_Win64_PGF_3","md5": "3bb34ebd93b8ab5799f4843e8cc829fa"},
+
+{"name": "rule HackTool_PY_ImpacketObfuscation_1","md5": "0b1e512afe24c31531d6db6b47bac8ee"},
+
+{"name": "rule APT_HackTool_Win64_EXCAVATOR_2","md5": "4fd62068e591cbd6f413e1c2b8f75442"},
+
+{"name": "rule APT_Loader_Raw32_REDFLARE_1","md5": "4022baddfda3858a57c9cbb0d49f6f86"},
+
+{"name": "rule APT_Loader_Win64_PGF_2","md5": "4326a7e863928ffbb5f6bdf63bb9126e"},
+
+{"name": "rule APT_HackTool_MSIL_SHARPTEMPLATE_1","md5": "dd8805d0e470e59b829d98397507d8c2"},
+
+{"name": "rule APT_HackTool_MSIL_MODIFIEDSHARPVIEW_1","md5": "db0eaad52465d5a2b86fdd6a6aa869a5"},
+
+{"name": "rule APT_Loader_Win32_PGF_5","md5": "8c91a27bbdbe9fb0877daccd28bd7bb5"},
+
+{"name": "rule APT_HackTool_MSIL_DNSOVERHTTPS_C2_1","md5": "dd8805d0e470e59b829d98397507d8c2"},
+
+{"name": "rule APT_HackTool_MSIL_LUALOADER_1","md5": "dd8805d0e470e59b829d98397507d8c2"},
+
+{"name": "rule HackTool_MSIL_PXELOOT_2","md5": "d93100fe60c342e9e3b13150fd91c7d8"},
+
+{"name": "rule APT_HackTool_MSIL_PRAT_1","md5": "dd8805d0e470e59b829d98397507d8c2"},
+
+{"name": "rule APT_HackTool_MSIL_SHARPNATIVEZIPPER_1","md5": "dd8805d0e470e59b829d98397507d8c2"},
+
+{"name": "rule APT_Loader_Win32_REDFLARE_1","md5": "01d68343ac46db6065f888a094edfe4f"},
+
+{"name": "rule APT_Loader_MSIL_PGF_1","md5": "a495c6d11ff3f525915345fb762f8047"},
+
+{"name": "rule APT_Backdoor_Win_DShell_2","md5": "e0683f8ee787313cfd2c61cd0995a830"},
+
+{"name": "rule CredTheft_Win_EXCAVATOR_2","md5": "6a9a114928554c26675884eeb40cc01b"},
+
+{"name": "rule Builder_MSIL_SharpGenerator_1","md5": "dd8805d0e470e59b829d98397507d8c2"},
+
+{"name": "rule APT_Trojan_Win_REDFLARE_6","md5": "294b1e229c3b1efce29b162e7b3be0ab"},
+
+{"name": "rule APT_Trojan_Win_REDFLARE_6b","md5": "6902862bd81da402e7ac70856afbe6a2"},
+
+{"name": "rule HackTool_Win64_AndrewSpecial_1","md5": "4456e52f6f8543c3ba76cb25ea3e9bd2"},
+
+{"name": "rule Loader_MSIL_Generic_1","md5": "b8415b4056c10c15da5bba4826a44ffd"},
+
+{"name": "rule APT_Keylogger_Win32_REDFLARE_1","md5": "d7cfb9fbcf19ce881180f757aeec77dd"},
+
+{"name": "rule Loader_MSIL_InMemoryCompilation_1","md5": "dd8805d0e470e59b829d98397507d8c2"},
+
+{"name": "rule HackTool_MSIL_WMISharp_1","md5": "dd8805d0e470e59b829d98397507d8c2"},
+
+{"name": "rule APT_Loader_Win_PGF_2","md5": "226b1ac427eb5a4dc2a00cc72c163214"},
+
+{"name": "rule APT_Loader_Win_PGF_3","md5": "2398ed2d5b830d226af26dedaf30f64a"},
+
+{"name": "rule APT_Loader_Win_PGF_4","md5": "24a7c99da9eef1c58f09cf09b9744d7b"},
+
+{"name": "rule APT_Loader_Win_PGF_5","md5": "aeb0e1d0e71ce2a08db9b1e5fb98e0aa"},
+
+{"name": "rule Trojan_Win_Generic_101","md5": "2e67c62bd0307c04af469ee8dcb220f2"},
+
+{"name": "rule Trojan_Macro_RESUMEPLEASE_1","md5": "d5d3d23c8573d999f1c48d3e211b1066"},
+
+{"name": "rule Loader_MSIL_CSharpSectionInjection_1","md5": "dd8805d0e470e59b829d98397507d8c2"},
+
+{"name": "rule APT_HackTool_MSIL_SHARPWEBCRAWLER_1","md5": "dd8805d0e470e59b829d98397507d8c2"},
+
+{"name": "rule Trojan_Win64_Generic_22","md5": "f7d9961463b5110a3d70ee2e97842ed3"},
+
+{"name": "rule Loader_Win_Generic_19","md5": "3fb9341fb11eca439b50121c6f7c59c7"},
+
+{"name": "rule APT_Builder_PY_REDFLARE_1","md5": "d0a830403e56ebaa4bfbe87dbfdee44f"},
+
+{"name": "rule HackTool_PY_ImpacketObfuscation_2","md5": "f3dd8aa567a01098a8a610529d892485"},
+
+{"name": "rule APT_Loader_MSIL_PGF_2","md5": "7c2a06ceb29cdb25f24c06f2a8892fba"},
+
+{"name": "rule APT_HackTool_MSIL_SHARPSQLCLIENT_1","md5": "dd8805d0e470e59b829d98397507d8c2"},
+
+{"name": "rule Methodology_OLE_CHARENCODING_2","md5": "41b70737fa8dda75d5e95c82699c2e9b"},
+
+{"name": "rule HackTool_MSIL_SharpHound_3","md5": "eeedc09570324767a3de8205f66a5295"},
+
+{"name": "rule CredTheft_MSIL_TitoSpecial_2","md5": "4bf96a7040a683bd34c618431e571e26"},
+
+{"name": "rule CredTheft_MSIL_WCMDump_1","md5": "dd8805d0e470e59b829d98397507d8c2"},
+
+{"name": "rule APT_Builder_Win64_MATRYOSHKA_1","md5": "8d949c34def898f0f32544e43117c057"},
+
+{"name": "rule Trojan_Win64_Generic_23","md5": "b66347ef110e60b064474ae746701d4a"},
+
+{"name": "rule HackTool_MSIL_KeePersist_1","md5": "dd8805d0e470e59b829d98397507d8c2"},
+
+{"name": "rule Tool_MSIL_CSharpUtils_1","md5": "dd8805d0e470e59b829d98397507d8c2"},
+
+{"name": "rule Trojan_MSIL_GORAT_Module_PowerShell_1","md5": "dd8805d0e470e59b829d98397507d8c2"},
+
+{"name": "rule HackTool_MSIL_PuppyHound_1","md5": "eeedc09570324767a3de8205f66a5295"},
+
+{"name": "rule APT_Builder_PY_MATRYOSHKA_1","md5": "25a97f6dba87ef9906a62c1a305ee1dd"},
+
+{"name": "rule Loader_MSIL_RuralBishop_3","md5": "09bdbad8358b04994e2c04bb26a160ef"},
+
+{"name": "rule APT_HackTool_MSIL_NOAMCI_1","md5": "dd8805d0e470e59b829d98397507d8c2"},
+
+{"name": "rule HackTool_MSIL_PXELOOT_1","md5": "82e33011ac34adfcced6cddc8ea56a81"},
+
+{"name": "rule APT_HackTool_MSIL_ADPassHunt_2","md5": "6efb58cf54d1bb45c057efcfbbd68a93"},
+
+{"name": "rule APT_HackTool_MSIL_ADPassHunt_1","md5": "6efb58cf54d1bb45c057efcfbbd68a93"},
+
+{"name": "rule APT_HackTool_MSIL_SHARPSACK_1","md5": "dd8805d0e470e59b829d98397507d8c2"},
+
+{"name": "rule APT_Loader_Win64_PGF_5","md5": "150224a0ccabce79f963795bf29ec75b"},
+
+{"name": "rule APT_Trojan_Win_REDFLARE_2","md5": "9529c4c9773392893a8a0ab8ce8f8ce1"},
+
+{"name": "rule APT_Trojan_Win_REDFLARE_3","md5": "05b99d438dac63a5a993cea37c036673"},
+
+{"name": "rule APT_HackTool_MSIL_DTRIM_1","md5": "dd8805d0e470e59b829d98397507d8c2"},
+
+{"name": "rule HackTool_MSIL_SharPivot_2","md5": "e4efa759d425e2f26fbc29943a30f5bd"},
+
+{"name": "rule APT_HackTool_MSIL_REVOLVER_1","md5": "dd8805d0e470e59b829d98397507d8c2"},
+
+{"name": "rule APT_Keylogger_Win64_REDFLARE_1","md5": "fbefb4074f1672a3c29c1a47595ea261"},
+
+{"name": "rule APT_HackTool_Win64_EXCAVATOR_1","md5": "6a9a114928554c26675884eeb40cc01b"},
+
+{"name": "rule APT_Loader_Win64_MATRYOSHKA_2","md5": "7f8102b789303b7861a03290c79feba0"}
