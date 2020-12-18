@@ -1,0 +1,4 @@
+# Copyright 2020 by FireEye, Inc.
+# You may not use this file except in compliance with the license. The license should have been received with this file. You may obtain a copy of the license at:
+# https://github.com/fireeye/red_team_tool_countermeasures/blob/master/LICENSE.txt
+alert tcp any any -> any 445 ( msg:"Backdoor.SMB.BASICPIPESHELL.[0b 00]"; content:"|fe|SMB"; offset:4; depth:4; content:"|0b 00|"; distance:8; within:2; content:"|70 00 69 00 70 00 65 00 73 00 68 00 65 00 6c 00 6c 00 2d 00 70 00 69 00 70 00 65 00 6e 00 61 00 6d 00 65 00|"; gid:666; sid:77600824; rev:1; )
